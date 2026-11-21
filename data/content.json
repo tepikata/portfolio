@@ -100,6 +100,330 @@
       "tahun": "2026",
       "gambar": "images/karya-pw-jeri.jpg",
       "deskripsi": "Sesi prewedding berlatar arsitektur rumah kayu tradisional Sulawesi Selatan dengan sentuhan warna hangat sinematik."
+    },
+    {
+      "id": "g10",
+      "judul": "Lorong Kaca & Dekorasi Akad",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-04.jpg",
+      "deskripsi": "Komposisi arsitektural ruang akad bernuansa bunga hangat di bawah cahaya alami."
+    },
+    {
+      "id": "g11",
+      "judul": "Daun Pacci & Gelang Emas Bugis",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-04.jpg",
+      "deskripsi": "Close-up simbol kesucian daun pacci di telapak tangan berpadu kilau gelang tradisional."
+    },
+    {
+      "id": "g12",
+      "judul": "Genggaman Tangan di Pesisir Pantai",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/pw-04.jpg",
+      "deskripsi": "Langkah santai berdua di tepi pantai dengan angin laut dan langit biru cerah."
+    },
+    {
+      "id": "g13",
+      "judul": "Tanda Tangan Buku Nikah",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-05.jpg",
+      "deskripsi": "Senyum tenang mempelai wanita saat mengesahkan ikatan di hadapan saksi dan keluarga."
+    },
+    {
+      "id": "g14",
+      "judul": "Pelaminan Mappacci dalam Cahaya Hangat",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-05.jpg",
+      "deskripsi": "Suasana syahdu malam mappacci yang dibingkai dalam pencahayaan gelap editorial."
+    },
+    {
+      "id": "g15",
+      "judul": "Horizon Biru Laut Sulawesi",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/pw-05.jpg",
+      "deskripsi": "Komposisi lapang minimalis yang menyatukan pasangan dengan luasnya garis pantai."
+    },
+    {
+      "id": "g16",
+      "judul": "Menuju Pelaminan Monokrom",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-06.jpg",
+      "deskripsi": "Langkah beriringan kedua mempelai dari sudut belakang dalam nuansa hitam-putih abadi."
+    },
+    {
+      "id": "g17",
+      "judul": "Restu Keluarga di Malam Mappacci",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-06.jpg",
+      "deskripsi": "Kehangatan para sesepuh dan ibu-ibu keluarga yang mendampingi calon mempelai."
+    },
+    {
+      "id": "g18",
+      "judul": "Senja Tenang di Tepi Pantai",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/pw-06.jpg",
+      "deskripsi": "Momen santai dan jujur di antara karang kayu pesisir menjelang sore."
+    },
+    {
+      "id": "g19",
+      "judul": "Haru di Detik Ijab Kabul",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-07.jpg",
+      "deskripsi": "Tetes haru bahagia yang terekam jujur tanpa arahan saat prosesi akad berlangsung."
+    },
+    {
+      "id": "g20",
+      "judul": "Detail Inai & Sarung Sutera Sengkang",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Gowa · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-07.jpg",
+      "deskripsi": "Perpaduan warna kaya sarung sutera tradisional dan ritual meletakkan daun pacci."
+    },
+    {
+      "id": "g21",
+      "judul": "Sore Klasik Bersama Vespa Merah",
+      "kategori": "Prewedding",
+      "lokasi": "Makassar · Kota Tua",
+      "tahun": "2026",
+      "gambar": "images/pw-07.jpg",
+      "deskripsi": "Nuansa retro penuh kehangatan di depan dinding kolonial bersejarah Makassar."
+    },
+    {
+      "id": "g22",
+      "judul": "Siluet Gaun di Tepi Jendela",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-08.jpg",
+      "deskripsi": "Permainan cahaya alami dan bayangan jelang dimulainya rangkaian akad nikah."
+    },
+    {
+      "id": "g23",
+      "judul": "Khusyuk Menanti Doa Restu",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Gowa · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-08.jpg",
+      "deskripsi": "Ekspresi tenang dan lembut calon pengantin di balik tirai keemasan pelaminan mappacci."
+    },
+    {
+      "id": "g24",
+      "judul": "Langkah Ceria di Lorong Kota Tua",
+      "kategori": "Prewedding",
+      "lokasi": "Makassar · Kota Tua",
+      "tahun": "2026",
+      "gambar": "images/pw-08.jpg",
+      "deskripsi": "Energi spontan dan tawa natural menyusuri sudut-sudut ikonik kota lama."
+    },
+    {
+      "id": "g25",
+      "judul": "Persiapan & Baju Bodo Zamrud",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-09.jpg",
+      "deskripsi": "Potret tenang sebelum berganti busana adat hijau zamrud untuk resepsi utama."
+    },
+    {
+      "id": "g26",
+      "judul": "Lantunan Doa Malam Mappacci",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Gowa · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-09.jpg",
+      "deskripsi": "Momen pembacaan doa bersama keluarga sebelum hari akad nikah tiba."
+    },
+    {
+      "id": "g27",
+      "judul": "Cahaya Sore di Jalan Bersejarah",
+      "kategori": "Prewedding",
+      "lokasi": "Makassar · Kota Tua",
+      "tahun": "2026",
+      "gambar": "images/pw-09.jpg",
+      "deskripsi": "Sinar keemasan sore hari yang memanjangkan bayangan di jalanan klasik."
+    },
+    {
+      "id": "g28",
+      "judul": "Potret Monokrom Mempelai Pria",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-10.jpg",
+      "deskripsi": "Ketegasan detail busana adat pria Bugis-Makassar dalam kontras hitam-putih editorial."
+    },
+    {
+      "id": "g29",
+      "judul": "Pelukan Haru Orang Tua",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-10.jpg",
+      "deskripsi": "Dekapan penuh kasih antara ibu dan putra dalam prosesi sungkeman adat."
+    },
+    {
+      "id": "g30",
+      "judul": "Siluet Rumah Panggung Tradisional",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/pw-10.jpg",
+      "deskripsi": "Perpaduan megah busana adat Bugis dan arsitektur atap rumah tradisional."
+    },
+    {
+      "id": "g31",
+      "judul": "Busana Merah-Emas di Sudut Galeri",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-11.jpg",
+      "deskripsi": "Detail sulaman emas dan mahkota adat yang tampil menonjol di dinding galeri minimalis."
+    },
+    {
+      "id": "g32",
+      "judul": "Potret Mempelai Pria Jas Tutu",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar · Adat Bugis-Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-11.jpg",
+      "deskripsi": "Potret hening mempelai pria mengenakan songkok to bone dan jas tutu merah marun."
+    },
+    {
+      "id": "g33",
+      "judul": "Harmoni Cahaya di Bawah Kolong Kayu",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/pw-11.jpg",
+      "deskripsi": "Potret dramatis memanfaatkan bayangan pilar kayu dan cahaya terarah."
+    },
+    {
+      "id": "g34",
+      "judul": "Cahaya Temaram Menjelang Resepsi",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-12.jpg",
+      "deskripsi": "Potret editorial penuh karakter dalam pencahayaan kontras hangat sebelum menyapa tamu."
+    },
+    {
+      "id": "g35",
+      "judul": "Rangkaian Melati Prosesi Siraman",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/am-12.jpg",
+      "deskripsi": "Senyum cerah mempelai wanita berbalut roncean melati segar dalam prosesi siraman."
+    },
+    {
+      "id": "g36",
+      "judul": "Tangga Kayu & Kipas Lontara",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/pw-12.jpg",
+      "deskripsi": "Komposisi simetris di tangga kayu klasik dengan sentuhan warna hangat editorial."
+    },
+    {
+      "id": "g37",
+      "judul": "Hangatnya Keluarga Besar Resepsi",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-13.jpg",
+      "deskripsi": "Kebersamaan keluarga dalam balutan sarung sutera warna-warni yang meriah dan akrab."
+    },
+    {
+      "id": "g38",
+      "judul": "Monokrom di Ambang Pintu Rumah Adat",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/am-13.jpg",
+      "deskripsi": "Siluet klasik kebaya tradisional yang memadukan tekstur kayu dan cahaya alami."
+    },
+    {
+      "id": "g39",
+      "judul": "Potret Studio Adat Bernuansa Gelap",
+      "kategori": "Prewedding",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/pw-13.jpg",
+      "deskripsi": "Prewedding studio bergaya fine-art gelap dengan pencahayaan terukur pada detail busana."
+    },
+    {
+      "id": "g40",
+      "judul": "Di Bawah Lampu Kristal Ballroom",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-14.jpg",
+      "deskripsi": "Kilau chandelier megah mengiringi langkah pasangan di panggung resepsi malam."
+    },
+    {
+      "id": "g41",
+      "judul": "Senyum Hangat di Tengah Persiapan Adat",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/am-14.jpg",
+      "deskripsi": "Tawa akrab bersama kerabat dalam nuansa tradisi yang bersahaja dan tulus."
+    },
+    {
+      "id": "g42",
+      "judul": "Arsitektur Modern & Tenun Tradisional",
+      "kategori": "Prewedding",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/pw-14.jpg",
+      "deskripsi": "Kontras elegan antara garis arsitektur kontemporer dan sentuhan kain tenun nusantara."
+    },
+    {
+      "id": "g43",
+      "judul": "Momen Sakral Pemberkatan",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/ar-15.jpg",
+      "deskripsi": "Prosesi pemberkatan penuh kekhidmatan yang diabadikan dengan tenang dari sudut dokumenter."
+    },
+    {
+      "id": "g44",
+      "judul": "Potret Klasik Kebaya & Sarung Sutera",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/am-15.jpg",
+      "deskripsi": "Keanggunan klasik hitam-putih yang menonjolkan keaslian ekspresi dan busana tradisional."
+    },
+    {
+      "id": "g45",
+      "judul": "Langkah Berdua di Halaman Galeri",
+      "kategori": "Prewedding",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/pw-15.jpg",
+      "deskripsi": "Gaya prewedding modern-editorial yang bersih, tenang, dan berkarakter."
     }
   ],
   "filosofi": {

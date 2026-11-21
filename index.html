@@ -216,6 +216,12 @@
         </div>
 
         <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"></div>
+        <div id="galleryMoreWrap" class="hidden mt-14 text-center">
+          <button id="galleryMoreBtn" type="button"
+            class="px-9 py-4 border border-ink text-ink text-[10px] font-medium tracking-[0.26em] uppercase hover:bg-ink hover:text-white transition-colors">
+            Lihat Semua Karya
+          </button>
+        </div>
       </div>
     </section>
 
@@ -669,7 +675,24 @@
 
       /* --- Editorial Framed Gallery --- */
       var galleryGrid = document.getElementById('galleryGrid');
+      var galleryMoreWrap = document.getElementById('galleryMoreWrap');
+      var galleryMoreBtn = document.getElementById('galleryMoreBtn');
+      var showAllInSemua = false;
+      var INITIAL_SEMUA_LIMIT = 12;
+
+      function updateFilterCounts() {
+        var list = SITE_DATA.galeri || [];
+        document.querySelectorAll('.filter-btn').forEach(function (btn) {
+          var cat = btn.getAttribute('data-cat');
+          var count = cat === 'Semua'
+            ? list.length
+            : list.filter(function (item) { return UTILS.normalizeCategory(item.kategori) === cat; }).length;
+          btn.textContent = cat + ' (' + count + ')';
+        });
+      }
+
       function renderGallery() {
+        updateFilterCounts();
         var list = SITE_DATA.galeri || [];
         filteredGallery = activeCat === 'Semua'
           ? list.slice()
@@ -679,17 +702,22 @@
 
         if (!filteredGallery.length) {
           galleryGrid.innerHTML = '<p class="col-span-full py-12 text-center text-sm text-graphite font-light">Belum ada karya pada kategori ini.</p>';
+          galleryMoreWrap.classList.add('hidden');
           return;
         }
 
-        galleryGrid.innerHTML = filteredGallery.map(function (item, idx) {
+        var visibleList = (activeCat === 'Semua' && !showAllInSemua && filteredGallery.length > INITIAL_SEMUA_LIMIT)
+          ? filteredGallery.slice(0, INITIAL_SEMUA_LIMIT)
+          : filteredGallery;
+
+        galleryGrid.innerHTML = visibleList.map(function (item, idx) {
           var locShort = String(item.lokasi || '').split(' · ')[0];
           var rightMeta = [locShort, item.tahun].filter(Boolean).join(' · ');
           return (
             '<button type="button" data-idx="' + idx + '" class="gallery-card group text-left focus:outline-none">' +
               '<div class="art-frame">' +
                 '<div class="aspect-[4/3] overflow-hidden bg-gallery">' +
-                  '<img src="' + escapeHtml(resolveImage(item.gambar)) + '" alt="' + escapeHtml(item.judul || 'Karya Tepi Kata') + '" loading="lazy" class="w-full h-full object-cover block">' +
+                  '<img src="' + escapeHtml(resolveImage(item.gambar)) + '" alt="' + escapeHtml(item.judul || 'Karya Tepi Kata') + '" loading="lazy" decoding="async" class="w-full h-full object-cover block">' +
                 '</div>' +
               '</div>' +
               '<div class="pt-4 px-1 flex items-baseline justify-between gap-4">' +
@@ -702,11 +730,29 @@
             '</button>'
           );
         }).join('');
+
+        if (activeCat === 'Semua' && filteredGallery.length > INITIAL_SEMUA_LIMIT) {
+          galleryMoreWrap.classList.remove('hidden');
+          galleryMoreBtn.textContent = showAllInSemua
+            ? 'Tampilkan Ringkas'
+            : ('Lihat Semua Karya (' + filteredGallery.length + ')');
+        } else {
+          galleryMoreWrap.classList.add('hidden');
+        }
       }
+
+      galleryMoreBtn.addEventListener('click', function () {
+        showAllInSemua = !showAllInSemua;
+        renderGallery();
+        if (!showAllInSemua) {
+          document.getElementById('karya').scrollIntoView({ behavior: 'smooth' });
+        }
+      });
 
       document.querySelectorAll('.filter-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
           activeCat = btn.getAttribute('data-cat');
+          if (activeCat === 'Semua') showAllInSemua = false;
           document.querySelectorAll('.filter-btn').forEach(function (b) {
             var isOn = b === btn;
             b.classList.toggle('chip-active', isOn);

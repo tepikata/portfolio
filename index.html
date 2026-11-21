@@ -3,31 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Tepi Kata — Dokumentasi foto &amp; film pernikahan natural, jujur, dan sinematik di Makassar &amp; Sulawesi Selatan.">
   <title>Tepi Kata — Foto &amp; Film Pernikahan | Makassar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            canvas: '#FFFFFF',
-            gallery: '#F8F8F8',
-            ink: '#121212',
-            graphite: '#686868',
-            bronze: '#96764A',
-            bronzelight: '#C9AE82'
-          },
-          fontFamily: {
-            display: ['"Cormorant Garamond"', '"Bodoni Moda"', 'Georgia', 'serif'],
-            serif: ['"Bodoni Moda"', '"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans: ['Inter', 'system-ui', 'sans-serif']
+    if (window.tailwind) {
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              canvas: '#FFFFFF',
+              gallery: '#F8F8F8',
+              ink: '#121212',
+              graphite: '#686868',
+              bronze: '#96764A',
+              bronzelight: '#C9AE82'
+            },
+            fontFamily: {
+              display: ['"Cormorant Garamond"', '"Bodoni Moda"', 'Georgia', 'serif'],
+              serif: ['"Bodoni Moda"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+              sans: ['Inter', 'system-ui', 'sans-serif']
+            }
           }
         }
-      }
-    };
+      };
+    }
   </script>
   <style>
     html, body {
@@ -115,7 +118,7 @@
         <a href="#karya" class="nav-link hover:text-ink transition-colors">Karya</a>
       </nav>
 
-      <a href="#beranda" class="font-display text-2xl sm:text-[28px] font-normal tracking-[0.32em] text-ink hover:text-bronze transition-colors pl-[0.32em]">
+      <a id="headerBrand" href="#beranda" class="font-display text-2xl sm:text-[28px] font-normal tracking-[0.32em] text-ink hover:text-bronze transition-colors pl-[0.32em] uppercase">
         TEPI KATA
       </a>
 
@@ -156,7 +159,7 @@
     <section id="beranda" class="pt-20 bg-white">
       <div class="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0">
-          <img src="images/hero.jpg"
+          <img id="heroImg" src="images/hero.jpg"
             alt="Pasangan pengantin Tepi Kata di bawah cahaya lampu senja"
             class="w-full h-full object-cover object-center">
           <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/75"></div>
@@ -166,21 +169,21 @@
         <div class="pointer-events-none absolute inset-4 sm:inset-8 border border-white/20"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-8 sm:px-12 py-20 text-center">
-          <p class="text-[10px] sm:text-[11px] tracking-[0.34em] uppercase text-bronzelight mb-6">
-            Makassar &amp; Sulawesi Selatan &nbsp;·&nbsp; Foto &amp; Film Pernikahan
+          <p id="heroLabel" class="text-[10px] sm:text-[11px] tracking-[0.34em] uppercase text-bronzelight mb-6">
+            Makassar &amp; Sulawesi Selatan · Foto &amp; Film Pernikahan
           </p>
-          <h1 class="font-display font-light text-5xl sm:text-7xl lg:text-[84px] leading-[0.98] tracking-[-0.01em] text-white">
+          <h1 id="heroTitle" class="font-display font-light text-5xl sm:text-7xl lg:text-[84px] leading-[0.98] tracking-[-0.01em] text-white">
             Cerita Cinta yang <em class="italic font-light text-bronzelight">Abadi</em><br>dalam Foto &amp; Film
           </h1>
           <div class="w-12 h-px bg-bronzelight/70 mx-auto my-8"></div>
-          <p class="text-sm sm:text-[15px] text-white/85 max-w-xl mx-auto leading-relaxed font-light">
+          <p id="heroSubtitle" class="text-sm sm:text-[15px] text-white/85 max-w-xl mx-auto leading-relaxed font-light">
             Dokumentasi pernikahan natural, jujur, dan sinematik—mengabadikan setiap detik dari lamaran, siraman, mappacci, hingga akad dan resepsi tanpa terasa kaku.
           </p>
           <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="#karya" class="px-9 py-4 bg-white text-ink text-[11px] font-medium tracking-[0.26em] uppercase hover:bg-bronzelight hover:text-ink transition-colors">
+            <a id="heroCtaPrimary" href="#karya" class="px-9 py-4 bg-white text-ink text-[11px] font-medium tracking-[0.26em] uppercase hover:bg-bronzelight hover:text-ink transition-colors">
               Lihat Karya
             </a>
-            <a href="#kontak" class="px-9 py-4 border border-white/60 text-white text-[11px] font-normal tracking-[0.26em] uppercase hover:border-bronzelight hover:text-bronzelight transition-colors">
+            <a id="heroCtaSecondary" href="#kontak" class="px-9 py-4 border border-white/60 text-white text-[11px] font-normal tracking-[0.26em] uppercase hover:border-bronzelight hover:text-bronzelight transition-colors">
               Cek Tanggal
             </a>
           </div>
@@ -198,17 +201,17 @@
       <div class="max-w-7xl mx-auto px-6 sm:px-10">
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b hairline mb-14 reveal">
           <div>
-            <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Kurasi Karya</p>
-            <h2 class="font-display font-light text-4xl sm:text-5xl lg:text-[54px] text-ink leading-[1.06]">
+            <p id="galeriLabel" class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Kurasi Karya</p>
+            <h2 id="galeriTitle" class="font-display font-light text-4xl sm:text-5xl lg:text-[54px] text-ink leading-[1.06]">
               Momen yang <em class="italic text-bronze">Dirasakan</em>,<br class="hidden sm:inline"> Bukan Sekadar Dilihat
             </h2>
           </div>
 
           <div id="galleryFilters" class="flex flex-wrap gap-2" role="tablist" aria-label="Filter kategori karya">
-            <button type="button" data-cat="semua" class="filter-btn chip-active px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase transition-colors">Semua</button>
-            <button type="button" data-cat="resepsi" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Akad &amp; Resepsi</button>
-            <button type="button" data-cat="adat" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Adat &amp; Mappacci</button>
-            <button type="button" data-cat="prewedding" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Prewedding</button>
+            <button type="button" data-cat="Semua" class="filter-btn chip-active px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase transition-colors">Semua</button>
+            <button type="button" data-cat="Akad & Resepsi" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Akad &amp; Resepsi</button>
+            <button type="button" data-cat="Adat & Mappacci" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Adat &amp; Mappacci</button>
+            <button type="button" data-cat="Prewedding" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Prewedding</button>
           </div>
         </div>
 
@@ -220,38 +223,20 @@
     <section id="filosofi" class="py-24 sm:py-32 border-t hairline bg-gallery">
       <div class="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         <div class="lg:col-span-6 reveal">
-          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-4">Tujuan Utama Kami</p>
-          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink leading-[1.06]">
+          <p id="filosofiLabel" class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-4">Tujuan Utama Kami</p>
+          <h2 id="filosofiTitle" class="font-display font-light text-4xl sm:text-5xl text-ink leading-[1.06]">
             Mengubah hari bahagia Anda menjadi karya seni yang <em class="italic text-bronze">hidup</em>.
           </h2>
           <div class="w-10 h-px bg-bronze/60 my-7"></div>
-          <p class="text-sm sm:text-[15px] text-graphite leading-[1.85] font-light">
-            Pendekatan dokumenter dan candid selalu menjadi jantung cara kami bekerja. Tanpa pose yang dibuat-buat—kami percaya momen terkuat justru hadir secara alami: tatapan haru orang tua saat mappacci, tawa spontan bersama sahabat, hingga genggaman tangan sebelum akad dimulai.
-          </p>
-          <p class="mt-5 text-sm sm:text-[15px] text-graphite leading-[1.85] font-light">
-            Dengan membaur tenang di tengah acara, tim foto dan film Tepi Kata merawat setiap detail agar bertahun-tahun kemudian Anda bukan hanya ingat seperti apa bentuknya, tetapi juga bagaimana rasanya berada di hari itu.
-          </p>
+          <div id="filosofiBody" class="space-y-5 text-sm sm:text-[15px] text-graphite leading-[1.85] font-light"></div>
 
-          <div class="mt-10 pt-9 border-t hairline grid grid-cols-3 gap-6">
-            <div>
-              <p class="font-display text-2xl sm:text-3xl font-normal text-ink">Foto &amp; Film</p>
-              <p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">Satu Visi Visual</p>
-            </div>
-            <div>
-              <p class="font-display text-2xl sm:text-3xl font-normal text-ink">Galeri Daring</p>
-              <p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">Pilih dari HP</p>
-            </div>
-            <div>
-              <p class="font-display text-2xl sm:text-3xl font-normal text-ink">Adat &amp; Modern</p>
-              <p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">Bugis · Makassar</p>
-            </div>
-          </div>
+          <div id="filosofiHighlights" class="mt-10 pt-9 border-t hairline grid grid-cols-3 gap-6"></div>
         </div>
 
         <div class="lg:col-span-6 reveal">
           <div class="art-frame max-w-lg mx-auto">
-            <img src="images/filosofi.jpg"
-              alt="Potret pengantin bernuansa gelap editorial Tepi Kata"
+            <img id="filosofiImg" src="images/filosofi.jpg"
+              alt="Potret pengantin bernuansa editorial Tepi Kata"
               class="w-full h-auto max-h-[620px] object-cover block">
           </div>
         </div>
@@ -263,43 +248,20 @@
       <div class="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
         <div class="lg:col-span-5 order-2 lg:order-1 reveal">
           <div class="art-frame">
-            <img src="images/tentang.jpg"
+            <img id="tentangImg" src="images/tentang.jpg"
               alt="Kamera sinema, rol film, dan album linen Tepi Kata"
               class="w-full h-auto object-cover block">
           </div>
         </div>
 
         <div class="lg:col-span-7 order-1 lg:order-2 reveal">
-          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-4">Tentang Kami</p>
-          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink leading-[1.06]">
+          <p id="tentangLabel" class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-4">Tentang Kami</p>
+          <h2 id="tentangTitle" class="font-display font-light text-4xl sm:text-5xl text-ink leading-[1.06]">
             Lebih dari sekadar <em class="italic text-bronze">dokumentasi</em> pernikahan
           </h2>
-          <p class="mt-6 text-sm sm:text-[15px] text-graphite leading-[1.85] font-light">
-            Berbasis di Makassar, Sulawesi Selatan, <strong class="text-ink font-medium">Tepi Kata</strong> hadir untuk pasangan yang ingin menikmati hari bahagianya sepenuhnya tanpa sibuk memikirkan kamera. Tim fotografer, videografer, dan editor kami bekerja terpadu—memahami ritme sakral prosesi adat Bugis-Makassar hingga resepsi malam yang hangat.
-          </p>
+          <div id="tentangBody" class="mt-6 space-y-4 text-sm sm:text-[15px] text-graphite leading-[1.85] font-light"></div>
 
-          <div id="alur" class="mt-12 grid grid-cols-1 sm:grid-cols-2 border-t border-l hairline">
-            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
-              <span class="font-display text-2xl italic text-bronze">01</span>
-              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Diskusi &amp; Konsep</h3>
-              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Menyelaraskan jadwal prosesi, lokasi, nuansa warna, serta kebutuhan tim foto dan film.</p>
-            </div>
-            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
-              <span class="font-display text-2xl italic text-bronze">02</span>
-              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Hari Bahagia</h3>
-              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Liputan candid dan editorial yang tenang, terarah saat dibutuhkan, dan sigap menangkap emosi.</p>
-            </div>
-            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
-              <span class="font-display text-2xl italic text-bronze">03</span>
-              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Galeri Seleksi Daring</h3>
-              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Akses tautan galeri pribadi untuk melihat dan memilih foto favorit untuk edit maupun album langsung dari HP.</p>
-            </div>
-            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
-              <span class="font-display text-2xl italic text-bronze">04</span>
-              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Film &amp; Album Cetak</h3>
-              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Tinjau draf tata letak album secara daring sebelum cetak, lengkap dengan film sinematik siap simpan.</p>
-            </div>
-          </div>
+          <div id="alur" class="mt-12 grid grid-cols-1 sm:grid-cols-2 border-t border-l hairline"></div>
         </div>
       </div>
     </section>
@@ -308,81 +270,22 @@
     <section id="paket" class="py-24 sm:py-32 border-t hairline bg-gallery">
       <div class="max-w-7xl mx-auto px-6 sm:px-10">
         <div class="text-center max-w-2xl mx-auto mb-16 reveal">
-          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Layanan &amp; Paket</p>
-          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink leading-tight">
+          <p id="paketLabel" class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Layanan &amp; Paket</p>
+          <h2 id="paketTitle" class="font-display font-light text-4xl sm:text-5xl text-ink leading-tight">
             Dirancang mengikuti <em class="italic text-bronze">rangkaian</em> acara Anda
           </h2>
           <div class="w-10 h-px bg-bronze/60 mx-auto my-6"></div>
-          <p class="text-sm text-graphite leading-relaxed font-light">
+          <p id="paketSubtitle" class="text-sm text-graphite leading-relaxed font-light">
             Setiap paket dapat disesuaikan dengan jumlah prosesi, kebutuhan tim tambahan, maupun add-on Mini Studio.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-7 items-stretch">
-          <!-- Paket 1 -->
-          <article class="flex flex-col justify-between p-9 bg-white border hairline hover:border-ink/40 transition-colors reveal">
-            <div>
-              <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">01 &nbsp;·&nbsp; Intimate</p>
-              <h3 class="mt-3 font-display text-3xl font-normal text-ink">1 Prosesi / Prewedding</h3>
-              <p class="mt-4 text-xs text-graphite leading-relaxed font-light">Cocok untuk sesi Lamaran (Mappettuada), Mappacci Only, Akad Only, Resepsi Only, atau Prewedding.</p>
-              <div class="w-full h-px bg-black/10 my-6"></div>
-              <ul class="space-y-3 text-xs text-ink/85 font-light">
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Fotografer &amp; Videografer (opsional)</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Galeri daring pribadi Tepi Kata</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Kurasi &amp; color grading sinematik</span></li>
-              </ul>
-            </div>
-            <button type="button" data-paket="1 Prosesi / Prewedding" data-sesi="Lamaran,Prewedding"
-              class="paket-btn mt-10 w-full py-3.5 border border-ink text-ink text-[10px] tracking-[0.24em] uppercase hover:bg-ink hover:text-white transition-colors">
-              Tanya Paket Ini
-            </button>
-          </article>
-
-          <!-- Paket 2 (Featured Atelier) -->
-          <article class="flex flex-col justify-between p-9 bg-white border border-ink shadow-[0_24px_60px_rgba(18,18,18,0.08)] relative reveal">
-            <span class="absolute -top-3 left-9 px-3.5 py-1 bg-ink text-white text-[9px] tracking-[0.26em] uppercase">Pilihan Utama</span>
-            <div>
-              <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">02 &nbsp;·&nbsp; Rangkaian Adat</p>
-              <h3 class="mt-3 font-display text-3xl font-normal text-ink">Paket 3–4 Prosesi</h3>
-              <p class="mt-4 text-xs text-graphite leading-relaxed font-light">Mencakup rangkaian lengkap mulai dari Lamaran atau Prewedding, Siraman &amp; Mappacci, hingga Akad &amp; Resepsi.</p>
-              <div class="w-full h-px bg-black/10 my-6"></div>
-              <ul class="space-y-3 text-xs text-ink/90 font-light">
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Tim Foto &amp; Film Sinematik lengkap</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Seleksi foto edit &amp; draf album daring</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Album cetak eksklusif + highlight film</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Tersedia opsi Mapparola &amp; Mini Studio</span></li>
-              </ul>
-            </div>
-            <button type="button" data-paket="Paket 3–4 Prosesi" data-sesi="Prewedding,Siraman & Mappacci,Akad & Resepsi"
-              class="paket-btn mt-10 w-full py-3.5 bg-ink text-white text-[10px] tracking-[0.24em] uppercase hover:bg-bronze transition-colors">
-              Tanya Paket Ini
-            </button>
-          </article>
-
-          <!-- Paket 3 -->
-          <article class="flex flex-col justify-between p-9 bg-white border hairline hover:border-ink/40 transition-colors reveal">
-            <div>
-              <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">03 &nbsp;·&nbsp; All-In</p>
-              <h3 class="mt-3 font-display text-3xl font-normal text-ink">Paket Premium</h3>
-              <p class="mt-4 text-xs text-graphite leading-relaxed font-light">Liputan menyeluruh untuk acara berskala besar atau multi-hari, termasuk keluarga kedua mempelai &amp; luar kota.</p>
-              <div class="w-full h-px bg-black/10 my-6"></div>
-              <ul class="space-y-3 text-xs text-ink/85 font-light">
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Multi-kamera Foto &amp; Video + Support</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Add-on Mini Studio di lokasi resepsi</span></li>
-                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Prioritas editing &amp; album custom</span></li>
-              </ul>
-            </div>
-            <button type="button" data-paket="Paket Premium" data-sesi="Lamaran,Prewedding,Siraman & Mappacci,Akad & Resepsi,Mapparola,Mini Studio"
-              class="paket-btn mt-10 w-full py-3.5 border border-ink text-ink text-[10px] tracking-[0.24em] uppercase hover:bg-ink hover:text-white transition-colors">
-              Tanya Paket Ini
-            </button>
-          </article>
-        </div>
+        <div id="paketGrid" class="grid grid-cols-1 md:grid-cols-3 gap-7 items-stretch"></div>
       </div>
     </section>
 
     <!-- 6. "Kata Mereka" Editorial Testimonial Spread (1 / 3) -->
-    <section class="py-24 sm:py-32 border-t hairline bg-white">
+    <section id="testimoni" class="py-24 sm:py-32 border-t hairline bg-white">
       <div class="max-w-6xl mx-auto px-6 sm:px-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center reveal">
           <div class="lg:col-span-5">
@@ -398,16 +301,14 @@
           <div class="lg:col-span-7">
             <div class="flex items-center justify-between gap-4 pb-6 border-b hairline mb-8">
               <div>
-                <p class="text-[10px] tracking-[0.32em] uppercase text-bronze">Kata Mereka</p>
-                <p class="text-[11px] text-graphite mt-1 font-light">Contoh tata letak testimoni — siap diganti ulasan asli klien</p>
+                <p id="testiLabel" class="text-[10px] tracking-[0.32em] uppercase text-bronze">Kata Mereka</p>
+                <p id="testiSublabel" class="text-[11px] text-graphite mt-1 font-light"></p>
               </div>
-              <span id="testiCount" class="font-display text-xl italic text-bronze tabular-nums">1 / 3</span>
+              <span id="testiCount" class="font-display text-xl italic text-bronze tabular-nums shrink-0">1 / 3</span>
             </div>
 
-            <blockquote id="testiQuote" class="font-display font-light text-2xl sm:text-[32px] text-ink leading-[1.35]">
-              "Timnya santai banget tapi super sigap. Kami tidak merasa dipaksa berpose, dan hasil foto mappacci sampai resepsinya benar-benar bikin merinding setiap kali dilihat ulang."
-            </blockquote>
-            <p id="testiAuthor" class="mt-7 text-[11px] tracking-[0.26em] uppercase text-bronze">Pasangan Akad &amp; Resepsi · Makassar</p>
+            <blockquote id="testiQuote" class="font-display font-light text-2xl sm:text-[32px] text-ink leading-[1.35]"></blockquote>
+            <p id="testiAuthor" class="mt-7 text-[11px] tracking-[0.26em] uppercase text-bronze"></p>
 
             <div class="mt-9 flex items-center gap-3">
               <button id="testiPrev" type="button" aria-label="Testimoni sebelumnya"
@@ -428,10 +329,10 @@
     <section id="kontak" class="py-24 sm:py-32 border-t hairline bg-gallery">
       <div class="max-w-3xl mx-auto px-6 sm:px-10 reveal">
         <div class="text-center mb-12">
-          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Mari Terhubung</p>
-          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink">Ceritakan Rencana Hari Bahagia Anda</h2>
+          <p id="kontakLabel" class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Mari Terhubung</p>
+          <h2 id="kontakTitle" class="font-display font-light text-4xl sm:text-5xl text-ink">Ceritakan Rencana Hari Bahagia Anda</h2>
           <div class="w-10 h-px bg-bronze/60 mx-auto my-6"></div>
-          <p class="text-sm text-graphite max-w-lg mx-auto font-light leading-relaxed">
+          <p id="kontakSubtitle" class="text-sm text-graphite max-w-lg mx-auto font-light leading-relaxed">
             Isi detail singkat acara Anda di bawah ini untuk mengecek ketersediaan jadwal tim Tepi Kata dan mendapatkan daftar paket lengkap.
           </p>
         </div>
@@ -460,23 +361,13 @@
               <label for="fPaket" class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-1">Paket yang Diminati</label>
               <select id="fPaket" class="arch-input w-full text-sm text-ink bg-white">
                 <option value="Belum menentukan">Belum menentukan — minta pricelist</option>
-                <option value="1 Prosesi / Prewedding">1 Prosesi / Prewedding</option>
-                <option value="Paket 3–4 Prosesi">Paket 3–4 Prosesi</option>
-                <option value="Paket Premium">Paket Premium</option>
               </select>
             </div>
           </div>
 
           <div>
             <span class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-3.5">Prosesi yang Direncanakan</span>
-            <div id="sesiChips" class="flex flex-wrap gap-2">
-              <button type="button" data-sesi-chip="Lamaran" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Lamaran</button>
-              <button type="button" data-sesi-chip="Prewedding" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Prewedding</button>
-              <button type="button" data-sesi-chip="Siraman & Mappacci" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Siraman &amp; Mappacci</button>
-              <button type="button" data-sesi-chip="Akad & Resepsi" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Akad &amp; Resepsi</button>
-              <button type="button" data-sesi-chip="Mapparola" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Mapparola</button>
-              <button type="button" data-sesi-chip="Mini Studio" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">+ Mini Studio</button>
-            </div>
+            <div id="sesiChips" class="flex flex-wrap gap-2"></div>
           </div>
 
           <div>
@@ -485,9 +376,11 @@
               class="arch-input w-full text-sm text-ink placeholder:text-graphite/50 resize-none"></textarea>
           </div>
 
-          <button type="submit" class="w-full py-4 bg-ink text-white text-[11px] font-medium tracking-[0.26em] uppercase hover:bg-bronze transition-colors">
+          <button id="bookingSubmitBtn" type="submit" class="w-full py-4 bg-ink text-white text-[11px] font-medium tracking-[0.26em] uppercase hover:bg-bronze transition-colors">
             Siapkan Pesan Booking
           </button>
+
+          <div id="directContactBar" class="hidden pt-4 border-t hairline flex flex-wrap items-center justify-center gap-x-7 gap-y-2 text-[10px] tracking-[0.22em] uppercase text-graphite"></div>
         </form>
       </div>
     </section>
@@ -497,17 +390,18 @@
   <footer class="border-t hairline bg-white py-14">
     <div class="max-w-7xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="text-center sm:text-left">
-        <p class="font-display text-2xl tracking-[0.3em] text-ink">TEPI KATA</p>
-        <p class="text-[11px] tracking-[0.16em] uppercase text-graphite mt-1.5">Foto &amp; Film Pernikahan · Makassar, Sulawesi Selatan</p>
+        <p id="footerBrand" class="font-display text-2xl tracking-[0.3em] text-ink uppercase">TEPI KATA</p>
+        <p id="footerSubline" class="text-[11px] tracking-[0.16em] uppercase text-graphite mt-1.5">Foto &amp; Film Pernikahan · Makassar, Sulawesi Selatan</p>
       </div>
       <div class="flex flex-wrap justify-center gap-7 text-[10px] tracking-[0.24em] uppercase text-graphite">
-        <a href="#beranda" class="hover:text-ink">Beranda</a>
-        <a href="#karya" class="hover:text-ink">Karya</a>
-        <a href="#tentang" class="hover:text-ink">Tentang</a>
-        <a href="#paket" class="hover:text-ink">Paket</a>
-        <a href="#kontak" class="hover:text-ink">Kontak</a>
+        <a href="#beranda" class="hover:text-ink transition-colors">Beranda</a>
+        <a href="#karya" class="hover:text-ink transition-colors">Karya</a>
+        <a href="#tentang" class="hover:text-ink transition-colors">Tentang</a>
+        <a href="#paket" class="hover:text-ink transition-colors">Paket</a>
+        <a href="#kontak" class="hover:text-ink transition-colors">Kontak</a>
+        <a id="footerIgLink" href="#" target="_blank" rel="noopener noreferrer" class="hidden hover:text-bronze transition-colors">Instagram</a>
       </div>
-      <p class="text-[11px] text-graphite">&copy; 2026 Tepi Kata</p>
+      <p id="footerCopyright" class="text-[11px] text-graphite">&copy; 2026 Tepi Kata</p>
     </div>
   </footer>
 
@@ -522,10 +416,11 @@
       ←
     </button>
     <figure class="max-w-4xl w-full flex flex-col items-center">
-      <img id="lbImg" src="" alt="" class="max-h-[76vh] w-auto max-w-full border border-white/15 object-contain shadow-2xl">
-      <figcaption class="mt-5 text-center">
+      <img id="lbImg" alt="" class="max-h-[72vh] w-auto max-w-full border border-white/15 object-contain shadow-2xl">
+      <figcaption class="mt-5 text-center max-w-xl px-4">
         <p id="lbTitle" class="font-display text-2xl font-light text-white"></p>
         <p id="lbMeta" class="text-[10px] tracking-[0.26em] uppercase text-bronzelight mt-1.5"></p>
+        <p id="lbDesc" class="hidden text-xs text-white/75 font-light leading-relaxed mt-2.5"></p>
       </figcaption>
     </figure>
     <button id="lbNext" type="button" aria-label="Foto berikutnya"
@@ -546,10 +441,14 @@
       </div>
       <pre id="bmPreview" class="mt-5 p-5 bg-gallery border hairline text-xs text-ink whitespace-pre-wrap font-sans leading-relaxed"></pre>
       <div class="mt-6 flex flex-wrap gap-3">
-        <button id="bmCopy" type="button" class="flex-1 py-3.5 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors">
-          Salin Pesan WhatsApp
+        <a id="bmWaLink" href="#" target="_blank" rel="noopener noreferrer"
+          class="hidden flex-1 py-3.5 px-4 bg-ink text-white text-center text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors">
+          Buka di WhatsApp
+        </a>
+        <button id="bmCopy" type="button" class="flex-1 py-3.5 px-4 border border-ink text-ink text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-ink hover:text-white transition-colors">
+          Salin Pesan
         </button>
-        <button id="bmDone" type="button" class="px-6 py-3.5 border hairline text-[10px] uppercase tracking-[0.22em] text-ink hover:border-ink">
+        <button id="bmDone" type="button" class="px-5 py-3.5 border hairline text-[10px] uppercase tracking-[0.22em] text-graphite hover:text-ink hover:border-ink">
           Tutup
         </button>
       </div>
@@ -557,84 +456,55 @@
     </div>
   </div>
 
+  <!-- Preview Mode Floating Indicator (only shown when ?preview=1) -->
+  <div id="previewBar" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 max-w-[92vw] bg-ink text-white border border-bronzelight/40 px-5 py-3 shadow-2xl flex items-center gap-4">
+    <span class="text-[10px] tracking-[0.24em] uppercase text-bronzelight">Mode Pratinjau</span>
+    <span class="hidden sm:inline text-xs text-white/80 font-light">Perubahan sementara dari Editor belum dipublikasikan</span>
+    <button id="previewExitBtn" type="button" class="px-3 py-1.5 border border-white/30 text-[10px] tracking-[0.2em] uppercase hover:border-bronzelight hover:text-bronzelight transition-colors shrink-0">
+      Tutup
+    </button>
+  </div>
+
+  <script src="js/default-content.js"></script>
   <script>
     (function () {
       'use strict';
 
-      var GALLERY = [
-        {
-          id: 'g1',
-          cat: 'resepsi',
-          catLabel: 'Akad & Resepsi',
-          title: 'Cahaya Malam di Grand Ballroom',
-          loc: 'Makassar',
-          src: 'images/resepsi.jpg'
-        },
-        {
-          id: 'g2',
-          cat: 'adat',
-          catLabel: 'Adat & Mappacci',
-          title: 'Sakral Malam Mappacci',
-          loc: 'Gowa · Adat Bugis-Makassar',
-          src: 'images/mappacci.jpg'
-        },
-        {
-          id: 'g3',
-          cat: 'prewedding',
-          catLabel: 'Prewedding',
-          title: 'Senja di Tebing Pesisir',
-          loc: 'Sulawesi Selatan',
-          src: 'images/prewedding.jpg'
-        },
-        {
-          id: 'g4',
-          cat: 'resepsi',
-          catLabel: 'Akad & Resepsi',
-          title: 'Pelukan di Bawah Lampu Senja',
-          loc: 'Makassar',
-          src: 'images/hero.jpg'
-        },
-        {
-          id: 'g5',
-          cat: 'adat',
-          catLabel: 'Adat & Mappacci',
-          title: 'Tatapan Tenang Sebelum Akad',
-          loc: 'Makassar',
-          src: 'images/filosofi.jpg'
-        },
-        {
-          id: 'g6',
-          cat: 'prewedding',
-          catLabel: 'Behind the Craft',
-          title: 'Lensa, Film, & Album Linen',
-          loc: 'Studio Tepi Kata',
-          src: 'images/tentang.jpg'
-        }
-      ];
-
-      var TESTIMONIALS = [
-        {
-          quote: '"Timnya santai banget tapi super sigap. Kami tidak merasa dipaksa berpose, dan hasil foto mappacci sampai resepsinya benar-benar bikin merinding setiap kali dilihat ulang."',
-          author: 'Pasangan Akad & Resepsi · Makassar',
-          img: 'images/resepsi.jpg'
-        },
-        {
-          quote: '"Paling suka fitur galeri online-nya—habis acara kami tinggal pilih foto favorit untuk edit dan album langsung dari HP bareng keluarga. Praktis dan rapi sekali."',
-          author: 'Pasangan Paket 4 Prosesi · Gowa',
-          img: 'images/mappacci.jpg'
-        },
-        {
-          quote: '"Warna foto dan filmnya hangat, elegan, dan timeless. Dari prewedding sampai resepsi terasa seperti nonton film pendek tentang kisah kami sendiri."',
-          author: 'Pasangan Prewedding & Wedding · Sulawesi Selatan',
-          img: 'images/prewedding.jpg'
-        }
-      ];
-
-      var activeCat = 'semua';
-      var filteredGallery = GALLERY.slice();
+      var UTILS = window.TEPI_KATA_UTILS;
+      var SITE_DATA = UTILS.clone(window.TEPI_KATA_DEFAULT_CONTENT);
+      var PREVIEW_IMAGES = {};
+      var activeCat = 'Semua';
+      var filteredGallery = [];
       var lbIndex = 0;
       var testiIdx = 0;
       var selectedSesi = new Set(['Akad & Resepsi']);
+      var touchStartX = 0;
+
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      /* Converts *accent* into italic bronze emphasis and newlines into <br> safely */
+      function formatEditorialText(text, accentClass) {
+        var escaped = escapeHtml(text || '');
+        var emClass = accentClass || 'italic text-bronze';
+        return escaped
+          .replace(/\*([^*]+)\*/g, '<em class="' + emClass + '">$1</em>')
+          .replace(/\n/g, '<br>');
+      }
+
+      function resolveImage(path) {
+        if (!path) return 'images/resepsi.jpg';
+        if (PREVIEW_IMAGES && PREVIEW_IMAGES[path]) {
+          return PREVIEW_IMAGES[path];
+        }
+        return path;
+      }
 
       /* --- Mobile menu --- */
       var menuBtn = document.getElementById('menuBtn');
@@ -655,27 +525,179 @@
         link.addEventListener('click', function () { setMenu(false); });
       });
 
+      /* --- Render All Sections --- */
+      function renderSite() {
+        var d = SITE_DATA;
+        var brand = d.brand || {};
+        var brandName = brand.nama || 'Tepi Kata';
+        var brandTagline = brand.tagline || 'Foto & Film Pernikahan';
+        var brandKota = brand.kota || 'Makassar, Sulawesi Selatan';
+        var cityShort = brandKota.split(',')[0].trim();
+
+        document.title = brandName + ' — ' + brandTagline + (cityShort ? ' | ' + cityShort : '');
+        document.getElementById('headerBrand').textContent = brandName.toUpperCase();
+        document.getElementById('footerBrand').textContent = brandName.toUpperCase();
+        document.getElementById('footerSubline').textContent = [brandTagline, brandKota].filter(Boolean).join(' · ');
+        document.getElementById('footerCopyright').textContent = brand.copyright || ('© ' + new Date().getFullYear() + ' ' + brandName);
+
+        var igUsername = String(brand.instagram || '').replace(/^@/, '').trim();
+        var footerIgLink = document.getElementById('footerIgLink');
+        if (igUsername) {
+          footerIgLink.href = 'https://instagram.com/' + encodeURIComponent(igUsername);
+          footerIgLink.textContent = '@' + igUsername;
+          footerIgLink.classList.remove('hidden');
+        } else {
+          footerIgLink.classList.add('hidden');
+        }
+
+        /* 1. Hero */
+        var hero = d.hero || {};
+        var heroImg = document.getElementById('heroImg');
+        heroImg.src = resolveImage(hero.gambar || 'images/hero.jpg');
+        heroImg.alt = brandName + ' — ' + (hero.label || brandTagline);
+        document.getElementById('heroLabel').textContent = hero.label || '';
+        document.getElementById('heroTitle').innerHTML = formatEditorialText(hero.judul || '', 'italic font-light text-bronzelight');
+        document.getElementById('heroSubtitle').textContent = hero.subjudul || '';
+        document.getElementById('heroCtaPrimary').textContent = hero.ctaUtama || 'Lihat Karya';
+        document.getElementById('heroCtaSecondary').textContent = hero.ctaSekunder || 'Cek Tanggal';
+
+        /* 2. Galeri Section Header & Grid */
+        var gSec = d.galeriSection || {};
+        document.getElementById('galeriLabel').textContent = gSec.label || 'Kurasi Karya';
+        document.getElementById('galeriTitle').innerHTML = formatEditorialText(gSec.judul || '', 'italic text-bronze');
+        renderGallery();
+
+        /* 3. Filosofi */
+        var fil = d.filosofi || {};
+        document.getElementById('filosofiLabel').textContent = fil.label || 'Tujuan Utama Kami';
+        document.getElementById('filosofiTitle').innerHTML = formatEditorialText(fil.judul || '', 'italic text-bronze');
+        document.getElementById('filosofiBody').innerHTML = (fil.paragraf || []).filter(Boolean).map(function (p) {
+          return '<p>' + escapeHtml(p) + '</p>';
+        }).join('');
+        var filImg = document.getElementById('filosofiImg');
+        filImg.src = resolveImage(fil.gambar || 'images/filosofi.jpg');
+        filImg.alt = (fil.label || 'Filosofi') + ' — ' + brandName;
+
+        var sorotan = (fil.sorotan || []).filter(function (s) { return s && (s.judul || s.subjudul); });
+        var hlGrid = document.getElementById('filosofiHighlights');
+        hlGrid.className = 'mt-10 pt-9 border-t hairline grid gap-6 ' + (sorotan.length === 2 ? 'grid-cols-2' : sorotan.length === 1 ? 'grid-cols-1' : 'grid-cols-3');
+        hlGrid.innerHTML = sorotan.map(function (s) {
+          return (
+            '<div>' +
+              '<p class="font-display text-2xl sm:text-3xl font-normal text-ink">' + escapeHtml(s.judul || '') + '</p>' +
+              '<p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">' + escapeHtml(s.subjudul || '') + '</p>' +
+            '</div>'
+          );
+        }).join('');
+
+        /* 4. Tentang & Alur Kerja */
+        var tnt = d.tentang || {};
+        document.getElementById('tentangLabel').textContent = tnt.label || 'Tentang Kami';
+        document.getElementById('tentangTitle').innerHTML = formatEditorialText(tnt.judul || '', 'italic text-bronze');
+        document.getElementById('tentangBody').innerHTML = (tnt.paragraf || []).filter(Boolean).map(function (p) {
+          return '<p>' + escapeHtml(p) + '</p>';
+        }).join('');
+        var tntImg = document.getElementById('tentangImg');
+        tntImg.src = resolveImage(tnt.gambar || 'images/tentang.jpg');
+        tntImg.alt = (tnt.label || 'Tentang Kami') + ' — ' + brandName;
+
+        var alurEl = document.getElementById('alur');
+        alurEl.innerHTML = (d.alurKerja || []).map(function (step, idx) {
+          var num = step.nomor || String(idx + 1).padStart(2, '0');
+          return (
+            '<div class="p-6 sm:p-7 border-r border-b hairline bg-white">' +
+              '<span class="font-display text-2xl italic text-bronze">' + escapeHtml(num) + '</span>' +
+              '<h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">' + escapeHtml(step.judul || '') + '</h3>' +
+              '<p class="mt-2 text-xs text-graphite leading-relaxed font-light">' + escapeHtml(step.deskripsi || '') + '</p>' +
+            '</div>'
+          );
+        }).join('');
+
+        /* 5. Paket Prosesi */
+        var pSec = d.paketSection || {};
+        document.getElementById('paketLabel').textContent = pSec.label || 'Layanan & Paket';
+        document.getElementById('paketTitle').innerHTML = formatEditorialText(pSec.judul || '', 'italic text-bronze');
+        document.getElementById('paketSubtitle').textContent = pSec.subjudul || '';
+        renderPaket();
+
+        /* 6. Testimoni */
+        var tsSec = d.testimoniSection || {};
+        document.getElementById('testiLabel').textContent = tsSec.label || 'Kata Mereka';
+        var sublabelEl = document.getElementById('testiSublabel');
+        if (tsSec.sublabel) {
+          sublabelEl.textContent = tsSec.sublabel;
+          sublabelEl.classList.remove('hidden');
+        } else {
+          sublabelEl.textContent = '';
+          sublabelEl.classList.add('hidden');
+        }
+        testiIdx = 0;
+        renderTesti();
+
+        /* 7. Kontak & Direct Links */
+        var kSec = d.kontakSection || {};
+        document.getElementById('kontakLabel').textContent = kSec.label || 'Mari Terhubung';
+        document.getElementById('kontakTitle').innerHTML = formatEditorialText(kSec.judul || '', 'italic text-bronze');
+        document.getElementById('kontakSubtitle').textContent = kSec.subjudul || '';
+
+        renderPaketSelect();
+        renderSesiChipsDom();
+
+        var waNum = UTILS.normalizeWhatsapp(brand.whatsapp);
+        var submitBtn = document.getElementById('bookingSubmitBtn');
+        submitBtn.textContent = waNum ? 'Kirim Pertanyaan via WhatsApp' : 'Siapkan Pesan Booking';
+
+        var directBar = document.getElementById('directContactBar');
+        var directLinks = [];
+        if (waNum) {
+          directLinks.push(
+            '<a href="https://wa.me/' + encodeURIComponent(waNum) + '" target="_blank" rel="noopener noreferrer" class="hover:text-bronze transition-colors">WhatsApp: +' + escapeHtml(waNum) + '</a>'
+          );
+        }
+        if (igUsername) {
+          directLinks.push(
+            '<a href="https://instagram.com/' + encodeURIComponent(igUsername) + '" target="_blank" rel="noopener noreferrer" class="hover:text-bronze transition-colors">Instagram: @' + escapeHtml(igUsername) + '</a>'
+          );
+        }
+        if (directLinks.length) {
+          directBar.innerHTML = directLinks.join('<span class="text-ink/20">·</span>');
+          directBar.classList.remove('hidden');
+        } else {
+          directBar.classList.add('hidden');
+        }
+      }
+
       /* --- Editorial Framed Gallery --- */
       var galleryGrid = document.getElementById('galleryGrid');
       function renderGallery() {
-        filteredGallery = activeCat === 'semua'
-          ? GALLERY.slice()
-          : GALLERY.filter(function (item) { return item.cat === activeCat; });
+        var list = SITE_DATA.galeri || [];
+        filteredGallery = activeCat === 'Semua'
+          ? list.slice()
+          : list.filter(function (item) {
+              return UTILS.normalizeCategory(item.kategori) === activeCat;
+            });
+
+        if (!filteredGallery.length) {
+          galleryGrid.innerHTML = '<p class="col-span-full py-12 text-center text-sm text-graphite font-light">Belum ada karya pada kategori ini.</p>';
+          return;
+        }
 
         galleryGrid.innerHTML = filteredGallery.map(function (item, idx) {
+          var locShort = String(item.lokasi || '').split(' · ')[0];
+          var rightMeta = [locShort, item.tahun].filter(Boolean).join(' · ');
           return (
             '<button type="button" data-idx="' + idx + '" class="gallery-card group text-left focus:outline-none">' +
               '<div class="art-frame">' +
                 '<div class="aspect-[4/3] overflow-hidden bg-gallery">' +
-                  '<img src="' + item.src + '" alt="' + item.title + '" class="w-full h-full object-cover block">' +
+                  '<img src="' + escapeHtml(resolveImage(item.gambar)) + '" alt="' + escapeHtml(item.judul || 'Karya Tepi Kata') + '" loading="lazy" class="w-full h-full object-cover block">' +
                 '</div>' +
               '</div>' +
               '<div class="pt-4 px-1 flex items-baseline justify-between gap-4">' +
                 '<div>' +
-                  '<p class="text-[9px] tracking-[0.26em] uppercase text-bronze">' + item.catLabel + '</p>' +
-                  '<p class="font-display text-2xl font-normal text-ink group-hover:text-bronze transition-colors mt-1">' + item.title + '</p>' +
+                  '<p class="text-[9px] tracking-[0.26em] uppercase text-bronze">' + escapeHtml(item.kategori || '') + '</p>' +
+                  '<p class="font-display text-2xl font-normal text-ink group-hover:text-bronze transition-colors mt-1">' + escapeHtml(item.judul || '') + '</p>' +
                 '</div>' +
-                '<span class="text-[10px] tracking-[0.18em] uppercase text-graphite shrink-0">' + item.loc.split(' · ')[0] + '</span>' +
+                '<span class="text-[10px] tracking-[0.18em] uppercase text-graphite shrink-0">' + escapeHtml(rightMeta) + '</span>' +
               '</div>' +
             '</button>'
           );
@@ -700,19 +722,95 @@
         openLightbox(Number(card.getAttribute('data-idx')));
       });
 
+      /* --- Paket Grid --- */
+      var paketGrid = document.getElementById('paketGrid');
+      function renderPaket() {
+        var list = SITE_DATA.paket || [];
+        var colClass = list.length === 1 ? 'md:grid-cols-1 max-w-md mx-auto'
+          : list.length === 2 ? 'md:grid-cols-2 max-w-4xl mx-auto'
+          : 'md:grid-cols-3';
+        paketGrid.className = 'grid grid-cols-1 ' + colClass + ' gap-7 items-stretch';
+
+        paketGrid.innerHTML = list.map(function (pkg, idx) {
+          var featured = Boolean(pkg.pilihanUtama);
+          var cardClass = featured
+            ? 'flex flex-col justify-between p-9 bg-white border border-ink shadow-[0_24px_60px_rgba(18,18,18,0.08)] relative'
+            : 'flex flex-col justify-between p-9 bg-white border hairline hover:border-ink/40 transition-colors';
+          var btnClass = featured
+            ? 'paket-btn mt-10 w-full py-3.5 bg-ink text-white text-[10px] tracking-[0.24em] uppercase hover:bg-bronze transition-colors'
+            : 'paket-btn mt-10 w-full py-3.5 border border-ink text-ink text-[10px] tracking-[0.24em] uppercase hover:bg-ink hover:text-white transition-colors';
+
+          var badgeHtml = featured
+            ? '<span class="absolute -top-3 left-9 px-3.5 py-1 bg-ink text-white text-[9px] tracking-[0.26em] uppercase">' + escapeHtml(pkg.badge || 'Pilihan Utama') + '</span>'
+            : '';
+
+          var hargaHtml = pkg.harga
+            ? '<p class="mt-2 font-display text-xl italic text-bronze">' + escapeHtml(pkg.harga) + '</p>'
+            : '';
+
+          var fiturHtml = (pkg.fitur || []).filter(Boolean).map(function (f) {
+            return '<li class="flex items-start gap-3"><span class="text-bronze">—</span><span>' + escapeHtml(f) + '</span></li>';
+          }).join('');
+
+          return (
+            '<article class="' + cardClass + '">' +
+              badgeHtml +
+              '<div>' +
+                '<p class="text-[10px] tracking-[0.28em] uppercase text-bronze">' + escapeHtml(pkg.label || '') + '</p>' +
+                '<h3 class="mt-3 font-display text-3xl font-normal text-ink">' + escapeHtml(pkg.nama || '') + '</h3>' +
+                hargaHtml +
+                '<p class="mt-4 text-xs text-graphite leading-relaxed font-light">' + escapeHtml(pkg.deskripsi || '') + '</p>' +
+                '<div class="w-full h-px bg-black/10 my-6"></div>' +
+                '<ul class="space-y-3 text-xs ' + (featured ? 'text-ink/90' : 'text-ink/85') + ' font-light">' + fiturHtml + '</ul>' +
+              '</div>' +
+              '<button type="button" data-paket-idx="' + idx + '" class="' + btnClass + '">Tanya Paket Ini</button>' +
+            '</article>'
+          );
+        }).join('');
+      }
+
+      paketGrid.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-paket-idx]');
+        if (!btn) return;
+        var pkg = (SITE_DATA.paket || [])[Number(btn.getAttribute('data-paket-idx'))];
+        if (!pkg) return;
+
+        var fPaket = document.getElementById('fPaket');
+        fPaket.value = pkg.nama;
+
+        var defaultSesi = Array.isArray(pkg.sesiDefault) ? pkg.sesiDefault : [];
+        selectedSesi = new Set(defaultSesi);
+        updateSesiChipStates();
+
+        document.getElementById('kontak').scrollIntoView({ behavior: 'smooth' });
+        setTimeout(function () {
+          var fNama = document.getElementById('fNama');
+          if (fNama) fNama.focus({ preventScroll: true });
+        }, 450);
+      });
+
       /* --- Lightbox --- */
       var lightbox = document.getElementById('lightbox');
       var lbImg = document.getElementById('lbImg');
       var lbTitle = document.getElementById('lbTitle');
       var lbMeta = document.getElementById('lbMeta');
+      var lbDesc = document.getElementById('lbDesc');
 
       function showLightboxItem() {
         var item = filteredGallery[lbIndex];
         if (!item) return;
-        lbImg.src = item.src;
-        lbImg.alt = item.title;
-        lbTitle.textContent = item.title;
-        lbMeta.textContent = item.catLabel + ' · ' + item.loc + '  (' + (lbIndex + 1) + ' / ' + filteredGallery.length + ')';
+        lbImg.src = resolveImage(item.gambar);
+        lbImg.alt = item.judul || '';
+        lbTitle.textContent = item.judul || '';
+        var metaParts = [item.kategori, item.lokasi, item.tahun].filter(Boolean);
+        lbMeta.textContent = metaParts.join(' · ') + '  (' + (lbIndex + 1) + ' / ' + filteredGallery.length + ')';
+        if (item.deskripsi) {
+          lbDesc.textContent = item.deskripsi;
+          lbDesc.classList.remove('hidden');
+        } else {
+          lbDesc.textContent = '';
+          lbDesc.classList.add('hidden');
+        }
       }
       function openLightbox(idx) {
         lbIndex = idx;
@@ -726,76 +824,144 @@
       }
       document.getElementById('lbClose').addEventListener('click', closeLightbox);
       document.getElementById('lbPrev').addEventListener('click', function () {
+        if (!filteredGallery.length) return;
         lbIndex = (lbIndex - 1 + filteredGallery.length) % filteredGallery.length;
         showLightboxItem();
       });
       document.getElementById('lbNext').addEventListener('click', function () {
+        if (!filteredGallery.length) return;
         lbIndex = (lbIndex + 1) % filteredGallery.length;
         showLightboxItem();
       });
       lightbox.addEventListener('click', function (e) {
         if (e.target === lightbox) closeLightbox();
       });
+      lightbox.addEventListener('touchstart', function (e) {
+        if (e.changedTouches && e.changedTouches[0]) {
+          touchStartX = e.changedTouches[0].screenX;
+        }
+      }, { passive: true });
+      lightbox.addEventListener('touchend', function (e) {
+        if (!e.changedTouches || !e.changedTouches[0] || !filteredGallery.length) return;
+        var dx = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(dx) > 45) {
+          if (dx < 0) lbIndex = (lbIndex + 1) % filteredGallery.length;
+          else lbIndex = (lbIndex - 1 + filteredGallery.length) % filteredGallery.length;
+          showLightboxItem();
+        }
+      }, { passive: true });
 
       /* --- Testimonials --- */
+      var testiSection = document.getElementById('testimoni');
       var testiImg = document.getElementById('testiImg');
       var testiQuote = document.getElementById('testiQuote');
       var testiAuthor = document.getElementById('testiAuthor');
       var testiCount = document.getElementById('testiCount');
+      var testiPrev = document.getElementById('testiPrev');
+      var testiNext = document.getElementById('testiNext');
+
+      function formatQuote(q) {
+        var trimmed = String(q || '').trim();
+        if (!trimmed) return '';
+        if (/^["“]/.test(trimmed)) return trimmed;
+        return '"' + trimmed + '"';
+      }
 
       function renderTesti() {
-        var t = TESTIMONIALS[testiIdx];
-        testiQuote.textContent = t.quote;
-        testiAuthor.textContent = t.author;
-        testiImg.src = t.img;
-        testiCount.textContent = (testiIdx + 1) + ' / ' + TESTIMONIALS.length;
+        var list = SITE_DATA.testimoni || [];
+        if (!list.length) {
+          testiSection.classList.add('hidden');
+          return;
+        }
+        testiSection.classList.remove('hidden');
+        if (testiIdx >= list.length) testiIdx = 0;
+
+        var t = list[testiIdx];
+        testiQuote.textContent = formatQuote(t.kutipan);
+        testiAuthor.textContent = [t.namaKlien, t.sesi].filter(Boolean).join(' · ');
+        testiImg.src = resolveImage(t.gambar || 'images/resepsi.jpg');
+        testiImg.alt = (t.namaKlien ? 'Testimoni ' + t.namaKlien : 'Cuplikan momen pernikahan');
+        testiCount.textContent = (testiIdx + 1) + ' / ' + list.length;
+
+        var single = list.length <= 1;
+        testiPrev.disabled = single;
+        testiNext.disabled = single;
+        testiPrev.classList.toggle('opacity-40', single);
+        testiNext.classList.toggle('opacity-40', single);
       }
-      document.getElementById('testiPrev').addEventListener('click', function () {
-        testiIdx = (testiIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+
+      testiPrev.addEventListener('click', function () {
+        var list = SITE_DATA.testimoni || [];
+        if (list.length <= 1) return;
+        testiIdx = (testiIdx - 1 + list.length) % list.length;
         renderTesti();
       });
-      document.getElementById('testiNext').addEventListener('click', function () {
-        testiIdx = (testiIdx + 1) % TESTIMONIALS.length;
+      testiNext.addEventListener('click', function () {
+        var list = SITE_DATA.testimoni || [];
+        if (list.length <= 1) return;
+        testiIdx = (testiIdx + 1) % list.length;
         renderTesti();
       });
 
-      /* --- Sesi Chips & Paket Pre-fill --- */
-      function renderSesiChips() {
-        document.querySelectorAll('.sesi-chip').forEach(function (chip) {
+      /* --- Form Paket Select & Sesi Chips --- */
+      function renderPaketSelect() {
+        var select = document.getElementById('fPaket');
+        var prevVal = select.value;
+        var opts = ['<option value="Belum menentukan">Belum menentukan — minta pricelist</option>'];
+        (SITE_DATA.paket || []).forEach(function (pkg) {
+          if (pkg && pkg.nama) {
+            opts.push('<option value="' + escapeHtml(pkg.nama) + '">' + escapeHtml(pkg.nama) + '</option>');
+          }
+        });
+        select.innerHTML = opts.join('');
+        if (prevVal && Array.from(select.options).some(function (o) { return o.value === prevVal; })) {
+          select.value = prevVal;
+        }
+      }
+
+      var sesiChipsEl = document.getElementById('sesiChips');
+      function renderSesiChipsDom() {
+        var daftar = (SITE_DATA.kontakSection && SITE_DATA.kontakSection.daftarSesi) || [];
+        sesiChipsEl.innerHTML = daftar.map(function (sesi) {
+          var label = sesi === 'Mini Studio' ? '+ Mini Studio' : sesi;
+          return (
+            '<button type="button" data-sesi-chip="' + escapeHtml(sesi) + '" ' +
+              'class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">' +
+              escapeHtml(label) +
+            '</button>'
+          );
+        }).join('');
+        updateSesiChipStates();
+      }
+
+      function updateSesiChipStates() {
+        sesiChipsEl.querySelectorAll('.sesi-chip').forEach(function (chip) {
           var val = chip.getAttribute('data-sesi-chip');
           var on = selectedSesi.has(val);
           chip.classList.toggle('chip-active', on);
           chip.classList.toggle('text-graphite', !on);
         });
       }
-      document.querySelectorAll('.sesi-chip').forEach(function (chip) {
-        chip.addEventListener('click', function () {
-          var val = chip.getAttribute('data-sesi-chip');
-          if (selectedSesi.has(val)) selectedSesi.delete(val);
-          else selectedSesi.add(val);
-          renderSesiChips();
-        });
+
+      sesiChipsEl.addEventListener('click', function (e) {
+        var chip = e.target.closest('.sesi-chip');
+        if (!chip) return;
+        var val = chip.getAttribute('data-sesi-chip');
+        if (selectedSesi.has(val)) selectedSesi.delete(val);
+        else selectedSesi.add(val);
+        updateSesiChipStates();
       });
 
-      document.querySelectorAll('.paket-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var paket = btn.getAttribute('data-paket');
-          var sesi = (btn.getAttribute('data-sesi') || '').split(',').filter(Boolean);
-          document.getElementById('fPaket').value = paket;
-          selectedSesi = new Set(sesi);
-          renderSesiChips();
-          document.getElementById('kontak').scrollIntoView({ behavior: 'smooth' });
-          document.getElementById('fNama').focus();
-        });
-      });
-
-      /* --- Booking Form & Modal --- */
+      /* --- Booking Form & WhatsApp Integration --- */
       var bookingModal = document.getElementById('bookingModal');
       var bmPreview = document.getElementById('bmPreview');
       var bmStatus = document.getElementById('bmStatus');
+      var bmWaLink = document.getElementById('bmWaLink');
+      var bmCopy = document.getElementById('bmCopy');
 
       document.getElementById('bookingForm').addEventListener('submit', function (e) {
         e.preventDefault();
+        var brandName = (SITE_DATA.brand && SITE_DATA.brand.nama) || 'Tepi Kata';
         var nama = document.getElementById('fNama').value.trim();
         var tgl = document.getElementById('fTanggal').value;
         var lokasi = document.getElementById('fLokasi').value.trim() || 'Belum ditentukan';
@@ -804,7 +970,7 @@
         var sesiStr = Array.from(selectedSesi).join(', ') || 'Belum dipilih';
 
         var pesan = [
-          'Halo Tepi Kata! Saya ingin cek ketersediaan jadwal & pricelist:',
+          'Halo ' + brandName + '! Saya ingin cek ketersediaan jadwal & pricelist:',
           '',
           '• Nama Pasangan: ' + nama,
           '• Perkiraan Tanggal: ' + tgl,
@@ -814,8 +980,24 @@
         ];
         if (catatan) pesan.push('• Catatan: ' + catatan);
 
-        bmPreview.textContent = pesan.join('\n');
+        var fullMessage = pesan.join('\n');
+        var waNum = UTILS.normalizeWhatsapp(SITE_DATA.brand && SITE_DATA.brand.whatsapp);
+
+        bmPreview.textContent = fullMessage;
         bmStatus.textContent = '';
+
+        if (waNum) {
+          var waUrl = 'https://wa.me/' + encodeURIComponent(waNum) + '?text=' + encodeURIComponent(fullMessage);
+          bmWaLink.href = waUrl;
+          bmWaLink.classList.remove('hidden');
+          bmCopy.textContent = 'Salin Pesan';
+          bmStatus.textContent = 'Membuka WhatsApp… jika tidak terbuka otomatis, klik tombol "Buka di WhatsApp" di atas.';
+          window.open(waUrl, '_blank', 'noopener,noreferrer');
+        } else {
+          bmWaLink.classList.add('hidden');
+          bmCopy.textContent = 'Salin Pesan WhatsApp';
+        }
+
         bookingModal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       });
@@ -830,11 +1012,11 @@
         if (e.target === bookingModal) closeBookingModal();
       });
 
-      document.getElementById('bmCopy').addEventListener('click', function () {
+      bmCopy.addEventListener('click', function () {
         var text = bmPreview.textContent;
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(text).then(function () {
-            bmStatus.textContent = 'Pesan disalin — tinggal tempel ke WhatsApp Tepi Kata.';
+            bmStatus.textContent = 'Pesan disalin — tinggal tempel ke WhatsApp.';
           }).catch(function () { fallbackCopy(text); });
         } else {
           fallbackCopy(text);
@@ -846,7 +1028,7 @@
         ta.value = text;
         document.body.appendChild(ta);
         ta.select();
-        try { document.execCommand('copy'); bmStatus.textContent = 'Pesan disalin — tinggal tempel ke WhatsApp Tepi Kata.'; }
+        try { document.execCommand('copy'); bmStatus.textContent = 'Pesan disalin — tinggal tempel ke WhatsApp.'; }
         catch (err) { bmStatus.textContent = 'Silakan salin teks di atas secara manual.'; }
         ta.remove();
       }
@@ -855,7 +1037,7 @@
         if (e.key === 'Escape') {
           if (!lightbox.classList.contains('hidden')) closeLightbox();
           if (!bookingModal.classList.contains('hidden')) closeBookingModal();
-        } else if (!lightbox.classList.contains('hidden')) {
+        } else if (!lightbox.classList.contains('hidden') && filteredGallery.length) {
           if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + filteredGallery.length) % filteredGallery.length; showLightboxItem(); }
           if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % filteredGallery.length; showLightboxItem(); }
         }
@@ -871,15 +1053,60 @@
               io.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.08 });
         reveals.forEach(function (el) { io.observe(el); });
       } else {
         reveals.forEach(function (el) { el.classList.add('in'); });
       }
 
-      renderGallery();
-      renderTesti();
-      renderSesiChips();
+      /* --- Data Loading (Preview Draft > Live JSON > Fallback) --- */
+      function loadPreviewDraft() {
+        try {
+          var raw = localStorage.getItem(UTILS.PREVIEW_STORAGE_KEY);
+          if (!raw) return false;
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.content) {
+            SITE_DATA = UTILS.mergeContent(parsed.content);
+            PREVIEW_IMAGES = parsed.previewImages || {};
+            document.getElementById('previewBar').classList.remove('hidden');
+            return true;
+          }
+        } catch (err) {
+          /* ignore storage errors */
+        }
+        return false;
+      }
+
+      document.getElementById('previewExitBtn').addEventListener('click', function () {
+        if (window.opener && !window.opener.closed) {
+          window.close();
+        } else {
+          window.location.href = window.location.pathname;
+        }
+      });
+
+      /* Render fallback immediately so there is zero blank flash */
+      renderSite();
+
+      var params = new URLSearchParams(window.location.search);
+      var isPreview = params.get('preview') === '1';
+
+      if (isPreview && loadPreviewDraft()) {
+        renderSite();
+      } else if (window.location.protocol !== 'file:') {
+        fetch('data/content.json?v=' + Date.now(), { cache: 'no-store' })
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(function (json) {
+            SITE_DATA = UTILS.mergeContent(json);
+            renderSite();
+          })
+          .catch(function () {
+            /* Fallback data already rendered */
+          });
+      }
     })();
   </script>
 </body>

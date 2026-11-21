@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Studio Editor — Tepi Kata Portofolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    if (window.tailwind) {
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              canvas: '#FFFFFF',
+              gallery: '#F8F8F8',
+              ink: '#121212',
+              graphite: '#686868',
+              bronze: '#96764A',
+              bronzelight: '#C9AE82'
+            },
+            fontFamily: {
+              display: ['"Cormorant Garamond"', '"Bodoni Moda"', 'Georgia', 'serif'],
+              serif: ['"Bodoni Moda"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+              sans: ['Inter', 'system-ui', 'sans-serif']
+            }
+          }
+        }
+      };
+    }
+  </script>
+  <style>
+    html, body {
+      background-color: #F8F8F8;
+      color: #121212;
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hairline {
+      border-color: rgba(18, 18, 18, 0.11);
+    }
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .art-frame {
+      padding: 8px;
+      background: #FFFFFF;
+      border: 1px solid rgba(18, 18, 18, 0.10);
+      box-shadow: 0 12px 32px rgba(18, 18, 18, 0.04);
+    }
+    .ed-input {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid rgba(18, 18, 18, 0.16);
+      border-radius: 0;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #121212;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .ed-input:focus {
+      outline: none;
+      border-color: #96764A;
+      box-shadow: 0 0 0 1px #96764A;
+    }
+    .ed-label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #686868;
+      margin-bottom: 6px;
+    }
+    .tab-btn {
+      position: relative;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+    .tab-btn::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: #96764A;
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .tab-btn.tab-active {
+      color: #121212;
+    }
+    .tab-btn.tab-active::after {
+      transform: scaleX(1);
+    }
+    .chip-active {
+      background-color: #121212;
+      color: #FFFFFF;
+      border-color: #121212;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gallery text-ink selection:bg-bronze/20 pb-28 sm:pb-16">
+
+  <!-- Sticky Top Editorial Admin Bar -->
+  <header class="sticky top-0 z-30 nav-glass border-b hairline">
+    <div class="max-w-6xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="index.html" target="_blank" rel="noopener noreferrer"
+          class="font-display text-xl sm:text-2xl tracking-[0.26em] text-ink hover:text-bronze transition-colors uppercase shrink-0">
+          TEPI KATA
+        </a>
+        <span class="hidden sm:inline-block w-px h-5 bg-black/15"></span>
+        <div class="hidden sm:flex flex-col">
+          <span class="text-[10px] tracking-[0.24em] uppercase text-bronze">Studio Editor</span>
+          <span id="syncStatusText" class="text-[11px] text-graphite font-light">Memuat data…</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <button id="btnGithubSettings" type="button"
+          class="px-3 sm:px-4 py-2.5 border hairline bg-white text-[10px] tracking-[0.2em] uppercase text-ink hover:border-ink transition-colors flex items-center gap-2">
+          <span id="ghDot" class="w-2 h-2 bg-graphite/40 inline-block"></span>
+          <span class="hidden md:inline">GitHub</span>
+          <span class="md:hidden">Token</span>
+        </button>
+
+        <button id="btnPreviewTop" type="button"
+          class="hidden sm:inline-flex px-4 py-2.5 border border-ink bg-white text-[10px] tracking-[0.22em] uppercase text-ink hover:bg-ink hover:text-white transition-colors">
+          Pratinjau
+        </button>
+
+        <button id="btnPublishTop" type="button"
+          class="hidden sm:inline-flex px-5 py-2.5 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors">
+          Simpan &amp; Publish
+        </button>
+      </div>
+    </div>
+
+    <!-- 5-Tab Navigation Bar -->
+    <div class="border-t hairline bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 flex items-center justify-between gap-4">
+        <nav id="adminTabs" class="flex items-center gap-6 sm:gap-8 overflow-x-auto no-scrollbar" role="tablist" aria-label="Bagian editor konten">
+          <button type="button" data-tab="umum" role="tab" aria-selected="true"
+            class="tab-btn tab-active py-3.5 text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-graphite hover:text-ink">
+            1. Umum &amp; Kontak
+          </button>
+          <button type="button" data-tab="galeri" role="tab" aria-selected="false"
+            class="tab-btn py-3.5 text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-graphite hover:text-ink">
+            2. Galeri Karya
+          </button>
+          <button type="button" data-tab="filosofi" role="tab" aria-selected="false"
+            class="tab-btn py-3.5 text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-graphite hover:text-ink">
+            3. Filosofi &amp; Alur
+          </button>
+          <button type="button" data-tab="paket" role="tab" aria-selected="false"
+            class="tab-btn py-3.5 text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-graphite hover:text-ink">
+            4. Paket Prosesi
+          </button>
+          <button type="button" data-tab="testimoni" role="tab" aria-selected="false"
+            class="tab-btn py-3.5 text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-graphite hover:text-ink">
+            5. Testimoni
+          </button>
+        </nav>
+
+        <div class="hidden lg:flex items-center gap-2 shrink-0">
+          <button id="btnDownloadJson" type="button" title="Unduh file content.json untuk cadangan manual"
+            class="px-3 py-1.5 border hairline text-[10px] tracking-[0.18em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">
+            Unduh JSON
+          </button>
+          <label title="Impor file content.json cadangan"
+            class="px-3 py-1.5 border hairline text-[10px] tracking-[0.18em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors cursor-pointer">
+            Impor
+            <input id="inputImportJson" type="file" accept=".json,application/json" class="hidden">
+          </label>
+          <button id="btnReloadLive" type="button" title="Muat ulang versi terbaru dari website live"
+            class="px-3 py-1.5 border hairline text-[10px] tracking-[0.18em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">
+            Reset Live
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-8 pt-6 sm:pt-9">
+    <!-- Mobile status + secondary tools strip -->
+    <div class="sm:hidden mb-5 p-3.5 bg-white border hairline flex items-center justify-between gap-2">
+      <div class="min-w-0">
+        <p class="text-[9px] tracking-[0.24em] uppercase text-bronze">Studio Editor</p>
+        <p id="syncStatusMobile" class="text-[11px] text-graphite truncate">Memuat data…</p>
+      </div>
+      <div class="flex items-center gap-1.5 shrink-0">
+        <button id="btnDownloadJsonMobile" type="button" class="px-2.5 py-1.5 border hairline text-[9px] tracking-[0.18em] uppercase text-ink">JSON</button>
+        <button id="btnReloadLiveMobile" type="button" class="px-2.5 py-1.5 border hairline text-[9px] tracking-[0.18em] uppercase text-graphite">Reset</button>
+      </div>
+    </div>
+
+    <!-- Local Draft Recovery Banner -->
+    <div id="draftBanner" class="hidden mb-6 p-4 bg-white border border-bronze/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div>
+        <p class="text-[10px] tracking-[0.22em] uppercase text-bronze">Draf Lokal Tersimpan</p>
+        <p class="text-xs text-graphite mt-0.5 font-light">Ada perubahan teks yang belum sempat dipublikasikan dari sesi sebelumnya.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="btnRestoreDraft" type="button" class="px-4 py-2 bg-ink text-white text-[10px] tracking-[0.2em] uppercase hover:bg-bronze transition-colors">
+          Pulihkan Draf
+        </button>
+        <button id="btnDiscardDraft" type="button" class="px-4 py-2 border hairline text-[10px] tracking-[0.2em] uppercase text-graphite hover:text-ink hover:border-ink">
+          Abaikan
+        </button>
+      </div>
+    </div>
+
+    <!-- Pending Uploads Info Strip -->
+    <div id="pendingUploadsBar" class="hidden mb-6 px-4 py-3 bg-white border hairline flex flex-wrap items-center justify-between gap-2 text-xs">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2 h-2 bg-bronze inline-block"></span>
+        <span id="pendingUploadsText" class="text-ink font-light"></span>
+      </div>
+      <span class="text-[10px] tracking-[0.2em] uppercase text-graphite">Akan diunggah otomatis saat Publish</span>
+    </div>
+
+    <!-- TAB 1: UMUM & KONTAK -->
+    <section id="panel-umum" class="tab-panel space-y-6">
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="pb-5 border-b hairline mb-6">
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Identitas &amp; Kontak</p>
+          <h2 class="font-display text-3xl font-normal text-ink mt-1">Profil Studio &amp; Tautan WhatsApp</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="inBrandNama" class="ed-label">Nama Brand</label>
+            <input id="inBrandNama" type="text" class="ed-input" placeholder="Tepi Kata">
+          </div>
+          <div>
+            <label for="inBrandTagline" class="ed-label">Tagline</label>
+            <input id="inBrandTagline" type="text" class="ed-input" placeholder="Foto &amp; Film Pernikahan">
+          </div>
+          <div>
+            <label for="inBrandKota" class="ed-label">Kota / Wilayah</label>
+            <input id="inBrandKota" type="text" class="ed-input" placeholder="Makassar, Sulawesi Selatan">
+          </div>
+          <div>
+            <label for="inBrandCopyright" class="ed-label">Teks Copyright Footer</label>
+            <input id="inBrandCopyright" type="text" class="ed-input" placeholder="© 2026 Tepi Kata">
+          </div>
+          <div>
+            <label for="inBrandWa" class="ed-label">Nomor WhatsApp (Format 628...)</label>
+            <input id="inBrandWa" type="tel" class="ed-input" placeholder="6281234567890">
+            <p id="waHint" class="text-[11px] text-graphite mt-1.5 font-light">
+              Jika diisi, tombol form "Mari Terhubung" akan langsung membuka WhatsApp dengan pesan terformat otomatis.
+            </p>
+          </div>
+          <div>
+            <label for="inBrandIg" class="ed-label">Username Instagram (Tanpa @)</label>
+            <input id="inBrandIg" type="text" class="ed-input" placeholder="tepikata">
+            <p id="igHint" class="text-[11px] text-graphite mt-1.5 font-light"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Editor -->
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="pb-5 border-b hairline mb-6">
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 1 · Beranda</p>
+          <h2 class="font-display text-3xl font-normal text-ink mt-1">Tampilan Utama (Hero)</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+          <div class="lg:col-span-5">
+            <span class="ed-label">Foto Latar Hero</span>
+            <div class="art-frame">
+              <div class="aspect-[16/10] bg-gallery overflow-hidden">
+                <img id="prevHeroImg" src="images/hero.jpg" alt="Preview Hero" class="w-full h-full object-cover block">
+              </div>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-2">
+              <label class="px-4 py-2 bg-ink text-white text-[10px] tracking-[0.2em] uppercase hover:bg-bronze transition-colors cursor-pointer">
+                Ganti Foto Hero
+                <input id="uploadHeroImg" type="file" accept="image/*" class="hidden">
+              </label>
+              <span id="heroImgMeta" class="text-[11px] text-graphite font-light">Maks 1600px · JPEG 80%</span>
+            </div>
+            <div class="mt-3">
+              <label for="inHeroGambar" class="ed-label">Path Gambar</label>
+              <input id="inHeroGambar" type="text" class="ed-input text-xs" placeholder="images/hero.jpg">
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 space-y-5">
+            <div>
+              <label for="inHeroLabel" class="ed-label">Label Atas Hero</label>
+              <input id="inHeroLabel" type="text" class="ed-input">
+            </div>
+            <div>
+              <label for="inHeroJudul" class="ed-label">Judul Utama Hero</label>
+              <textarea id="inHeroJudul" rows="2" class="ed-input"></textarea>
+              <p class="text-[11px] text-graphite mt-1 font-light">Tips: Bungkus kata dengan <code class="px-1 bg-gallery border hairline">*kata*</code> untuk aksen miring bronze. Tekan Enter untuk baris baru.</p>
+            </div>
+            <div>
+              <label for="inHeroSubjudul" class="ed-label">Subjudul / Deskripsi Hero</label>
+              <textarea id="inHeroSubjudul" rows="3" class="ed-input"></textarea>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="inHeroCta1" class="ed-label">Tombol Utama</label>
+                <input id="inHeroCta1" type="text" class="ed-input">
+              </div>
+              <div>
+                <label for="inHeroCta2" class="ed-label">Tombol Sekunder</label>
+                <input id="inHeroCta2" type="text" class="ed-input">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section Texts -->
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="pb-5 border-b hairline mb-6">
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 7 · Formulir</p>
+          <h2 class="font-display text-3xl font-normal text-ink mt-1">Teks Bagian "Mari Terhubung"</h2>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="inKontakLabel" class="ed-label">Label Bagian</label>
+            <input id="inKontakLabel" type="text" class="ed-input">
+          </div>
+          <div>
+            <label for="inKontakJudul" class="ed-label">Judul Bagian</label>
+            <input id="inKontakJudul" type="text" class="ed-input">
+          </div>
+          <div class="sm:col-span-2">
+            <label for="inKontakSubjudul" class="ed-label">Subjudul Ajakan</label>
+            <textarea id="inKontakSubjudul" rows="2" class="ed-input"></textarea>
+          </div>
+          <div class="sm:col-span-2">
+            <label for="inKontakSesi" class="ed-label">Pilihan Chip Prosesi (pisahkan dengan koma)</label>
+            <input id="inKontakSesi" type="text" class="ed-input" placeholder="Lamaran, Prewedding, Siraman &amp; Mappacci, Akad &amp; Resepsi, Mapparola, Mini Studio">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: GALERI KARYA -->
+    <section id="panel-galeri" class="tab-panel hidden space-y-6">
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b hairline mb-6">
+          <div>
+            <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 2 · Kurasi Karya</p>
+            <h2 class="font-display text-3xl font-normal text-ink mt-1">Kelola Galeri Foto</h2>
+          </div>
+          <button id="btnAddGallery" type="button"
+            class="px-5 py-3 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors self-start sm:self-auto">
+            + Tambah Karya Baru
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="inGaleriLabel" class="ed-label">Label Bagian</label>
+            <input id="inGaleriLabel" type="text" class="ed-input">
+          </div>
+          <div>
+            <label for="inGaleriJudul" class="ed-label">Judul Bagian (gunakan *kata* untuk aksen bronze)</label>
+            <input id="inGaleriJudul" type="text" class="ed-input">
+          </div>
+        </div>
+      </div>
+
+      <div id="galleryListEditor" class="space-y-5"></div>
+    </section>
+
+    <!-- TAB 3: FILOSOFI, TENTANG & ALUR -->
+    <section id="panel-filosofi" class="tab-panel hidden space-y-6">
+      <!-- Filosofi -->
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="pb-5 border-b hairline mb-6">
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 3 · Filosofi</p>
+          <h2 class="font-display text-3xl font-normal text-ink mt-1">Tujuan Utama Kami</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="inFilLabel" class="ed-label">Label Atas</label>
+                <input id="inFilLabel" type="text" class="ed-input">
+              </div>
+              <div>
+                <label for="inFilJudul" class="ed-label">Judul Utama (*kata* = miring bronze)</label>
+                <input id="inFilJudul" type="text" class="ed-input">
+              </div>
+            </div>
+            <div>
+              <label for="inFilParagraf" class="ed-label">Paragraf Filosofi (pisahkan paragraf dengan 1 baris kosong)</label>
+              <textarea id="inFilParagraf" rows="6" class="ed-input leading-relaxed"></textarea>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <span class="ed-label">Foto Filosofi</span>
+            <div class="art-frame">
+              <div class="aspect-[4/5] max-h-72 bg-gallery overflow-hidden">
+                <img id="prevFilImg" src="images/filosofi.jpg" alt="Preview Filosofi" class="w-full h-full object-cover block">
+              </div>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-2">
+              <label class="px-4 py-2 bg-ink text-white text-[10px] tracking-[0.2em] uppercase hover:bg-bronze transition-colors cursor-pointer">
+                Ganti Foto
+                <input id="uploadFilImg" type="file" accept="image/*" class="hidden">
+              </label>
+              <span id="filImgMeta" class="text-[11px] text-graphite font-light"></span>
+            </div>
+            <div class="mt-3">
+              <label for="inFilGambar" class="ed-label">Path Gambar</label>
+              <input id="inFilGambar" type="text" class="ed-input text-xs">
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t hairline">
+          <span class="ed-label mb-4">3 Sorotan Utama</span>
+          <div id="sorotanEditor" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        </div>
+      </div>
+
+      <!-- Tentang Kami -->
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="pb-5 border-b hairline mb-6">
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 4 · Profil</p>
+          <h2 class="font-display text-3xl font-normal text-ink mt-1">Tentang Kami</h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-7">
+          <div class="lg:col-span-5">
+            <span class="ed-label">Foto Tentang Kami</span>
+            <div class="art-frame">
+              <div class="aspect-[4/3] bg-gallery overflow-hidden">
+                <img id="prevTentangImg" src="images/tentang.jpg" alt="Preview Tentang Kami" class="w-full h-full object-cover block">
+              </div>
+            </div>
+            <div class="mt-3 flex flex-wrap items-center gap-2">
+              <label class="px-4 py-2 bg-ink text-white text-[10px] tracking-[0.2em] uppercase hover:bg-bronze transition-colors cursor-pointer">
+                Ganti Foto
+                <input id="uploadTentangImg" type="file" accept="image/*" class="hidden">
+              </label>
+              <span id="tentangImgMeta" class="text-[11px] text-graphite font-light"></span>
+            </div>
+            <div class="mt-3">
+              <label for="inTentangGambar" class="ed-label">Path Gambar</label>
+              <input id="inTentangGambar" type="text" class="ed-input text-xs">
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="inTentangLabel" class="ed-label">Label Atas</label>
+                <input id="inTentangLabel" type="text" class="ed-input">
+              </div>
+              <div>
+                <label for="inTentangJudul" class="ed-label">Judul Utama (*kata* = miring bronze)</label>
+                <input id="inTentangJudul" type="text" class="ed-input">
+              </div>
+            </div>
+            <div>
+              <label for="inTentangParagraf" class="ed-label">Paragraf Tentang Kami (pisahkan paragraf dengan 1 baris kosong)</label>
+              <textarea id="inTentangParagraf" rows="5" class="ed-input leading-relaxed"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Langkah Alur Kerja -->
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="flex items-end justify-between gap-4 pb-5 border-b hairline mb-6">
+          <div>
+            <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 4B · Proses</p>
+            <h2 class="font-display text-3xl font-normal text-ink mt-1">Langkah Alur Kerja</h2>
+          </div>
+          <button id="btnAddAlur" type="button"
+            class="px-4 py-2.5 border border-ink text-ink text-[10px] tracking-[0.2em] uppercase hover:bg-ink hover:text-white transition-colors">
+            + Langkah
+          </button>
+        </div>
+
+        <div id="alurEditor" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: PAKET PROSESI -->
+    <section id="panel-paket" class="tab-panel hidden space-y-6">
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b hairline mb-6">
+          <div>
+            <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 5 · Layanan &amp; Paket</p>
+            <h2 class="font-display text-3xl font-normal text-ink mt-1">Kelola Paket Prosesi</h2>
+          </div>
+          <button id="btnAddPaket" type="button"
+            class="px-5 py-3 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors self-start sm:self-auto">
+            + Tambah Paket Baru
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="inPaketLabel" class="ed-label">Label Bagian</label>
+            <input id="inPaketLabel" type="text" class="ed-input">
+          </div>
+          <div>
+            <label for="inPaketJudul" class="ed-label">Judul Bagian (*kata* = miring bronze)</label>
+            <input id="inPaketJudul" type="text" class="ed-input">
+          </div>
+          <div class="sm:col-span-2">
+            <label for="inPaketSubjudul" class="ed-label">Subjudul Paket</label>
+            <textarea id="inPaketSubjudul" rows="2" class="ed-input"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="paketListEditor" class="space-y-6"></div>
+    </section>
+
+    <!-- TAB 5: TESTIMONI KLIEN -->
+    <section id="panel-testimoni" class="tab-panel hidden space-y-6">
+      <div class="bg-white border hairline p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b hairline mb-6">
+          <div>
+            <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Bagian 6 · Ulasan Klien</p>
+            <h2 class="font-display text-3xl font-normal text-ink mt-1">Kelola Testimoni "Kata Mereka"</h2>
+          </div>
+          <button id="btnAddTesti" type="button"
+            class="px-5 py-3 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors self-start sm:self-auto">
+            + Tambah Testimoni
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="inTestiLabel" class="ed-label">Label Bagian</label>
+            <input id="inTestiLabel" type="text" class="ed-input">
+          </div>
+          <div>
+            <label for="inTestiSublabel" class="ed-label">Keterangan Singkat (Opsional)</label>
+            <input id="inTestiSublabel" type="text" class="ed-input">
+          </div>
+        </div>
+      </div>
+
+      <div id="testiListEditor" class="space-y-5"></div>
+    </section>
+  </main>
+
+  <!-- Mobile Bottom Sticky Action Bar -->
+  <div class="sm:hidden fixed inset-x-0 bottom-0 z-30 nav-glass border-t hairline px-4 py-3 flex items-center gap-2.5">
+    <button id="btnPreviewMobile" type="button"
+      class="flex-1 py-3 border border-ink bg-white text-[10px] tracking-[0.22em] uppercase text-ink">
+      Pratinjau
+    </button>
+    <button id="btnPublishMobile" type="button"
+      class="flex-[1.5] py-3 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase">
+      Simpan &amp; Publish
+    </button>
+  </div>
+
+  <!-- GitHub Token & Repository Settings Modal -->
+  <div id="githubModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Pengaturan Publish GitHub">
+    <div class="max-w-xl w-full max-h-[90vh] overflow-y-auto bg-white border border-ink/20 p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b hairline">
+        <div>
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Publikasi Langsung</p>
+          <h3 class="font-display text-3xl font-normal text-ink mt-1">Koneksi GitHub Repository</h3>
+        </div>
+        <button id="ghClose" type="button" aria-label="Tutup pengaturan GitHub" class="w-9 h-9 border hairline text-graphite hover:text-ink hover:border-ink">✕</button>
+      </div>
+
+      <div class="mt-5 space-y-4">
+        <p class="text-xs text-graphite leading-relaxed font-light">
+          Token GitHub hanya disimpan di <strong class="text-ink font-medium">browser perangkat ini</strong> (<code class="px-1 bg-gallery border hairline">localStorage</code>) dan tidak pernah disimpan di kode repository.
+        </p>
+
+        <div>
+          <label for="inGhToken" class="ed-label">GitHub Fine-Grained Personal Access Token *</label>
+          <div class="flex gap-2">
+            <input id="inGhToken" type="password" autocomplete="off" class="ed-input font-mono text-xs" placeholder="github_pat_...">
+            <button id="btnToggleToken" type="button" class="px-3.5 border hairline text-[10px] tracking-[0.18em] uppercase text-graphite hover:text-ink hover:border-ink shrink-0">
+              Lihat
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label for="inGhOwner" class="ed-label">Owner</label>
+            <input id="inGhOwner" type="text" class="ed-input text-xs" value="tepikata">
+          </div>
+          <div>
+            <label for="inGhRepo" class="ed-label">Repository</label>
+            <input id="inGhRepo" type="text" class="ed-input text-xs" value="portfolio">
+          </div>
+          <div>
+            <label for="inGhBranch" class="ed-label">Branch</label>
+            <input id="inGhBranch" type="text" class="ed-input text-xs" value="main">
+          </div>
+        </div>
+
+        <div id="ghTestResult" class="hidden p-3.5 border text-xs leading-relaxed"></div>
+
+        <div class="flex flex-wrap gap-2.5 pt-2">
+          <button id="btnGhTest" type="button"
+            class="px-5 py-3 border border-ink text-ink text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-ink hover:text-white transition-colors">
+            Tes Koneksi
+          </button>
+          <button id="btnGhSave" type="button"
+            class="flex-1 py-3 px-5 bg-ink text-white text-[10px] font-medium tracking-[0.2em] uppercase hover:bg-bronze transition-colors">
+            Simpan Pengaturan
+          </button>
+          <button id="btnGhClear" type="button"
+            class="px-4 py-3 border hairline text-[10px] tracking-[0.18em] uppercase text-graphite hover:text-red-700 hover:border-red-300 transition-colors">
+            Hapus Token
+          </button>
+        </div>
+
+        <details class="mt-4 border hairline bg-gallery p-4">
+          <summary class="text-[10px] tracking-[0.22em] uppercase text-ink cursor-pointer select-none">
+            Cara Membuat Token GitHub (1 Menit)
+          </summary>
+          <ol class="mt-3 space-y-1.5 text-xs text-graphite font-light list-decimal list-inside leading-relaxed">
+            <li>Buka <strong class="text-ink font-normal">GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong>.</li>
+            <li>Klik <strong class="text-ink font-normal">Generate new token</strong>, beri nama mis. <em>Tepi Kata Portfolio Editor</em>.</li>
+            <li>Di bagian <strong class="text-ink font-normal">Repository access</strong>, pilih <strong class="text-ink font-normal">Only select repositories</strong> → pilih <code class="px-1 bg-white border hairline">tepikata/portfolio</code> (JANGAN pilih repo lain).</li>
+            <li>Di bagian <strong class="text-ink font-normal">Repository permissions</strong>, ubah <strong class="text-ink font-normal">Contents</strong> menjadi <strong class="text-ink font-normal">Read and write</strong>.</li>
+            <li>Klik <strong class="text-ink font-normal">Generate token</strong>, lalu salin dan tempel tokennya ke kolom di atas.</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Publish Progress & Result Modal -->
+  <div id="publishModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Proses Publikasi">
+    <div class="max-w-lg w-full bg-white border border-ink/20 p-6 sm:p-8 shadow-2xl">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b hairline">
+        <div>
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">GitHub Pages</p>
+          <h3 id="pubModalTitle" class="font-display text-3xl font-normal text-ink mt-1">Mempublikasikan Perubahan…</h3>
+        </div>
+        <button id="pubClose" type="button" aria-label="Tutup dialog publikasi" class="w-9 h-9 border hairline text-graphite hover:text-ink hover:border-ink">✕</button>
+      </div>
+
+      <div id="pubLog" class="mt-5 p-4 bg-gallery border hairline text-xs text-ink space-y-2 max-h-60 overflow-y-auto font-light"></div>
+
+      <div id="pubActions" class="hidden mt-6 flex flex-wrap gap-3">
+        <a href="https://tepikata.github.io/portfolio/" target="_blank" rel="noopener noreferrer"
+          class="flex-1 py-3 px-4 bg-ink text-white text-center text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors">
+          Buka Website Live
+        </a>
+        <button id="pubDownloadBackup" type="button"
+          class="px-4 py-3 border hairline text-[10px] tracking-[0.2em] uppercase text-ink hover:border-ink">
+          Unduh JSON
+        </button>
+        <button id="pubDoneBtn" type="button"
+          class="px-5 py-3 border hairline text-[10px] tracking-[0.2em] uppercase text-graphite hover:text-ink hover:border-ink">
+          Selesai
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="hidden fixed top-20 right-4 sm:right-8 z-50 max-w-sm bg-ink text-white border border-bronzelight/40 px-5 py-3.5 shadow-2xl text-xs font-light tracking-wide"></div>
+
+  <script src="js/default-content.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var UTILS = window.TEPI_KATA_UTILS;
+      var GH_CONFIG_KEY = 'tepikata_github_config_v1';
+      var LOCAL_DRAFT_KEY = 'tepikata_admin_draft_v1';
+
+      var state = UTILS.clone(window.TEPI_KATA_DEFAULT_CONTENT);
+      var liveSnapshot = '';
+      var isDirty = false;
+      var pendingUploads = {}; /* { 'images/karya-xxx.jpg': { base64, dataUrl, sizeKB, width, height } } */
+      var toastTimer = null;
+
+      /* --- Utilities --- */
+      function escapeHtml(str) {
+        return String(str == null ? '' : str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function showToast(msg, duration) {
+        var el = document.getElementById('toast');
+        el.textContent = msg;
+        el.classList.remove('hidden');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          el.classList.add('hidden');
+        }, duration || 3200);
+      }
+
+      function resolveImage(path) {
+        if (!path) return 'images/resepsi.jpg';
+        if (pendingUploads[path]) return pendingUploads[path].dataUrl;
+        return path;
+      }
+
+      function getReferencedPendingPaths() {
+        var serialized = JSON.stringify(state);
+        return Object.keys(pendingUploads).filter(function (path) {
+          return serialized.indexOf(path) !== -1;
+        });
+      }
+
+      function updateSyncIndicators() {
+        var currentJson = JSON.stringify(state);
+        isDirty = (liveSnapshot !== '' && currentJson !== liveSnapshot) || getReferencedPendingPaths().length > 0;
+        var pendingPaths = getReferencedPendingPaths();
+
+        var text = isDirty
+          ? ('Ada perubahan belum dipublikasikan' + (pendingPaths.length ? ' · ' + pendingPaths.length + ' foto baru' : ''))
+          : 'Tersinkron dengan versi live';
+
+        document.getElementById('syncStatusText').textContent = text;
+        document.getElementById('syncStatusMobile').textContent = text;
+
+        var bar = document.getElementById('pendingUploadsBar');
+        if (pendingPaths.length) {
+          document.getElementById('pendingUploadsText').textContent =
+            pendingPaths.length + ' foto baru terkompresi siap diunggah ke folder images/: ' + pendingPaths.join(', ');
+          bar.classList.remove('hidden');
+        } else {
+          bar.classList.add('hidden');
+        }
+
+        if (isDirty) {
+          try {
+            localStorage.setItem(LOCAL_DRAFT_KEY, JSON.stringify({
+              content: state,
+              updatedAt: Date.now()
+            }));
+          } catch (e) { /* ignore quota */ }
+        }
+      }
+
+      function makeId(prefix) {
+        return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      }
+
+      function makeImagePath(prefix) {
+        var now = new Date();
+        var stamp = now.getFullYear() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0');
+        var rand = Math.random().toString(36).slice(2, 6);
+        return 'images/' + prefix + '-' + stamp + '-' + rand + '.jpg';
+      }
+
+      /* --- Client-Side Image Compression (Max Width 1600px, JPEG 80%) --- */
+      function compressImageFile(file, maxWidth, quality) {
+        maxWidth = maxWidth || 1600;
+        quality = quality || 0.80;
+
+        return new Promise(function (resolve, reject) {
+          function processDrawable(drawable, origW, origH, cleanup) {
+            try {
+              var targetW = origW;
+              var targetH = origH;
+              if (origW > maxWidth) {
+                targetW = maxWidth;
+                targetH = Math.round((origH * maxWidth) / origW);
+              }
+              var canvas = document.createElement('canvas');
+              canvas.width = targetW;
+              canvas.height = targetH;
+              var ctx = canvas.getContext('2d');
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(0, 0, targetW, targetH);
+              ctx.drawImage(drawable, 0, 0, targetW, targetH);
+              var dataUrl = canvas.toDataURL('image/jpeg', quality);
+              var base64 = dataUrl.split(',')[1];
+              var sizeKB = Math.round((base64.length * 3) / 4 / 1024);
+              if (cleanup) cleanup();
+              resolve({
+                dataUrl: dataUrl,
+                base64: base64,
+                sizeKB: sizeKB,
+                origKB: Math.round(file.size / 1024),
+                width: targetW,
+                height: targetH
+              });
+            } catch (err) {
+              if (cleanup) cleanup();
+              reject(err);
+            }
+          }
+
+          if (typeof createImageBitmap === 'function') {
+            createImageBitmap(file).then(function (bitmap) {
+              processDrawable(bitmap, bitmap.width, bitmap.height, function () {
+                if (bitmap.close) bitmap.close();
+              });
+            }).catch(function () {
+              fallbackImgLoad();
+            });
+          } else {
+            fallbackImgLoad();
+          }
+
+          function fallbackImgLoad() {
+            var url = URL.createObjectURL(file);
+            var img = new Image();
+            img.onload = function () {
+              processDrawable(img, img.naturalWidth || img.width, img.naturalHeight || img.height, function () {
+                URL.revokeObjectURL(url);
+              });
+            };
+            img.onerror = function () {
+              URL.revokeObjectURL(url);
+              reject(new Error('Gagal membaca file gambar.'));
+            };
+            img.src = url;
+          }
+        });
+      }
+
+      function handleImageUpload(file, prefix, onComplete) {
+        if (!file) return;
+        if (!/^image\//.test(file.type)) {
+          showToast('Pilih file gambar (JPG, PNG, atau WebP).');
+          return;
+        }
+        showToast('Mengompresi gambar…', 2000);
+        compressImageFile(file, 1600, 0.80).then(function (res) {
+          var newPath = makeImagePath(prefix);
+          pendingUploads[newPath] = res;
+          onComplete(newPath, res);
+          updateSyncIndicators();
+          showToast('Foto siap: ' + res.width + '×' + res.height + 'px (' + res.sizeKB + ' KB)');
+        }).catch(function (err) {
+          showToast('Gagal memproses foto: ' + (err && err.message ? err.message : 'Format tidak didukung'));
+        });
+      }
+
+      /* --- Tabs --- */
+      document.getElementById('adminTabs').addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-tab]');
+        if (!btn) return;
+        var tab = btn.getAttribute('data-tab');
+        document.querySelectorAll('#adminTabs .tab-btn').forEach(function (b) {
+          var active = b === btn;
+          b.classList.toggle('tab-active', active);
+          b.setAttribute('aria-selected', String(active));
+        });
+        document.querySelectorAll('.tab-panel').forEach(function (panel) {
+          panel.classList.toggle('hidden', panel.id !== 'panel-' + tab);
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      /* --- Populate All Editors --- */
+      function populateAllForms() {
+        /* Tab 1: Umum & Kontak */
+        var b = state.brand;
+        document.getElementById('inBrandNama').value = b.nama || '';
+        document.getElementById('inBrandTagline').value = b.tagline || '';
+        document.getElementById('inBrandKota').value = b.kota || '';
+        document.getElementById('inBrandCopyright').value = b.copyright || '';
+        document.getElementById('inBrandWa').value = b.whatsapp || '';
+        document.getElementById('inBrandIg').value = b.instagram || '';
+        refreshContactHints();
+
+        var h = state.hero;
+        document.getElementById('inHeroLabel').value = h.label || '';
+        document.getElementById('inHeroJudul').value = h.judul || '';
+        document.getElementById('inHeroSubjudul').value = h.subjudul || '';
+        document.getElementById('inHeroCta1').value = h.ctaUtama || '';
+        document.getElementById('inHeroCta2').value = h.ctaSekunder || '';
+        document.getElementById('inHeroGambar').value = h.gambar || '';
+        document.getElementById('prevHeroImg').src = resolveImage(h.gambar);
+
+        var ks = state.kontakSection;
+        document.getElementById('inKontakLabel').value = ks.label || '';
+        document.getElementById('inKontakJudul').value = ks.judul || '';
+        document.getElementById('inKontakSubjudul').value = ks.subjudul || '';
+        document.getElementById('inKontakSesi').value = (ks.daftarSesi || []).join(', ');
+
+        /* Tab 2: Galeri */
+        document.getElementById('inGaleriLabel').value = state.galeriSection.label || '';
+        document.getElementById('inGaleriJudul').value = state.galeriSection.judul || '';
+        renderGalleryEditor();
+
+        /* Tab 3: Filosofi, Tentang & Alur */
+        var f = state.filosofi;
+        document.getElementById('inFilLabel').value = f.label || '';
+        document.getElementById('inFilJudul').value = f.judul || '';
+        document.getElementById('inFilParagraf').value = (f.paragraf || []).join('\n\n');
+        document.getElementById('inFilGambar').value = f.gambar || '';
+        document.getElementById('prevFilImg').src = resolveImage(f.gambar);
+        renderSorotanEditor();
+
+        var t = state.tentang;
+        document.getElementById('inTentangLabel').value = t.label || '';
+        document.getElementById('inTentangJudul').value = t.judul || '';
+        document.getElementById('inTentangParagraf').value = (t.paragraf || []).join('\n\n');
+        document.getElementById('inTentangGambar').value = t.gambar || '';
+        document.getElementById('prevTentangImg').src = resolveImage(t.gambar);
+        renderAlurEditor();
+
+        /* Tab 4: Paket */
+        document.getElementById('inPaketLabel').value = state.paketSection.label || '';
+        document.getElementById('inPaketJudul').value = state.paketSection.judul || '';
+        document.getElementById('inPaketSubjudul').value = state.paketSection.subjudul || '';
+        renderPaketEditor();
+
+        /* Tab 5: Testimoni */
+        document.getElementById('inTestiLabel').value = state.testimoniSection.label || '';
+        document.getElementById('inTestiSublabel').value = state.testimoniSection.sublabel || '';
+        renderTestiEditor();
+      }
+
+      function refreshContactHints() {
+        var wa = UTILS.normalizeWhatsapp(state.brand.whatsapp);
+        var waHint = document.getElementById('waHint');
+        if (wa) {
+          waHint.textContent = 'Aktif: https://wa.me/' + wa + ' (form kontak akan otomatis membuka WhatsApp)';
+        } else {
+          waHint.textContent = 'Kosong: form kontak akan menampilkan ringkasan untuk disalin manual. Isi 628... untuk langsung ke WhatsApp.';
+        }
+        var ig = String(state.brand.instagram || '').replace(/^@/, '').trim();
+        document.getElementById('igHint').textContent = ig ? ('Tautan: https://instagram.com/' + ig) : 'Kosongkan jika tidak ingin menampilkan tautan Instagram.';
+      }
+
+      /* --- Bind Tab 1 & Static Inputs --- */
+      function bindInput(id, onChange) {
+        var el = document.getElementById(id);
+        el.addEventListener('input', function () {
+          onChange(el.value);
+          updateSyncIndicators();
+        });
+      }
+
+      bindInput('inBrandNama', function (v) { state.brand.nama = v; });
+      bindInput('inBrandTagline', function (v) { state.brand.tagline = v; });
+      bindInput('inBrandKota', function (v) { state.brand.kota = v; });
+      bindInput('inBrandCopyright', function (v) { state.brand.copyright = v; });
+      bindInput('inBrandWa', function (v) { state.brand.whatsapp = UTILS.normalizeWhatsapp(v); refreshContactHints(); });
+      bindInput('inBrandIg', function (v) { state.brand.instagram = v.replace(/^@/, '').trim(); refreshContactHints(); });
+
+      bindInput('inHeroLabel', function (v) { state.hero.label = v; });
+      bindInput('inHeroJudul', function (v) { state.hero.judul = v; });
+      bindInput('inHeroSubjudul', function (v) { state.hero.subjudul = v; });
+      bindInput('inHeroCta1', function (v) { state.hero.ctaUtama = v; });
+      bindInput('inHeroCta2', function (v) { state.hero.ctaSekunder = v; });
+      bindInput('inHeroGambar', function (v) {
+        state.hero.gambar = v.trim();
+        document.getElementById('prevHeroImg').src = resolveImage(state.hero.gambar);
+      });
+
+      document.getElementById('uploadHeroImg').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        e.target.value = '';
+        handleImageUpload(file, 'hero', function (path, info) {
+          state.hero.gambar = path;
+          document.getElementById('inHeroGambar').value = path;
+          document.getElementById('prevHeroImg').src = info.dataUrl;
+          document.getElementById('heroImgMeta').textContent = info.origKB + ' KB → ' + info.sizeKB + ' KB (' + info.width + '×' + info.height + ')';
+        });
+      });
+
+      bindInput('inKontakLabel', function (v) { state.kontakSection.label = v; });
+      bindInput('inKontakJudul', function (v) { state.kontakSection.judul = v; });
+      bindInput('inKontakSubjudul', function (v) { state.kontakSection.subjudul = v; });
+      bindInput('inKontakSesi', function (v) {
+        state.kontakSection.daftarSesi = v.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+        renderPaketEditor();
+      });
+
+      bindInput('inGaleriLabel', function (v) { state.galeriSection.label = v; });
+      bindInput('inGaleriJudul', function (v) { state.galeriSection.judul = v; });
+
+      bindInput('inFilLabel', function (v) { state.filosofi.label = v; });
+      bindInput('inFilJudul', function (v) { state.filosofi.judul = v; });
+      bindInput('inFilParagraf', function (v) {
+        state.filosofi.paragraf = v.split(/\n\s*\n/).map(function (p) { return p.trim(); }).filter(Boolean);
+      });
+      bindInput('inFilGambar', function (v) {
+        state.filosofi.gambar = v.trim();
+        document.getElementById('prevFilImg').src = resolveImage(state.filosofi.gambar);
+      });
+      document.getElementById('uploadFilImg').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        e.target.value = '';
+        handleImageUpload(file, 'filosofi', function (path, info) {
+          state.filosofi.gambar = path;
+          document.getElementById('inFilGambar').value = path;
+          document.getElementById('prevFilImg').src = info.dataUrl;
+          document.getElementById('filImgMeta').textContent = info.origKB + ' KB → ' + info.sizeKB + ' KB';
+        });
+      });
+
+      bindInput('inTentangLabel', function (v) { state.tentang.label = v; });
+      bindInput('inTentangJudul', function (v) { state.tentang.judul = v; });
+      bindInput('inTentangParagraf', function (v) {
+        state.tentang.paragraf = v.split(/\n\s*\n/).map(function (p) { return p.trim(); }).filter(Boolean);
+      });
+      bindInput('inTentangGambar', function (v) {
+        state.tentang.gambar = v.trim();
+        document.getElementById('prevTentangImg').src = resolveImage(state.tentang.gambar);
+      });
+      document.getElementById('uploadTentangImg').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        e.target.value = '';
+        handleImageUpload(file, 'tentang', function (path, info) {
+          state.tentang.gambar = path;
+          document.getElementById('inTentangGambar').value = path;
+          document.getElementById('prevTentangImg').src = info.dataUrl;
+          document.getElementById('tentangImgMeta').textContent = info.origKB + ' KB → ' + info.sizeKB + ' KB';
+        });
+      });
+
+      bindInput('inPaketLabel', function (v) { state.paketSection.label = v; });
+      bindInput('inPaketJudul', function (v) { state.paketSection.judul = v; });
+      bindInput('inPaketSubjudul', function (v) { state.paketSection.subjudul = v; });
+
+      bindInput('inTestiLabel', function (v) { state.testimoniSection.label = v; });
+      bindInput('inTestiSublabel', function (v) { state.testimoniSection.sublabel = v; });
+
+      /* --- TAB 2: Galeri Karya Editor --- */
+      function renderGalleryEditor() {
+        var container = document.getElementById('galleryListEditor');
+        var list = state.galeri || [];
+        if (!list.length) {
+          container.innerHTML = '<div class="bg-white border hairline p-10 text-center text-sm text-graphite font-light">Belum ada foto di galeri. Klik <strong>+ Tambah Karya Baru</strong> di atas.</div>';
+          return;
+        }
+
+        container.innerHTML = list.map(function (item, idx) {
+          var isPending = Boolean(pendingUploads[item.gambar]);
+          var catOptions = UTILS.CATEGORIES.map(function (c) {
+            return '<option value="' + escapeHtml(c) + '"' + (UTILS.normalizeCategory(item.kategori) === c ? ' selected' : '') + '>' + escapeHtml(c) + '</option>';
+          }).join('');
+
+          return (
+            '<article class="bg-white border hairline p-5 sm:p-7" data-gidx="' + idx + '">' +
+              '<div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b hairline mb-5">' +
+                '<div class="flex items-center gap-3">' +
+                  '<span class="font-display text-2xl italic text-bronze">' + String(idx + 1).padStart(2, '0') + '</span>' +
+                  '<span class="text-xs font-medium text-ink">' + escapeHtml(item.judul || 'Karya Tanpa Judul') + '</span>' +
+                  (isPending ? '<span class="px-2 py-0.5 bg-bronze/15 text-bronze text-[9px] tracking-[0.18em] uppercase">Foto Baru</span>' : '') +
+                '</div>' +
+                '<div class="flex items-center gap-1.5">' +
+                  '<button type="button" data-action="g-up" ' + (idx === 0 ? 'disabled' : '') + ' title="Naikkan urutan" class="w-8 h-8 border hairline text-xs text-ink hover:border-ink disabled:opacity-30">↑</button>' +
+                  '<button type="button" data-action="g-down" ' + (idx === list.length - 1 ? 'disabled' : '') + ' title="Turunkan urutan" class="w-8 h-8 border hairline text-xs text-ink hover:border-ink disabled:opacity-30">↓</button>' +
+                  '<button type="button" data-action="g-del" title="Hapus karya" class="px-3 h-8 border hairline text-[10px] tracking-[0.16em] uppercase text-graphite hover:text-red-700 hover:border-red-300">Hapus</button>' +
+                '</div>' +
+              '</div>' +
+
+              '<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">' +
+                '<div class="lg:col-span-4">' +
+                  '<div class="art-frame">' +
+                    '<div class="aspect-[4/3] bg-gallery overflow-hidden">' +
+                      '<img src="' + escapeHtml(resolveImage(item.gambar)) + '" alt="' + escapeHtml(item.judul || '') + '" class="g-prev-img w-full h-full object-cover block">' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="mt-3 flex flex-wrap items-center gap-2">' +
+                    '<label class="px-3.5 py-2 bg-ink text-white text-[10px] tracking-[0.18em] uppercase hover:bg-bronze transition-colors cursor-pointer">' +
+                      'Upload / Ganti Foto' +
+                      '<input type="file" accept="image/*" data-action="g-upload" class="hidden">' +
+                    '</label>' +
+                    '<span class="g-img-meta text-[11px] text-graphite font-light">' +
+                      (isPending ? (pendingUploads[item.gambar].sizeKB + ' KB · Siap publish') : '') +
+                    '</span>' +
+                  '</div>' +
+                  '<div class="mt-2.5">' +
+                    inputPlaceholder(item.gambar) +
+                  '</div>' +
+                '</div>' +
+
+                '<div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+                  '<div class="sm:col-span-2">' +
+                    '<label class="ed-label">Judul Karya</label>' +
+                    '<input type="text" data-gfield="judul" value="' + escapeHtml(item.judul || '') + '" class="ed-input" placeholder="Mis. Sakral Malam Mappacci">' +
+                  '</div>' +
+                  '<div>' +
+                    '<label class="ed-label">Kategori</label>' +
+                    '<select data-gfield="kategori" class="ed-input">' + catOptions + '</select>' +
+                  '</div>' +
+                  '<div>' +
+                    '<label class="ed-label">Tahun</label>' +
+                    '<input type="text" data-gfield="tahun" value="' + escapeHtml(item.tahun || '') + '" class="ed-input" placeholder="2026">' +
+                  '</div>' +
+                  '<div class="sm:col-span-2">' +
+                    '<label class="ed-label">Lokasi</label>' +
+                    '<input type="text" data-gfield="lokasi" value="' + escapeHtml(item.lokasi || '') + '" class="ed-input" placeholder="Mis. Makassar / Gowa · Adat Bugis-Makassar">' +
+                  '</div>' +
+                  '<div class="sm:col-span-2">' +
+                    '<label class="ed-label">Deskripsi Singkat (Tampil di Lightbox)</label>' +
+                    '<textarea rows="2" data-gfield="deskripsi" class="ed-input" placeholder="Cerita singkat di balik foto ini…">' + escapeHtml(item.deskripsi || '') + '</textarea>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</article>'
+          );
+        }).join('');
+      }
+
+      function inputPlaceholder(val) {
+        return '<input type="text" data-gfield="gambar" value="' + escapeHtml(val || '') + '" class="ed-input text-xs" placeholder="images/nama-file.jpg">';
+      }
+
+      document.getElementById('btnAddGallery').addEventListener('click', function () {
+        state.galeri.unshift({
+          id: makeId('g'),
+          judul: 'Karya Baru',
+          kategori: 'Akad & Resepsi',
+          lokasi: 'Makassar',
+          tahun: String(new Date().getFullYear()),
+          gambar: 'images/resepsi.jpg',
+          deskripsi: ''
+        });
+        renderGalleryEditor();
+        updateSyncIndicators();
+        showToast('Item karya baru ditambahkan di urutan paling atas.');
+      });
+
+      var galleryListEl = document.getElementById('galleryListEditor');
+      galleryListEl.addEventListener('input', function (e) {
+        var card = e.target.closest('[data-gidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-gidx'));
+        var field = e.target.getAttribute('data-gfield');
+        if (!field || !state.galeri[idx]) return;
+        state.galeri[idx][field] = e.target.value;
+        if (field === 'gambar') {
+          var img = card.querySelector('.g-prev-img');
+          if (img) img.src = resolveImage(e.target.value.trim());
+        }
+        updateSyncIndicators();
+      });
+      galleryListEl.addEventListener('change', function (e) {
+        var card = e.target.closest('[data-gidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-gidx'));
+        if (e.target.getAttribute('data-action') === 'g-upload') {
+          var file = e.target.files && e.target.files[0];
+          e.target.value = '';
+          handleImageUpload(file, 'karya', function (path) {
+            state.galeri[idx].gambar = path;
+            renderGalleryEditor();
+          });
+        } else if (e.target.getAttribute('data-gfield') === 'kategori') {
+          state.galeri[idx].kategori = e.target.value;
+          updateSyncIndicators();
+        }
+      });
+      galleryListEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        var card = btn.closest('[data-gidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-gidx'));
+        var act = btn.getAttribute('data-action');
+        if (act === 'g-up' && idx > 0) {
+          var tmp = state.galeri[idx - 1];
+          state.galeri[idx - 1] = state.galeri[idx];
+          state.galeri[idx] = tmp;
+          renderGalleryEditor();
+          updateSyncIndicators();
+        } else if (act === 'g-down' && idx < state.galeri.length - 1) {
+          var tmp2 = state.galeri[idx + 1];
+          state.galeri[idx + 1] = state.galeri[idx];
+          state.galeri[idx] = tmp2;
+          renderGalleryEditor();
+          updateSyncIndicators();
+        } else if (act === 'g-del') {
+          if (confirm('Hapus karya "' + (state.galeri[idx].judul || 'ini') + '" dari galeri?')) {
+            state.galeri.splice(idx, 1);
+            renderGalleryEditor();
+            updateSyncIndicators();
+          }
+        }
+      });
+
+      /* --- TAB 3: Sorotan & Alur Kerja Editors --- */
+      function renderSorotanEditor() {
+        var container = document.getElementById('sorotanEditor');
+        while (state.filosofi.sorotan.length < 3) {
+          state.filosofi.sorotan.push({ judul: '', subjudul: '' });
+        }
+        container.innerHTML = state.filosofi.sorotan.map(function (s, idx) {
+          return (
+            '<div class="p-4 bg-gallery border hairline space-y-3" data-sidx="' + idx + '">' +
+              '<p class="text-[9px] tracking-[0.24em] uppercase text-bronze">Sorotan 0' + (idx + 1) + '</p>' +
+              '<div>' +
+                '<label class="ed-label">Judul</label>' +
+                '<input type="text" data-sfield="judul" value="' + escapeHtml(s.judul || '') + '" class="ed-input">' +
+              '</div>' +
+              '<div>' +
+                '<label class="ed-label">Subjudul</label>' +
+                '<input type="text" data-sfield="subjudul" value="' + escapeHtml(s.subjudul || '') + '" class="ed-input">' +
+              '</div>' +
+            '</div>'
+          );
+        }).join('');
+      }
+      document.getElementById('sorotanEditor').addEventListener('input', function (e) {
+        var box = e.target.closest('[data-sidx]');
+        if (!box) return;
+        var idx = Number(box.getAttribute('data-sidx'));
+        var field = e.target.getAttribute('data-sfield');
+        if (field && state.filosofi.sorotan[idx]) {
+          state.filosofi.sorotan[idx][field] = e.target.value;
+          updateSyncIndicators();
+        }
+      });
+
+      function renderAlurEditor() {
+        var container = document.getElementById('alurEditor');
+        container.innerHTML = (state.alurKerja || []).map(function (step, idx) {
+          return (
+            '<div class="p-5 bg-gallery border hairline space-y-3" data-aidx="' + idx + '">' +
+              '<div class="flex items-center justify-between gap-2">' +
+                '<span class="font-display text-2xl italic text-bronze">' + escapeHtml(step.nomor || String(idx + 1).padStart(2, '0')) + '</span>' +
+                '<button type="button" data-action="a-del" class="text-[10px] tracking-[0.16em] uppercase text-graphite hover:text-red-700">Hapus</button>' +
+              '</div>' +
+              '<div class="grid grid-cols-3 gap-3">' +
+                '<div>' +
+                  '<label class="ed-label">Nomor</label>' +
+                  '<input type="text" data-afield="nomor" value="' + escapeHtml(step.nomor || '') + '" class="ed-input">' +
+                '</div>' +
+                '<div class="col-span-2">' +
+                  '<label class="ed-label">Judul Langkah</label>' +
+                  '<input type="text" data-afield="judul" value="' + escapeHtml(step.judul || '') + '" class="ed-input">' +
+                '</div>' +
+              '</div>' +
+              '<div>' +
+                '<label class="ed-label">Deskripsi</label>' +
+                '<textarea rows="2" data-afield="deskripsi" class="ed-input">' + escapeHtml(step.deskripsi || '') + '</textarea>' +
+              '</div>' +
+            '</div>'
+          );
+        }).join('');
+      }
+
+      document.getElementById('btnAddAlur').addEventListener('click', function () {
+        var nextNum = String(state.alurKerja.length + 1).padStart(2, '0');
+        state.alurKerja.push({ nomor: nextNum, judul: 'Langkah Baru', deskripsi: '' });
+        renderAlurEditor();
+        updateSyncIndicators();
+      });
+
+      var alurEl = document.getElementById('alurEditor');
+      alurEl.addEventListener('input', function (e) {
+        var box = e.target.closest('[data-aidx]');
+        if (!box) return;
+        var idx = Number(box.getAttribute('data-aidx'));
+        var field = e.target.getAttribute('data-afield');
+        if (field && state.alurKerja[idx]) {
+          state.alurKerja[idx][field] = e.target.value;
+          updateSyncIndicators();
+        }
+      });
+      alurEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-action="a-del"]');
+        if (!btn) return;
+        var box = btn.closest('[data-aidx]');
+        var idx = Number(box.getAttribute('data-aidx'));
+        if (state.alurKerja.length <= 1) {
+          showToast('Minimal harus ada 1 langkah alur kerja.');
+          return;
+        }
+        state.alurKerja.splice(idx, 1);
+        renderAlurEditor();
+        updateSyncIndicators();
+      });
+
+      /* --- TAB 4: Paket Prosesi Editor --- */
+      function renderPaketEditor() {
+        var container = document.getElementById('paketListEditor');
+        var list = state.paket || [];
+        var allSesi = (state.kontakSection && state.kontakSection.daftarSesi) || [];
+
+        if (!list.length) {
+          container.innerHTML = '<div class="bg-white border hairline p-10 text-center text-sm text-graphite font-light">Belum ada paket. Klik <strong>+ Tambah Paket Baru</strong>.</div>';
+          return;
+        }
+
+        container.innerHTML = list.map(function (pkg, idx) {
+          var fiturRows = (pkg.fitur || []).map(function (f, fIdx) {
+            return (
+              '<div class="flex items-center gap-2" data-fidx="' + fIdx + '">' +
+                '<span class="text-bronze text-xs">—</span>' +
+                '<input type="text" data-pfitur="' + fIdx + '" value="' + escapeHtml(f) + '" class="ed-input py-2" placeholder="Isi poin fitur…">' +
+                '<button type="button" data-action="p-del-fitur" data-fidx="' + fIdx + '" class="w-9 h-9 border hairline text-xs text-graphite hover:text-red-700 hover:border-red-300 shrink-0">✕</button>' +
+              '</div>'
+            );
+          }).join('');
+
+          var sesiChips = allSesi.map(function (s) {
+            var active = (pkg.sesiDefault || []).indexOf(s) !== -1;
+            return (
+              '<button type="button" data-action="p-toggle-sesi" data-sesi="' + escapeHtml(s) + '" ' +
+                'class="px-3 py-1.5 border hairline text-[10px] tracking-[0.14em] uppercase transition-colors ' +
+                (active ? 'chip-active' : 'bg-white text-graphite hover:border-ink hover:text-ink') + '">' +
+                escapeHtml(s) +
+              '</button>'
+            );
+          }).join('');
+
+          return (
+            '<article class="bg-white border ' + (pkg.pilihanUtama ? 'border-ink shadow-sm' : 'hairline') + ' p-6 sm:p-8" data-pidx="' + idx + '">' +
+              '<div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b hairline mb-6">' +
+                '<div class="flex items-center gap-3">' +
+                  '<span class="font-display text-2xl italic text-bronze">' + String(idx + 1).padStart(2, '0') + '</span>' +
+                  '<span class="text-sm font-medium text-ink">' + escapeHtml(pkg.nama || 'Paket Baru') + '</span>' +
+                  (pkg.pilihanUtama ? '<span class="px-2.5 py-0.5 bg-ink text-white text-[9px] tracking-[0.2em] uppercase">' + escapeHtml(pkg.badge || 'Pilihan Utama') + '</span>' : '') +
+                '</div>' +
+                '<div class="flex items-center gap-1.5">' +
+                  '<button type="button" data-action="p-up" ' + (idx === 0 ? 'disabled' : '') + ' class="w-8 h-8 border hairline text-xs hover:border-ink disabled:opacity-30">↑</button>' +
+                  '<button type="button" data-action="p-down" ' + (idx === list.length - 1 ? 'disabled' : '') + ' class="w-8 h-8 border hairline text-xs hover:border-ink disabled:opacity-30">↓</button>' +
+                  '<button type="button" data-action="p-del" class="px-3 h-8 border hairline text-[10px] tracking-[0.16em] uppercase text-graphite hover:text-red-700 hover:border-red-300">Hapus</button>' +
+                '</div>' +
+              '</div>' +
+
+              '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">' +
+                '<div>' +
+                  '<label class="ed-label">Label Atas</label>' +
+                  '<input type="text" data-pfield="label" value="' + escapeHtml(pkg.label || '') + '" class="ed-input" placeholder="01 · Intimate">' +
+                '</div>' +
+                '<div>' +
+                  '<label class="ed-label">Nama Paket</label>' +
+                  '<input type="text" data-pfield="nama" value="' + escapeHtml(pkg.nama || '') + '" class="ed-input" placeholder="Paket 3–4 Prosesi">' +
+                '</div>' +
+                '<div>' +
+                  '<label class="ed-label">Harga (Opsional)</label>' +
+                  '<input type="text" data-pfield="harga" value="' + escapeHtml(pkg.harga || '') + '" class="ed-input" placeholder="Kosongkan jika via pricelist">' +
+                '</div>' +
+                '<div class="sm:col-span-3">' +
+                  '<label class="ed-label">Deskripsi Paket</label>' +
+                  '<textarea rows="2" data-pfield="deskripsi" class="ed-input">' + escapeHtml(pkg.deskripsi || '') + '</textarea>' +
+                '</div>' +
+              '</div>' +
+
+              '<div class="mt-5 pt-5 border-t hairline flex flex-wrap items-center gap-5">' +
+                '<label class="inline-flex items-center gap-2.5 cursor-pointer select-none">' +
+                  '<input type="checkbox" data-pfield="pilihanUtama" ' + (pkg.pilihanUtama ? 'checked' : '') + ' class="w-4 h-4 accent-[#121212]">' +
+                  '<span class="text-xs text-ink">Sorot sebagai Pilihan Utama (bingkai tegas &amp; badge)</span>' +
+                '</label>' +
+                '<div class="flex items-center gap-2">' +
+                  '<span class="text-[10px] tracking-[0.2em] uppercase text-graphite">Teks Badge:</span>' +
+                  '<input type="text" data-pfield="badge" value="' + escapeHtml(pkg.badge || 'Pilihan Utama') + '" class="ed-input py-1.5 w-40 text-xs">' +
+                '</div>' +
+              '</div>' +
+
+              '<div class="mt-6 pt-5 border-t hairline">' +
+                '<div class="flex items-center justify-between mb-3">' +
+                  '<span class="ed-label mb-0">Daftar Fitur Paket</span>' +
+                  '<button type="button" data-action="p-add-fitur" class="px-3 py-1.5 border hairline text-[10px] tracking-[0.18em] uppercase text-ink hover:border-ink">+ Tambah Fitur</button>' +
+                '</div>' +
+                '<div class="space-y-2">' + fiturRows + '</div>' +
+              '</div>' +
+
+              '<div class="mt-6 pt-5 border-t hairline">' +
+                '<span class="ed-label mb-2.5">Sesi Default Auto-Fill saat Pengunjung Klik "Tanya Paket Ini"</span>' +
+                '<div class="flex flex-wrap gap-2">' + sesiChips + '</div>' +
+              '</div>' +
+            '</article>'
+          );
+        }).join('');
+      }
+
+      document.getElementById('btnAddPaket').addEventListener('click', function () {
+        var n = String(state.paket.length + 1).padStart(2, '0');
+        state.paket.push({
+          id: makeId('p'),
+          label: n + ' · Custom',
+          nama: 'Paket Baru',
+          harga: '',
+          deskripsi: 'Deskripsi singkat rangkaian prosesi untuk paket ini.',
+          fitur: ['Tim Foto & Film', 'Galeri daring pribadi Tepi Kata'],
+          pilihanUtama: false,
+          badge: 'Pilihan Utama',
+          sesiDefault: ['Akad & Resepsi']
+        });
+        renderPaketEditor();
+        updateSyncIndicators();
+        showToast('Paket baru ditambahkan.');
+      });
+
+      var paketListEl = document.getElementById('paketListEditor');
+      paketListEl.addEventListener('input', function (e) {
+        var card = e.target.closest('[data-pidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-pidx'));
+        var pkg = state.paket[idx];
+        if (!pkg) return;
+
+        var fIdxAttr = e.target.getAttribute('data-pfitur');
+        if (fIdxAttr !== null) {
+          pkg.fitur[Number(fIdxAttr)] = e.target.value;
+          updateSyncIndicators();
+          return;
+        }
+
+        var field = e.target.getAttribute('data-pfield');
+        if (field && field !== 'pilihanUtama') {
+          pkg[field] = e.target.value;
+          updateSyncIndicators();
+        }
+      });
+      paketListEl.addEventListener('change', function (e) {
+        var card = e.target.closest('[data-pidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-pidx'));
+        if (e.target.getAttribute('data-pfield') === 'pilihanUtama') {
+          state.paket[idx].pilihanUtama = e.target.checked;
+          renderPaketEditor();
+          updateSyncIndicators();
+        }
+      });
+      paketListEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        var card = btn.closest('[data-pidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-pidx'));
+        var pkg = state.paket[idx];
+        var act = btn.getAttribute('data-action');
+
+        if (act === 'p-up' && idx > 0) {
+          var tmp = state.paket[idx - 1];
+          state.paket[idx - 1] = state.paket[idx];
+          state.paket[idx] = tmp;
+          renderPaketEditor();
+          updateSyncIndicators();
+        } else if (act === 'p-down' && idx < state.paket.length - 1) {
+          var tmp2 = state.paket[idx + 1];
+          state.paket[idx + 1] = state.paket[idx];
+          state.paket[idx] = tmp2;
+          renderPaketEditor();
+          updateSyncIndicators();
+        } else if (act === 'p-del') {
+          if (confirm('Hapus paket "' + (pkg.nama || 'ini') + '"?')) {
+            state.paket.splice(idx, 1);
+            renderPaketEditor();
+            updateSyncIndicators();
+          }
+        } else if (act === 'p-add-fitur') {
+          pkg.fitur.push('');
+          renderPaketEditor();
+          updateSyncIndicators();
+        } else if (act === 'p-del-fitur') {
+          var fIdx = Number(btn.getAttribute('data-fidx'));
+          pkg.fitur.splice(fIdx, 1);
+          renderPaketEditor();
+          updateSyncIndicators();
+        } else if (act === 'p-toggle-sesi') {
+          var sesi = btn.getAttribute('data-sesi');
+          var pos = pkg.sesiDefault.indexOf(sesi);
+          if (pos === -1) pkg.sesiDefault.push(sesi);
+          else pkg.sesiDefault.splice(pos, 1);
+          renderPaketEditor();
+          updateSyncIndicators();
+        }
+      });
+
+      /* --- TAB 5: Testimoni Klien Editor --- */
+      function renderTestiEditor() {
+        var container = document.getElementById('testiListEditor');
+        var list = state.testimoni || [];
+        if (!list.length) {
+          container.innerHTML = '<div class="bg-white border hairline p-10 text-center text-sm text-graphite font-light">Belum ada testimoni. Klik <strong>+ Tambah Testimoni</strong> di atas.</div>';
+          return;
+        }
+
+        container.innerHTML = list.map(function (t, idx) {
+          var isPending = Boolean(pendingUploads[t.gambar]);
+          return (
+            '<article class="bg-white border hairline p-5 sm:p-7" data-tidx="' + idx + '">' +
+              '<div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b hairline mb-5">' +
+                '<div class="flex items-center gap-3">' +
+                  '<span class="font-display text-2xl italic text-bronze">' + String(idx + 1).padStart(2, '0') + '</span>' +
+                  '<span class="text-xs font-medium text-ink">' + escapeHtml(t.namaKlien || 'Klien') + '</span>' +
+                  (isPending ? '<span class="px-2 py-0.5 bg-bronze/15 text-bronze text-[9px] tracking-[0.18em] uppercase">Foto Baru</span>' : '') +
+                '</div>' +
+                '<div class="flex items-center gap-1.5">' +
+                  '<button type="button" data-action="t-up" ' + (idx === 0 ? 'disabled' : '') + ' class="w-8 h-8 border hairline text-xs hover:border-ink disabled:opacity-30">↑</button>' +
+                  '<button type="button" data-action="t-down" ' + (idx === list.length - 1 ? 'disabled' : '') + ' class="w-8 h-8 border hairline text-xs hover:border-ink disabled:opacity-30">↓</button>' +
+                  '<button type="button" data-action="t-del" class="px-3 h-8 border hairline text-[10px] tracking-[0.16em] uppercase text-graphite hover:text-red-700 hover:border-red-300">Hapus</button>' +
+                '</div>' +
+              '</div>' +
+
+              '<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">' +
+                '<div class="lg:col-span-4">' +
+                  '<div class="art-frame">' +
+                    '<div class="aspect-[4/3] bg-gallery overflow-hidden">' +
+                      '<img src="' + escapeHtml(resolveImage(t.gambar)) + '" alt="Foto testimoni" class="t-prev-img w-full h-full object-cover block">' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="mt-3 flex flex-wrap items-center gap-2">' +
+                    '<label class="px-3.5 py-2 bg-ink text-white text-[10px] tracking-[0.18em] uppercase hover:bg-bronze transition-colors cursor-pointer">' +
+                      'Upload Foto' +
+                      '<input type="file" accept="image/*" data-action="t-upload" class="hidden">' +
+                    '</label>' +
+                  '</div>' +
+                  '<div class="mt-2.5">' +
+                    '<input type="text" data-tfield="gambar" value="' + escapeHtml(t.gambar || '') + '" class="ed-input text-xs" placeholder="images/resepsi.jpg">' +
+                  '</div>' +
+                '</div>' +
+
+                '<div class="lg:col-span-8 space-y-4">' +
+                  '<div>' +
+                    '<label class="ed-label">Kutipan Testimoni</label>' +
+                    '<textarea rows="4" data-tfield="kutipan" class="ed-input leading-relaxed" placeholder="Tulis ulasan asli dari pasangan klien…">' + escapeHtml(t.kutipan || '') + '</textarea>' +
+                  '</div>' +
+                  '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">' +
+                    '<div>' +
+                      '<label class="ed-label">Nama Klien / Pasangan</label>' +
+                      '<input type="text" data-tfield="namaKlien" value="' + escapeHtml(t.namaKlien || '') + '" class="ed-input" placeholder="Mis. Raka &amp; Dinda">' +
+                    '</div>' +
+                    '<div>' +
+                      '<label class="ed-label">Sesi &amp; Kota</label>' +
+                      '<input type="text" data-tfield="sesi" value="' + escapeHtml(t.sesi || '') + '" class="ed-input" placeholder="Mis. Akad &amp; Resepsi · Makassar">' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</article>'
+          );
+        }).join('');
+      }
+
+      document.getElementById('btnAddTesti').addEventListener('click', function () {
+        state.testimoni.push({
+          id: makeId('t'),
+          kutipan: '',
+          namaKlien: 'Nama Pasangan',
+          sesi: 'Akad & Resepsi · Makassar',
+          gambar: 'images/resepsi.jpg'
+        });
+        renderTestiEditor();
+        updateSyncIndicators();
+        showToast('Testimoni baru ditambahkan.');
+      });
+
+      var testiListEl = document.getElementById('testiListEditor');
+      testiListEl.addEventListener('input', function (e) {
+        var card = e.target.closest('[data-tidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-tidx'));
+        var field = e.target.getAttribute('data-tfield');
+        if (!field || !state.testimoni[idx]) return;
+        state.testimoni[idx][field] = e.target.value;
+        if (field === 'gambar') {
+          var img = card.querySelector('.t-prev-img');
+          if (img) img.src = resolveImage(e.target.value.trim());
+        }
+        updateSyncIndicators();
+      });
+      testiListEl.addEventListener('change', function (e) {
+        var card = e.target.closest('[data-tidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-tidx'));
+        if (e.target.getAttribute('data-action') === 't-upload') {
+          var file = e.target.files && e.target.files[0];
+          e.target.value = '';
+          handleImageUpload(file, 'testi', function (path) {
+            state.testimoni[idx].gambar = path;
+            renderTestiEditor();
+          });
+        }
+      });
+      testiListEl.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        var card = btn.closest('[data-tidx]');
+        if (!card) return;
+        var idx = Number(card.getAttribute('data-tidx'));
+        var act = btn.getAttribute('data-action');
+        if (act === 't-up' && idx > 0) {
+          var tmp = state.testimoni[idx - 1];
+          state.testimoni[idx - 1] = state.testimoni[idx];
+          state.testimoni[idx] = tmp;
+          renderTestiEditor();
+          updateSyncIndicators();
+        } else if (act === 't-down' && idx < state.testimoni.length - 1) {
+          var tmp2 = state.testimoni[idx + 1];
+          state.testimoni[idx + 1] = state.testimoni[idx];
+          state.testimoni[idx] = tmp2;
+          renderTestiEditor();
+          updateSyncIndicators();
+        } else if (act === 't-del') {
+          if (confirm('Hapus testimoni dari "' + (state.testimoni[idx].namaKlien || 'klien ini') + '"?')) {
+            state.testimoni.splice(idx, 1);
+            renderTestiEditor();
+            updateSyncIndicators();
+          }
+        }
+      });
+
+      /* --- Preview Before Publish --- */
+      function openPreview() {
+        var previewImages = {};
+        getReferencedPendingPaths().forEach(function (path) {
+          previewImages[path] = pendingUploads[path].dataUrl;
+        });
+
+        try {
+          localStorage.setItem(UTILS.PREVIEW_STORAGE_KEY, JSON.stringify({
+            content: state,
+            previewImages: previewImages,
+            savedAt: Date.now()
+          }));
+        } catch (err) {
+          /* Quota exceeded if many huge images; fall back to text-only preview */
+          try {
+            localStorage.setItem(UTILS.PREVIEW_STORAGE_KEY, JSON.stringify({
+              content: state,
+              previewImages: {},
+              savedAt: Date.now()
+            }));
+            showToast('Pratinjau dibuka (sebagian foto baru terlalu besar untuk memori sementara).', 4000);
+          } catch (e2) {
+            showToast('Gagal menyimpan pratinjau ke browser.');
+            return;
+          }
+        }
+
+        window.open('index.html?preview=1', '_blank', 'noopener');
+      }
+
+      document.getElementById('btnPreviewTop').addEventListener('click', openPreview);
+      document.getElementById('btnPreviewMobile').addEventListener('click', openPreview);
+
+      /* --- Download & Import content.json --- */
+      function downloadJson() {
+        var jsonStr = JSON.stringify(state, null, 2) + '\n';
+        var blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'content.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast('File content.json berhasil diunduh.');
+      }
+      document.getElementById('btnDownloadJson').addEventListener('click', downloadJson);
+      document.getElementById('btnDownloadJsonMobile').addEventListener('click', downloadJson);
+      document.getElementById('pubDownloadBackup').addEventListener('click', downloadJson);
+
+      document.getElementById('inputImportJson').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        e.target.value = '';
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          try {
+            var parsed = JSON.parse(String(reader.result || ''));
+            state = UTILS.mergeContent(parsed);
+            populateAllForms();
+            updateSyncIndicators();
+            showToast('Data content.json berhasil dimuat ke editor.');
+          } catch (err) {
+            showToast('File JSON tidak valid.');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      /* --- GitHub Settings Modal & Persistence --- */
+      function getGhConfig() {
+        var defaults = { token: '', owner: 'tepikata', repo: 'portfolio', branch: 'main' };
+        try {
+          var raw = localStorage.getItem(GH_CONFIG_KEY);
+          if (!raw) return defaults;
+          return Object.assign(defaults, JSON.parse(raw));
+        } catch (err) {
+          return defaults;
+        }
+      }
+
+      function saveGhConfig(cfg) {
+        try {
+          localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(cfg));
+        } catch (err) { /* ignore */ }
+        refreshGhDot();
+      }
+
+      function refreshGhDot() {
+        var cfg = getGhConfig();
+        var dot = document.getElementById('ghDot');
+        if (cfg.token) {
+          dot.className = 'w-2 h-2 bg-bronze inline-block';
+        } else {
+          dot.className = 'w-2 h-2 bg-graphite/40 inline-block';
+        }
+      }
+
+      var ghModal = document.getElementById('githubModal');
+      function openGhModal() {
+        var cfg = getGhConfig();
+        document.getElementById('inGhToken').value = cfg.token || '';
+        document.getElementById('inGhOwner').value = cfg.owner || 'tepikata';
+        document.getElementById('inGhRepo').value = cfg.repo || 'portfolio';
+        document.getElementById('inGhBranch').value = cfg.branch || 'main';
+        document.getElementById('ghTestResult').classList.add('hidden');
+        ghModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeGhModal() {
+        ghModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('btnGithubSettings').addEventListener('click', openGhModal);
+      document.getElementById('ghClose').addEventListener('click', closeGhModal);
+      ghModal.addEventListener('click', function (e) {
+        if (e.target === ghModal) closeGhModal();
+      });
+
+      document.getElementById('btnToggleToken').addEventListener('click', function () {
+        var inp = document.getElementById('inGhToken');
+        var isPwd = inp.type === 'password';
+        inp.type = isPwd ? 'text' : 'password';
+        this.textContent = isPwd ? 'Sembunyi' : 'Lihat';
+      });
+
+      function readGhForm() {
+        return {
+          token: document.getElementById('inGhToken').value.trim(),
+          owner: document.getElementById('inGhOwner').value.trim() || 'tepikata',
+          repo: document.getElementById('inGhRepo').value.trim() || 'portfolio',
+          branch: document.getElementById('inGhBranch').value.trim() || 'main'
+        };
+      }
+
+      function showGhTestResult(ok, msg) {
+        var box = document.getElementById('ghTestResult');
+        box.className = 'p-3.5 border text-xs leading-relaxed ' + (ok
+          ? 'bg-gallery border-bronze/50 text-ink'
+          : 'bg-red-50 border-red-200 text-red-800');
+        box.textContent = msg;
+        box.classList.remove('hidden');
+      }
+
+      document.getElementById('btnGhSave').addEventListener('click', function () {
+        var cfg = readGhForm();
+        saveGhConfig(cfg);
+        closeGhModal();
+        showToast(cfg.token ? 'Pengaturan GitHub disimpan di browser ini.' : 'Pengaturan disimpan (tanpa token).');
+      });
+
+      document.getElementById('btnGhClear').addEventListener('click', function () {
+        if (!confirm('Hapus token GitHub dari browser ini?')) return;
+        var cfg = readGhForm();
+        cfg.token = '';
+        saveGhConfig(cfg);
+        document.getElementById('inGhToken').value = '';
+        showGhTestResult(true, 'Token berhasil dihapus dari browser ini.');
+      });
+
+      document.getElementById('btnGhTest').addEventListener('click', function () {
+        var cfg = readGhForm();
+        if (!cfg.token) {
+          showGhTestResult(false, 'Masukkan GitHub Personal Access Token terlebih dahulu.');
+          return;
+        }
+        showGhTestResult(true, 'Menguji koneksi ke ' + cfg.owner + '/' + cfg.repo + '…');
+
+        var headers = {
+          'Authorization': 'Bearer ' + cfg.token,
+          'Accept': 'application/vnd.github+json',
+          'X-GitHub-Api-Version': '2022-11-28'
+        };
+
+        fetch('https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo), {
+          headers: headers
+        }).then(function (res) {
+          return res.json().then(function (body) { return { ok: res.ok, status: res.status, body: body }; });
+        }).then(function (r) {
+          if (!r.ok) {
+            throw new Error('Gagal (' + r.status + '): ' + (r.body && r.body.message ? r.body.message : 'Periksa token dan nama repo.'));
+          }
+          if (r.body.permissions && r.body.permissions.push === false) {
+            throw new Error('Token hanya memiliki akses baca. Pastikan izin "Contents: Read and write" sudah aktif.');
+          }
+          return fetch('https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) + '/branches/' + encodeURIComponent(cfg.branch), {
+            headers: headers
+          }).then(function (bres) {
+            if (!bres.ok) throw new Error('Branch "' + cfg.branch + '" tidak ditemukan di repo ini.');
+            saveGhConfig(cfg);
+            showGhTestResult(true, 'Berhasil terhubung ke ' + cfg.owner + '/' + cfg.repo + ' (branch ' + cfg.branch + '). Token disimpan & siap publish.');
+          });
+        }).catch(function (err) {
+          showGhTestResult(false, err.message || 'Tidak dapat terhubung ke GitHub API.');
+        });
+      });
+
+      /* --- Publish to GitHub REST API --- */
+      function utf8ToBase64(str) {
+        var bytes = new TextEncoder().encode(str);
+        var binary = '';
+        var chunkSize = 0x8000;
+        for (var i = 0; i < bytes.length; i += chunkSize) {
+          binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+        }
+        return btoa(binary);
+      }
+
+      function githubGetSha(cfg, filePath) {
+        var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) +
+          '/contents/' + filePath.split('/').map(encodeURIComponent).join('/') + '?ref=' + encodeURIComponent(cfg.branch);
+        return fetch(url, {
+          headers: {
+            'Authorization': 'Bearer ' + cfg.token,
+            'Accept': 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28'
+          },
+          cache: 'no-store'
+        }).then(function (res) {
+          if (res.status === 404) return null;
+          if (!res.ok) {
+            return res.json().then(function (b) {
+              throw new Error('Gagal membaca ' + filePath + ' (' + res.status + '): ' + (b.message || ''));
+            });
+          }
+          return res.json().then(function (data) { return data.sha || null; });
+        });
+      }
+
+      function githubPutFile(cfg, filePath, base64Content, commitMessage) {
+        return githubGetSha(cfg, filePath).then(function (sha) {
+          var url = 'https://api.github.com/repos/' + encodeURIComponent(cfg.owner) + '/' + encodeURIComponent(cfg.repo) +
+            '/contents/' + filePath.split('/').map(encodeURIComponent).join('/');
+          var payload = {
+            message: commitMessage,
+            content: base64Content,
+            branch: cfg.branch
+          };
+          if (sha) payload.sha = sha;
+
+          return fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Authorization': 'Bearer ' + cfg.token,
+              'Accept': 'application/vnd.github+json',
+              'Content-Type': 'application/json',
+              'X-GitHub-Api-Version': '2022-11-28'
+            },
+            body: JSON.stringify(payload)
+          }).then(function (res) {
+            return res.json().then(function (body) {
+              if (!res.ok) {
+                throw new Error('Gagal upload ' + filePath + ' (' + res.status + '): ' + (body.message || 'Periksa izin Contents: Read & Write'));
+              }
+              return body;
+            });
+          });
+        });
+      }
+
+      var pubModal = document.getElementById('publishModal');
+      var pubLog = document.getElementById('pubLog');
+      var pubTitle = document.getElementById('pubModalTitle');
+      var pubActions = document.getElementById('pubActions');
+
+      function appendPubLog(text, isError) {
+        var p = document.createElement('p');
+        p.className = isError ? 'text-red-700 font-normal' : 'text-ink';
+        p.textContent = text;
+        pubLog.appendChild(p);
+        pubLog.scrollTop = pubLog.scrollHeight;
+      }
+
+      function closePublishModal() {
+        pubModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      document.getElementById('pubClose').addEventListener('click', closePublishModal);
+      document.getElementById('pubDoneBtn').addEventListener('click', closePublishModal);
+
+      function startPublish() {
+        var cfg = getGhConfig();
+        if (!cfg.token) {
+          openGhModal();
+          showGhTestResult(false, 'Masukkan GitHub Personal Access Token dulu agar bisa publish langsung, atau gunakan tombol "Unduh JSON" untuk upload manual.');
+          return;
+        }
+
+        pubTitle.textContent = 'Mempublikasikan Perubahan…';
+        pubLog.innerHTML = '';
+        pubActions.classList.add('hidden');
+        pubModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        var imagesToUpload = getReferencedPendingPaths();
+        var chain = Promise.resolve();
+
+        if (imagesToUpload.length) {
+          appendPubLog('Menyiapkan ' + imagesToUpload.length + ' foto terkompresi untuk diunggah ke ' + cfg.owner + '/' + cfg.repo + '…');
+          imagesToUpload.forEach(function (imgPath, idx) {
+            chain = chain.then(function () {
+              var info = pendingUploads[imgPath];
+              appendPubLog('[' + (idx + 1) + '/' + imagesToUpload.length + '] Mengunggah ' + imgPath + ' (' + info.sizeKB + ' KB)…');
+              return githubPutFile(cfg, imgPath, info.base64, 'Upload foto portofolio: ' + imgPath).then(function () {
+                delete pendingUploads[imgPath];
+                appendPubLog('✓ ' + imgPath + ' berhasil diunggah.');
+              });
+            });
+          });
+        }
+
+        chain.then(function () {
+          appendPubLog('Menyimpan data/content.json ke branch ' + cfg.branch + '…');
+          var jsonStr = JSON.stringify(state, null, 2) + '\n';
+          var b64 = utf8ToBase64(jsonStr);
+          return githubPutFile(cfg, 'data/content.json', b64, 'Update konten portofolio via Studio Editor');
+        }).then(function () {
+          liveSnapshot = JSON.stringify(state);
+          try { localStorage.removeItem(LOCAL_DRAFT_KEY); } catch (e) { /* ignore */ }
+          updateSyncIndicators();
+          renderGalleryEditor();
+          renderTestiEditor();
+          pubTitle.textContent = 'Berhasil Dipublikasikan';
+          appendPubLog('✓ data/content.json tersimpan di GitHub.');
+          appendPubLog('GitHub Pages akan memperbarui website live dalam ~30–60 detik.');
+          pubActions.classList.remove('hidden');
+        }).catch(function (err) {
+          pubTitle.textContent = 'Publikasi Gagal';
+          appendPubLog('✕ ' + (err && err.message ? err.message : 'Terjadi kesalahan saat menghubungi GitHub.'), true);
+          appendPubLog('Tip: Pastikan token valid & memiliki izin Contents: Read and write untuk repo tepikata/portfolio, atau unduh content.json sebagai cadangan.', false);
+          pubActions.classList.remove('hidden');
+        });
+      }
+
+      document.getElementById('btnPublishTop').addEventListener('click', startPublish);
+      document.getElementById('btnPublishMobile').addEventListener('click', startPublish);
+
+      /* --- Load Live Content & Draft Recovery --- */
+      function loadLiveContent(forceReset) {
+        function applyLoaded(json) {
+          state = UTILS.mergeContent(json);
+          liveSnapshot = JSON.stringify(state);
+          pendingUploads = {};
+          populateAllForms();
+
+          if (forceReset) {
+            try { localStorage.removeItem(LOCAL_DRAFT_KEY); } catch (e) { /* ignore */ }
+            document.getElementById('draftBanner').classList.add('hidden');
+            showToast('Konten dimuat ulang dari versi live.');
+          } else {
+            checkLocalDraft();
+          }
+          updateSyncIndicators();
+        }
+
+        if (window.location.protocol === 'file:') {
+          applyLoaded(window.TEPI_KATA_DEFAULT_CONTENT);
+          return;
+        }
+
+        fetch('data/content.json?v=' + Date.now(), { cache: 'no-store' })
+          .then(function (res) {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(applyLoaded)
+          .catch(function () {
+            applyLoaded(window.TEPI_KATA_DEFAULT_CONTENT);
+          });
+      }
+
+      function checkLocalDraft() {
+        try {
+          var raw = localStorage.getItem(LOCAL_DRAFT_KEY);
+          if (!raw) return;
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.content && JSON.stringify(UTILS.mergeContent(parsed.content)) !== liveSnapshot) {
+            document.getElementById('draftBanner').classList.remove('hidden');
+          }
+        } catch (err) { /* ignore */ }
+      }
+
+      document.getElementById('btnRestoreDraft').addEventListener('click', function () {
+        try {
+          var raw = localStorage.getItem(LOCAL_DRAFT_KEY);
+          var parsed = JSON.parse(raw || '{}');
+          if (parsed && parsed.content) {
+            state = UTILS.mergeContent(parsed.content);
+            populateAllForms();
+            updateSyncIndicators();
+            showToast('Draf lokal berhasil dipulihkan.');
+          }
+        } catch (err) { /* ignore */ }
+        document.getElementById('draftBanner').classList.add('hidden');
+      });
+
+      document.getElementById('btnDiscardDraft').addEventListener('click', function () {
+        try { localStorage.removeItem(LOCAL_DRAFT_KEY); } catch (e) { /* ignore */ }
+        document.getElementById('draftBanner').classList.add('hidden');
+        showToast('Draf lokal diabaikan.');
+      });
+
+      function onResetLiveClick() {
+        if (isDirty && !confirm('Buang semua perubahan yang belum dipublikasikan dan muat ulang dari versi live?')) {
+          return;
+        }
+        loadLiveContent(true);
+      }
+      document.getElementById('btnReloadLive').addEventListener('click', onResetLiveClick);
+      document.getElementById('btnReloadLiveMobile').addEventListener('click', onResetLiveClick);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (!ghModal.classList.contains('hidden')) closeGhModal();
+        }
+      });
+
+      window.addEventListener('beforeunload', function (e) {
+        if (isDirty) {
+          e.preventDefault();
+          e.returnValue = '';
+        }
+      });
+
+      refreshGhDot();
+      loadLiveContent(false);
+    })();
+  </script>
+</body>
+</html>

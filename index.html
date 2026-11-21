@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tepi Kata — Foto &amp; Film Pernikahan | Makassar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#FFFFFF',
+            gallery: '#F8F8F8',
+            ink: '#121212',
+            graphite: '#686868',
+            bronze: '#96764A',
+            bronzelight: '#C9AE82'
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', '"Bodoni Moda"', 'Georgia', 'serif'],
+            serif: ['"Bodoni Moda"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    html, body {
+      background-color: #FFFFFF;
+      color: #121212;
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .hairline {
+      border-color: rgba(18, 18, 18, 0.11);
+    }
+    .nav-glass {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    /* Fine-art print frame */
+    .art-frame {
+      padding: 10px;
+      background: #FFFFFF;
+      border: 1px solid rgba(18, 18, 18, 0.10);
+      box-shadow: 0 18px 50px rgba(18, 18, 18, 0.05);
+    }
+    .gallery-card img {
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery-card:hover img {
+      transform: scale(1.045);
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 1px;
+      background: #96764A;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+    .chip-active {
+      background-color: #121212;
+      color: #FFFFFF;
+      border-color: #121212;
+    }
+    .arch-input {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(18, 18, 18, 0.22);
+      border-radius: 0;
+      padding: 12px 2px;
+      transition: border-color 0.25s ease;
+    }
+    .arch-input:focus {
+      outline: none;
+      border-bottom-color: #96764A;
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-canvas text-ink selection:bg-bronze/20 selection:text-ink">
+
+  <!-- Minimal Fine-Art Header -->
+  <header id="topNav" class="fixed inset-x-0 top-0 z-30 nav-glass border-b hairline">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 h-20 flex items-center justify-between gap-4">
+      <nav class="hidden md:flex items-center gap-9 text-[11px] tracking-[0.24em] uppercase text-graphite">
+        <a href="#beranda" class="nav-link hover:text-ink transition-colors">Beranda</a>
+        <a href="#tentang" class="nav-link hover:text-ink transition-colors">Tentang</a>
+        <a href="#karya" class="nav-link hover:text-ink transition-colors">Karya</a>
+      </nav>
+
+      <a href="#beranda" class="font-display text-2xl sm:text-[28px] font-normal tracking-[0.32em] text-ink hover:text-bronze transition-colors pl-[0.32em]">
+        TEPI KATA
+      </a>
+
+      <nav class="hidden md:flex items-center gap-9 text-[11px] tracking-[0.24em] uppercase text-graphite">
+        <a href="#alur" class="nav-link hover:text-ink transition-colors">Proses</a>
+        <a href="#paket" class="nav-link hover:text-ink transition-colors">Paket</a>
+        <a href="#kontak" class="px-5 py-2.5 border border-ink text-ink hover:bg-ink hover:text-white transition-colors">
+          Kontak
+        </a>
+      </nav>
+
+      <button id="menuBtn" type="button" aria-label="Buka menu navigasi" aria-expanded="false"
+        class="md:hidden w-10 h-10 flex items-center justify-center border hairline text-ink hover:border-ink">
+        <svg id="menuIconOpen" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square">
+          <path d="M4 7h16M4 12h16M4 17h16"/>
+        </svg>
+        <svg id="menuIconClose" class="w-5 h-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square">
+          <path d="M6 6l12 12M18 6l-12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div id="mobileMenu" class="hidden md:hidden border-t hairline bg-white px-6 py-7">
+      <div class="flex flex-col gap-5 text-[11px] tracking-[0.26em] uppercase text-ink">
+        <a href="#beranda" class="mobile-link py-1 hover:text-bronze">Beranda</a>
+        <a href="#tentang" class="mobile-link py-1 hover:text-bronze">Tentang</a>
+        <a href="#karya" class="mobile-link py-1 hover:text-bronze">Karya Terbaru</a>
+        <a href="#alur" class="mobile-link py-1 hover:text-bronze">Alur Kerja</a>
+        <a href="#paket" class="mobile-link py-1 hover:text-bronze">Paket Prosesi</a>
+        <a href="#kontak" class="mobile-link py-3 mt-1 text-center border border-ink text-ink hover:bg-ink hover:text-white">Tanya Jadwal</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Framed Fine-Art Editorial Hero -->
+    <section id="beranda" class="pt-20 bg-white">
+      <div class="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+          <img src="images/hero.jpg"
+            alt="Pasangan pengantin Tepi Kata di bawah cahaya lampu senja"
+            class="w-full h-full object-cover object-center">
+          <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/75"></div>
+        </div>
+
+        <!-- Subtle architectural inner frame -->
+        <div class="pointer-events-none absolute inset-4 sm:inset-8 border border-white/20"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-8 sm:px-12 py-20 text-center">
+          <p class="text-[10px] sm:text-[11px] tracking-[0.34em] uppercase text-bronzelight mb-6">
+            Makassar &amp; Sulawesi Selatan &nbsp;·&nbsp; Foto &amp; Film Pernikahan
+          </p>
+          <h1 class="font-display font-light text-5xl sm:text-7xl lg:text-[84px] leading-[0.98] tracking-[-0.01em] text-white">
+            Cerita Cinta yang <em class="italic font-light text-bronzelight">Abadi</em><br>dalam Foto &amp; Film
+          </h1>
+          <div class="w-12 h-px bg-bronzelight/70 mx-auto my-8"></div>
+          <p class="text-sm sm:text-[15px] text-white/85 max-w-xl mx-auto leading-relaxed font-light">
+            Dokumentasi pernikahan natural, jujur, dan sinematik—mengabadikan setiap detik dari lamaran, siraman, mappacci, hingga akad dan resepsi tanpa terasa kaku.
+          </p>
+          <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <a href="#karya" class="px-9 py-4 bg-white text-ink text-[11px] font-medium tracking-[0.26em] uppercase hover:bg-bronzelight hover:text-ink transition-colors">
+              Lihat Karya
+            </a>
+            <a href="#kontak" class="px-9 py-4 border border-white/60 text-white text-[11px] font-normal tracking-[0.26em] uppercase hover:border-bronzelight hover:text-bronzelight transition-colors">
+              Cek Tanggal
+            </a>
+          </div>
+        </div>
+
+        <div class="hidden sm:flex flex-col items-center gap-2 absolute bottom-7 left-1/2 -translate-x-1/2 z-10 text-white/60">
+          <span class="text-[9px] tracking-[0.32em] uppercase">Gulir</span>
+          <span class="w-px h-7 bg-white/40"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Editorial Gallery (Clean Captions Below Framed Prints) -->
+    <section id="karya" class="py-24 sm:py-32 bg-white">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b hairline mb-14 reveal">
+          <div>
+            <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Kurasi Karya</p>
+            <h2 class="font-display font-light text-4xl sm:text-5xl lg:text-[54px] text-ink leading-[1.06]">
+              Momen yang <em class="italic text-bronze">Dirasakan</em>,<br class="hidden sm:inline"> Bukan Sekadar Dilihat
+            </h2>
+          </div>
+
+          <div id="galleryFilters" class="flex flex-wrap gap-2" role="tablist" aria-label="Filter kategori karya">
+            <button type="button" data-cat="semua" class="filter-btn chip-active px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase transition-colors">Semua</button>
+            <button type="button" data-cat="resepsi" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Akad &amp; Resepsi</button>
+            <button type="button" data-cat="adat" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Adat &amp; Mappacci</button>
+            <button type="button" data-cat="prewedding" class="filter-btn px-5 py-2.5 border hairline text-[10px] tracking-[0.22em] uppercase text-graphite hover:text-ink hover:border-ink transition-colors">Prewedding</button>
+          </div>
+        </div>
+
+        <div id="galleryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"></div>
+      </div>
+    </section>
+
+    <!-- 3. Philosophy / "Tujuan Utama Kami" Split Fine-Art Section -->
+    <section id="filosofi" class="py-24 sm:py-32 border-t hairline bg-gallery">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+        <div class="lg:col-span-6 reveal">
+          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-4">Tujuan Utama Kami</p>
+          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink leading-[1.06]">
+            Mengubah hari bahagia Anda menjadi karya seni yang <em class="italic text-bronze">hidup</em>.
+          </h2>
+          <div class="w-10 h-px bg-bronze/60 my-7"></div>
+          <p class="text-sm sm:text-[15px] text-graphite leading-[1.85] font-light">
+            Pendekatan dokumenter dan candid selalu menjadi jantung cara kami bekerja. Tanpa pose yang dibuat-buat—kami percaya momen terkuat justru hadir secara alami: tatapan haru orang tua saat mappacci, tawa spontan bersama sahabat, hingga genggaman tangan sebelum akad dimulai.
+          </p>
+          <p class="mt-5 text-sm sm:text-[15px] text-graphite leading-[1.85] font-light">
+            Dengan membaur tenang di tengah acara, tim foto dan film Tepi Kata merawat setiap detail agar bertahun-tahun kemudian Anda bukan hanya ingat seperti apa bentuknya, tetapi juga bagaimana rasanya berada di hari itu.
+          </p>
+
+          <div class="mt-10 pt-9 border-t hairline grid grid-cols-3 gap-6">
+            <div>
+              <p class="font-display text-2xl sm:text-3xl font-normal text-ink">Foto &amp; Film</p>
+              <p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">Satu Visi Visual</p>
+            </div>
+            <div>
+              <p class="font-display text-2xl sm:text-3xl font-normal text-ink">Galeri Daring</p>
+              <p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">Pilih dari HP</p>
+            </div>
+            <div>
+              <p class="font-display text-2xl sm:text-3xl font-normal text-ink">Adat &amp; Modern</p>
+              <p class="text-[10px] tracking-[0.2em] uppercase text-graphite mt-1.5">Bugis · Makassar</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 reveal">
+          <div class="art-frame max-w-lg mx-auto">
+            <img src="images/filosofi.jpg"
+              alt="Potret pengantin bernuansa gelap editorial Tepi Kata"
+              class="w-full h-auto max-h-[620px] object-cover block">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. "Tentang Tepi Kata" & 4-Step Editorial Process -->
+    <section id="tentang" class="py-24 sm:py-32 border-t hairline bg-white">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-20 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1 reveal">
+          <div class="art-frame">
+            <img src="images/tentang.jpg"
+              alt="Kamera sinema, rol film, dan album linen Tepi Kata"
+              class="w-full h-auto object-cover block">
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 order-1 lg:order-2 reveal">
+          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-4">Tentang Kami</p>
+          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink leading-[1.06]">
+            Lebih dari sekadar <em class="italic text-bronze">dokumentasi</em> pernikahan
+          </h2>
+          <p class="mt-6 text-sm sm:text-[15px] text-graphite leading-[1.85] font-light">
+            Berbasis di Makassar, Sulawesi Selatan, <strong class="text-ink font-medium">Tepi Kata</strong> hadir untuk pasangan yang ingin menikmati hari bahagianya sepenuhnya tanpa sibuk memikirkan kamera. Tim fotografer, videografer, dan editor kami bekerja terpadu—memahami ritme sakral prosesi adat Bugis-Makassar hingga resepsi malam yang hangat.
+          </p>
+
+          <div id="alur" class="mt-12 grid grid-cols-1 sm:grid-cols-2 border-t border-l hairline">
+            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
+              <span class="font-display text-2xl italic text-bronze">01</span>
+              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Diskusi &amp; Konsep</h3>
+              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Menyelaraskan jadwal prosesi, lokasi, nuansa warna, serta kebutuhan tim foto dan film.</p>
+            </div>
+            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
+              <span class="font-display text-2xl italic text-bronze">02</span>
+              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Hari Bahagia</h3>
+              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Liputan candid dan editorial yang tenang, terarah saat dibutuhkan, dan sigap menangkap emosi.</p>
+            </div>
+            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
+              <span class="font-display text-2xl italic text-bronze">03</span>
+              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Galeri Seleksi Daring</h3>
+              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Akses tautan galeri pribadi untuk melihat dan memilih foto favorit untuk edit maupun album langsung dari HP.</p>
+            </div>
+            <div class="p-6 sm:p-7 border-r border-b hairline bg-white">
+              <span class="font-display text-2xl italic text-bronze">04</span>
+              <h3 class="mt-2.5 text-[11px] font-medium tracking-[0.22em] text-ink uppercase">Film &amp; Album Cetak</h3>
+              <p class="mt-2 text-xs text-graphite leading-relaxed font-light">Tinjau draf tata letak album secara daring sebelum cetak, lengkap dengan film sinematik siap simpan.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Paket Prosesi (Architectural Luxury Columns) -->
+    <section id="paket" class="py-24 sm:py-32 border-t hairline bg-gallery">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10">
+        <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Layanan &amp; Paket</p>
+          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink leading-tight">
+            Dirancang mengikuti <em class="italic text-bronze">rangkaian</em> acara Anda
+          </h2>
+          <div class="w-10 h-px bg-bronze/60 mx-auto my-6"></div>
+          <p class="text-sm text-graphite leading-relaxed font-light">
+            Setiap paket dapat disesuaikan dengan jumlah prosesi, kebutuhan tim tambahan, maupun add-on Mini Studio.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7 items-stretch">
+          <!-- Paket 1 -->
+          <article class="flex flex-col justify-between p-9 bg-white border hairline hover:border-ink/40 transition-colors reveal">
+            <div>
+              <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">01 &nbsp;·&nbsp; Intimate</p>
+              <h3 class="mt-3 font-display text-3xl font-normal text-ink">1 Prosesi / Prewedding</h3>
+              <p class="mt-4 text-xs text-graphite leading-relaxed font-light">Cocok untuk sesi Lamaran (Mappettuada), Mappacci Only, Akad Only, Resepsi Only, atau Prewedding.</p>
+              <div class="w-full h-px bg-black/10 my-6"></div>
+              <ul class="space-y-3 text-xs text-ink/85 font-light">
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Fotografer &amp; Videografer (opsional)</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Galeri daring pribadi Tepi Kata</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Kurasi &amp; color grading sinematik</span></li>
+              </ul>
+            </div>
+            <button type="button" data-paket="1 Prosesi / Prewedding" data-sesi="Lamaran,Prewedding"
+              class="paket-btn mt-10 w-full py-3.5 border border-ink text-ink text-[10px] tracking-[0.24em] uppercase hover:bg-ink hover:text-white transition-colors">
+              Tanya Paket Ini
+            </button>
+          </article>
+
+          <!-- Paket 2 (Featured Atelier) -->
+          <article class="flex flex-col justify-between p-9 bg-white border border-ink shadow-[0_24px_60px_rgba(18,18,18,0.08)] relative reveal">
+            <span class="absolute -top-3 left-9 px-3.5 py-1 bg-ink text-white text-[9px] tracking-[0.26em] uppercase">Pilihan Utama</span>
+            <div>
+              <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">02 &nbsp;·&nbsp; Rangkaian Adat</p>
+              <h3 class="mt-3 font-display text-3xl font-normal text-ink">Paket 3–4 Prosesi</h3>
+              <p class="mt-4 text-xs text-graphite leading-relaxed font-light">Mencakup rangkaian lengkap mulai dari Lamaran atau Prewedding, Siraman &amp; Mappacci, hingga Akad &amp; Resepsi.</p>
+              <div class="w-full h-px bg-black/10 my-6"></div>
+              <ul class="space-y-3 text-xs text-ink/90 font-light">
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Tim Foto &amp; Film Sinematik lengkap</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Seleksi foto edit &amp; draf album daring</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Album cetak eksklusif + highlight film</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Tersedia opsi Mapparola &amp; Mini Studio</span></li>
+              </ul>
+            </div>
+            <button type="button" data-paket="Paket 3–4 Prosesi" data-sesi="Prewedding,Siraman & Mappacci,Akad & Resepsi"
+              class="paket-btn mt-10 w-full py-3.5 bg-ink text-white text-[10px] tracking-[0.24em] uppercase hover:bg-bronze transition-colors">
+              Tanya Paket Ini
+            </button>
+          </article>
+
+          <!-- Paket 3 -->
+          <article class="flex flex-col justify-between p-9 bg-white border hairline hover:border-ink/40 transition-colors reveal">
+            <div>
+              <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">03 &nbsp;·&nbsp; All-In</p>
+              <h3 class="mt-3 font-display text-3xl font-normal text-ink">Paket Premium</h3>
+              <p class="mt-4 text-xs text-graphite leading-relaxed font-light">Liputan menyeluruh untuk acara berskala besar atau multi-hari, termasuk keluarga kedua mempelai &amp; luar kota.</p>
+              <div class="w-full h-px bg-black/10 my-6"></div>
+              <ul class="space-y-3 text-xs text-ink/85 font-light">
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Multi-kamera Foto &amp; Video + Support</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Add-on Mini Studio di lokasi resepsi</span></li>
+                <li class="flex items-start gap-3"><span class="text-bronze">—</span><span>Prioritas editing &amp; album custom</span></li>
+              </ul>
+            </div>
+            <button type="button" data-paket="Paket Premium" data-sesi="Lamaran,Prewedding,Siraman & Mappacci,Akad & Resepsi,Mapparola,Mini Studio"
+              class="paket-btn mt-10 w-full py-3.5 border border-ink text-ink text-[10px] tracking-[0.24em] uppercase hover:bg-ink hover:text-white transition-colors">
+              Tanya Paket Ini
+            </button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. "Kata Mereka" Editorial Testimonial Spread (1 / 3) -->
+    <section class="py-24 sm:py-32 border-t hairline bg-white">
+      <div class="max-w-6xl mx-auto px-6 sm:px-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center reveal">
+          <div class="lg:col-span-5">
+            <div class="art-frame">
+              <div class="aspect-[4/3] overflow-hidden bg-gallery">
+                <img id="testiImg" src="images/resepsi.jpg"
+                  alt="Cuplikan momen pernikahan Tepi Kata"
+                  class="w-full h-full object-cover transition-opacity duration-300 block">
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <div class="flex items-center justify-between gap-4 pb-6 border-b hairline mb-8">
+              <div>
+                <p class="text-[10px] tracking-[0.32em] uppercase text-bronze">Kata Mereka</p>
+                <p class="text-[11px] text-graphite mt-1 font-light">Contoh tata letak testimoni — siap diganti ulasan asli klien</p>
+              </div>
+              <span id="testiCount" class="font-display text-xl italic text-bronze tabular-nums">1 / 3</span>
+            </div>
+
+            <blockquote id="testiQuote" class="font-display font-light text-2xl sm:text-[32px] text-ink leading-[1.35]">
+              "Timnya santai banget tapi super sigap. Kami tidak merasa dipaksa berpose, dan hasil foto mappacci sampai resepsinya benar-benar bikin merinding setiap kali dilihat ulang."
+            </blockquote>
+            <p id="testiAuthor" class="mt-7 text-[11px] tracking-[0.26em] uppercase text-bronze">Pasangan Akad &amp; Resepsi · Makassar</p>
+
+            <div class="mt-9 flex items-center gap-3">
+              <button id="testiPrev" type="button" aria-label="Testimoni sebelumnya"
+                class="w-11 h-11 border hairline flex items-center justify-center text-ink hover:border-ink hover:bg-ink hover:text-white transition-colors">
+                ←
+              </button>
+              <button id="testiNext" type="button" aria-label="Testimoni berikutnya"
+                class="w-11 h-11 border hairline flex items-center justify-center text-ink hover:border-ink hover:bg-ink hover:text-white transition-colors">
+                →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Architectural Booking Inquiry Section ("Mari Terhubung") -->
+    <section id="kontak" class="py-24 sm:py-32 border-t hairline bg-gallery">
+      <div class="max-w-3xl mx-auto px-6 sm:px-10 reveal">
+        <div class="text-center mb-12">
+          <p class="text-[10px] tracking-[0.32em] uppercase text-bronze mb-3">Mari Terhubung</p>
+          <h2 class="font-display font-light text-4xl sm:text-5xl text-ink">Ceritakan Rencana Hari Bahagia Anda</h2>
+          <div class="w-10 h-px bg-bronze/60 mx-auto my-6"></div>
+          <p class="text-sm text-graphite max-w-lg mx-auto font-light leading-relaxed">
+            Isi detail singkat acara Anda di bawah ini untuk mengecek ketersediaan jadwal tim Tepi Kata dan mendapatkan daftar paket lengkap.
+          </p>
+        </div>
+
+        <form id="bookingForm" class="p-8 sm:p-12 bg-white border hairline shadow-[0_24px_60px_rgba(18,18,18,0.04)] space-y-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <label for="fNama" class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-1">Nama Pasangan *</label>
+              <input id="fNama" type="text" required placeholder="Contoh: Raka &amp; Dinda"
+                class="arch-input w-full text-sm text-ink placeholder:text-graphite/50">
+            </div>
+            <div>
+              <label for="fTanggal" class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-1">Perkiraan Tanggal Acara *</label>
+              <input id="fTanggal" type="date" required
+                class="arch-input w-full text-sm text-ink">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div>
+              <label for="fLokasi" class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-1">Lokasi / Kota</label>
+              <input id="fLokasi" type="text" placeholder="Contoh: Makassar / Gowa / Maros"
+                class="arch-input w-full text-sm text-ink placeholder:text-graphite/50">
+            </div>
+            <div>
+              <label for="fPaket" class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-1">Paket yang Diminati</label>
+              <select id="fPaket" class="arch-input w-full text-sm text-ink bg-white">
+                <option value="Belum menentukan">Belum menentukan — minta pricelist</option>
+                <option value="1 Prosesi / Prewedding">1 Prosesi / Prewedding</option>
+                <option value="Paket 3–4 Prosesi">Paket 3–4 Prosesi</option>
+                <option value="Paket Premium">Paket Premium</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <span class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-3.5">Prosesi yang Direncanakan</span>
+            <div id="sesiChips" class="flex flex-wrap gap-2">
+              <button type="button" data-sesi-chip="Lamaran" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Lamaran</button>
+              <button type="button" data-sesi-chip="Prewedding" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Prewedding</button>
+              <button type="button" data-sesi-chip="Siraman & Mappacci" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Siraman &amp; Mappacci</button>
+              <button type="button" data-sesi-chip="Akad & Resepsi" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Akad &amp; Resepsi</button>
+              <button type="button" data-sesi-chip="Mapparola" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">Mapparola</button>
+              <button type="button" data-sesi-chip="Mini Studio" class="sesi-chip px-4 py-2 border hairline text-[11px] tracking-[0.12em] uppercase text-graphite hover:border-ink hover:text-ink transition-colors">+ Mini Studio</button>
+            </div>
+          </div>
+
+          <div>
+            <label for="fCatatan" class="block text-[10px] tracking-[0.24em] uppercase text-graphite mb-1">Catatan Tambahan</label>
+            <textarea id="fCatatan" rows="3" placeholder="Ceritakan konsep, venue, atau pertanyaan Anda…"
+              class="arch-input w-full text-sm text-ink placeholder:text-graphite/50 resize-none"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-4 bg-ink text-white text-[11px] font-medium tracking-[0.26em] uppercase hover:bg-bronze transition-colors">
+            Siapkan Pesan Booking
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Minimal Architectural Footer -->
+  <footer class="border-t hairline bg-white py-14">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="text-center sm:text-left">
+        <p class="font-display text-2xl tracking-[0.3em] text-ink">TEPI KATA</p>
+        <p class="text-[11px] tracking-[0.16em] uppercase text-graphite mt-1.5">Foto &amp; Film Pernikahan · Makassar, Sulawesi Selatan</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-7 text-[10px] tracking-[0.24em] uppercase text-graphite">
+        <a href="#beranda" class="hover:text-ink">Beranda</a>
+        <a href="#karya" class="hover:text-ink">Karya</a>
+        <a href="#tentang" class="hover:text-ink">Tentang</a>
+        <a href="#paket" class="hover:text-ink">Paket</a>
+        <a href="#kontak" class="hover:text-ink">Kontak</a>
+      </div>
+      <p class="text-[11px] text-graphite">&copy; 2026 Tepi Kata</p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal (Dark Theater for Photos) -->
+  <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/94 backdrop-blur-md flex items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true" aria-label="Pratinjau foto">
+    <button id="lbClose" type="button" aria-label="Tutup pratinjau"
+      class="absolute top-6 right-6 w-11 h-11 border border-white/25 bg-black/60 text-white hover:border-bronzelight hover:text-bronzelight flex items-center justify-center text-base">
+      ✕
+    </button>
+    <button id="lbPrev" type="button" aria-label="Foto sebelumnya"
+      class="absolute left-4 sm:left-8 w-11 h-11 border border-white/25 bg-black/60 text-white hover:border-bronzelight hover:text-bronzelight flex items-center justify-center">
+      ←
+    </button>
+    <figure class="max-w-4xl w-full flex flex-col items-center">
+      <img id="lbImg" src="" alt="" class="max-h-[76vh] w-auto max-w-full border border-white/15 object-contain shadow-2xl">
+      <figcaption class="mt-5 text-center">
+        <p id="lbTitle" class="font-display text-2xl font-light text-white"></p>
+        <p id="lbMeta" class="text-[10px] tracking-[0.26em] uppercase text-bronzelight mt-1.5"></p>
+      </figcaption>
+    </figure>
+    <button id="lbNext" type="button" aria-label="Foto berikutnya"
+      class="absolute right-4 sm:right-8 w-11 h-11 border border-white/25 bg-black/60 text-white hover:border-bronzelight hover:text-bronzelight flex items-center justify-center">
+      →
+    </button>
+  </div>
+
+  <!-- Booking Confirmation Modal -->
+  <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-label="Ringkasan pesan booking">
+    <div class="max-w-lg w-full bg-white border border-ink/20 p-7 sm:p-9 shadow-2xl">
+      <div class="flex items-start justify-between gap-4 pb-4 border-b hairline">
+        <div>
+          <p class="text-[10px] tracking-[0.28em] uppercase text-bronze">Pesan Siap Dikirim</p>
+          <h3 class="font-display text-3xl font-normal text-ink mt-1">Ringkasan Pertanyaan Jadwal</h3>
+        </div>
+        <button id="bmClose" type="button" aria-label="Tutup ringkasan" class="w-9 h-9 border hairline text-graphite hover:text-ink hover:border-ink">✕</button>
+      </div>
+      <pre id="bmPreview" class="mt-5 p-5 bg-gallery border hairline text-xs text-ink whitespace-pre-wrap font-sans leading-relaxed"></pre>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <button id="bmCopy" type="button" class="flex-1 py-3.5 bg-ink text-white text-[10px] font-medium tracking-[0.22em] uppercase hover:bg-bronze transition-colors">
+          Salin Pesan WhatsApp
+        </button>
+        <button id="bmDone" type="button" class="px-6 py-3.5 border hairline text-[10px] uppercase tracking-[0.22em] text-ink hover:border-ink">
+          Tutup
+        </button>
+      </div>
+      <p id="bmStatus" class="mt-3 text-xs text-bronze min-h-[1rem]"></p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var GALLERY = [
+        {
+          id: 'g1',
+          cat: 'resepsi',
+          catLabel: 'Akad & Resepsi',
+          title: 'Cahaya Malam di Grand Ballroom',
+          loc: 'Makassar',
+          src: 'images/resepsi.jpg'
+        },
+        {
+          id: 'g2',
+          cat: 'adat',
+          catLabel: 'Adat & Mappacci',
+          title: 'Sakral Malam Mappacci',
+          loc: 'Gowa · Adat Bugis-Makassar',
+          src: 'images/mappacci.jpg'
+        },
+        {
+          id: 'g3',
+          cat: 'prewedding',
+          catLabel: 'Prewedding',
+          title: 'Senja di Tebing Pesisir',
+          loc: 'Sulawesi Selatan',
+          src: 'images/prewedding.jpg'
+        },
+        {
+          id: 'g4',
+          cat: 'resepsi',
+          catLabel: 'Akad & Resepsi',
+          title: 'Pelukan di Bawah Lampu Senja',
+          loc: 'Makassar',
+          src: 'images/hero.jpg'
+        },
+        {
+          id: 'g5',
+          cat: 'adat',
+          catLabel: 'Adat & Mappacci',
+          title: 'Tatapan Tenang Sebelum Akad',
+          loc: 'Makassar',
+          src: 'images/filosofi.jpg'
+        },
+        {
+          id: 'g6',
+          cat: 'prewedding',
+          catLabel: 'Behind the Craft',
+          title: 'Lensa, Film, & Album Linen',
+          loc: 'Studio Tepi Kata',
+          src: 'images/tentang.jpg'
+        }
+      ];
+
+      var TESTIMONIALS = [
+        {
+          quote: '"Timnya santai banget tapi super sigap. Kami tidak merasa dipaksa berpose, dan hasil foto mappacci sampai resepsinya benar-benar bikin merinding setiap kali dilihat ulang."',
+          author: 'Pasangan Akad & Resepsi · Makassar',
+          img: 'images/resepsi.jpg'
+        },
+        {
+          quote: '"Paling suka fitur galeri online-nya—habis acara kami tinggal pilih foto favorit untuk edit dan album langsung dari HP bareng keluarga. Praktis dan rapi sekali."',
+          author: 'Pasangan Paket 4 Prosesi · Gowa',
+          img: 'images/mappacci.jpg'
+        },
+        {
+          quote: '"Warna foto dan filmnya hangat, elegan, dan timeless. Dari prewedding sampai resepsi terasa seperti nonton film pendek tentang kisah kami sendiri."',
+          author: 'Pasangan Prewedding & Wedding · Sulawesi Selatan',
+          img: 'images/prewedding.jpg'
+        }
+      ];
+
+      var activeCat = 'semua';
+      var filteredGallery = GALLERY.slice();
+      var lbIndex = 0;
+      var testiIdx = 0;
+      var selectedSesi = new Set(['Akad & Resepsi']);
+
+      /* --- Mobile menu --- */
+      var menuBtn = document.getElementById('menuBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var iconOpen = document.getElementById('menuIconOpen');
+      var iconClose = document.getElementById('menuIconClose');
+
+      function setMenu(open) {
+        mobileMenu.classList.toggle('hidden', !open);
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+        menuBtn.setAttribute('aria-expanded', String(open));
+      }
+      menuBtn.addEventListener('click', function () {
+        setMenu(mobileMenu.classList.contains('hidden'));
+      });
+      document.querySelectorAll('.mobile-link').forEach(function (link) {
+        link.addEventListener('click', function () { setMenu(false); });
+      });
+
+      /* --- Editorial Framed Gallery --- */
+      var galleryGrid = document.getElementById('galleryGrid');
+      function renderGallery() {
+        filteredGallery = activeCat === 'semua'
+          ? GALLERY.slice()
+          : GALLERY.filter(function (item) { return item.cat === activeCat; });
+
+        galleryGrid.innerHTML = filteredGallery.map(function (item, idx) {
+          return (
+            '<button type="button" data-idx="' + idx + '" class="gallery-card group text-left focus:outline-none">' +
+              '<div class="art-frame">' +
+                '<div class="aspect-[4/3] overflow-hidden bg-gallery">' +
+                  '<img src="' + item.src + '" alt="' + item.title + '" class="w-full h-full object-cover block">' +
+                '</div>' +
+              '</div>' +
+              '<div class="pt-4 px-1 flex items-baseline justify-between gap-4">' +
+                '<div>' +
+                  '<p class="text-[9px] tracking-[0.26em] uppercase text-bronze">' + item.catLabel + '</p>' +
+                  '<p class="font-display text-2xl font-normal text-ink group-hover:text-bronze transition-colors mt-1">' + item.title + '</p>' +
+                '</div>' +
+                '<span class="text-[10px] tracking-[0.18em] uppercase text-graphite shrink-0">' + item.loc.split(' · ')[0] + '</span>' +
+              '</div>' +
+            '</button>'
+          );
+        }).join('');
+      }
+
+      document.querySelectorAll('.filter-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCat = btn.getAttribute('data-cat');
+          document.querySelectorAll('.filter-btn').forEach(function (b) {
+            var isOn = b === btn;
+            b.classList.toggle('chip-active', isOn);
+            b.classList.toggle('text-graphite', !isOn);
+          });
+          renderGallery();
+        });
+      });
+
+      galleryGrid.addEventListener('click', function (e) {
+        var card = e.target.closest('[data-idx]');
+        if (!card) return;
+        openLightbox(Number(card.getAttribute('data-idx')));
+      });
+
+      /* --- Lightbox --- */
+      var lightbox = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lbImg');
+      var lbTitle = document.getElementById('lbTitle');
+      var lbMeta = document.getElementById('lbMeta');
+
+      function showLightboxItem() {
+        var item = filteredGallery[lbIndex];
+        if (!item) return;
+        lbImg.src = item.src;
+        lbImg.alt = item.title;
+        lbTitle.textContent = item.title;
+        lbMeta.textContent = item.catLabel + ' · ' + item.loc + '  (' + (lbIndex + 1) + ' / ' + filteredGallery.length + ')';
+      }
+      function openLightbox(idx) {
+        lbIndex = idx;
+        showLightboxItem();
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLightbox() {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      document.getElementById('lbClose').addEventListener('click', closeLightbox);
+      document.getElementById('lbPrev').addEventListener('click', function () {
+        lbIndex = (lbIndex - 1 + filteredGallery.length) % filteredGallery.length;
+        showLightboxItem();
+      });
+      document.getElementById('lbNext').addEventListener('click', function () {
+        lbIndex = (lbIndex + 1) % filteredGallery.length;
+        showLightboxItem();
+      });
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      /* --- Testimonials --- */
+      var testiImg = document.getElementById('testiImg');
+      var testiQuote = document.getElementById('testiQuote');
+      var testiAuthor = document.getElementById('testiAuthor');
+      var testiCount = document.getElementById('testiCount');
+
+      function renderTesti() {
+        var t = TESTIMONIALS[testiIdx];
+        testiQuote.textContent = t.quote;
+        testiAuthor.textContent = t.author;
+        testiImg.src = t.img;
+        testiCount.textContent = (testiIdx + 1) + ' / ' + TESTIMONIALS.length;
+      }
+      document.getElementById('testiPrev').addEventListener('click', function () {
+        testiIdx = (testiIdx - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
+        renderTesti();
+      });
+      document.getElementById('testiNext').addEventListener('click', function () {
+        testiIdx = (testiIdx + 1) % TESTIMONIALS.length;
+        renderTesti();
+      });
+
+      /* --- Sesi Chips & Paket Pre-fill --- */
+      function renderSesiChips() {
+        document.querySelectorAll('.sesi-chip').forEach(function (chip) {
+          var val = chip.getAttribute('data-sesi-chip');
+          var on = selectedSesi.has(val);
+          chip.classList.toggle('chip-active', on);
+          chip.classList.toggle('text-graphite', !on);
+        });
+      }
+      document.querySelectorAll('.sesi-chip').forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var val = chip.getAttribute('data-sesi-chip');
+          if (selectedSesi.has(val)) selectedSesi.delete(val);
+          else selectedSesi.add(val);
+          renderSesiChips();
+        });
+      });
+
+      document.querySelectorAll('.paket-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var paket = btn.getAttribute('data-paket');
+          var sesi = (btn.getAttribute('data-sesi') || '').split(',').filter(Boolean);
+          document.getElementById('fPaket').value = paket;
+          selectedSesi = new Set(sesi);
+          renderSesiChips();
+          document.getElementById('kontak').scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('fNama').focus();
+        });
+      });
+
+      /* --- Booking Form & Modal --- */
+      var bookingModal = document.getElementById('bookingModal');
+      var bmPreview = document.getElementById('bmPreview');
+      var bmStatus = document.getElementById('bmStatus');
+
+      document.getElementById('bookingForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var nama = document.getElementById('fNama').value.trim();
+        var tgl = document.getElementById('fTanggal').value;
+        var lokasi = document.getElementById('fLokasi').value.trim() || 'Belum ditentukan';
+        var paket = document.getElementById('fPaket').value;
+        var catatan = document.getElementById('fCatatan').value.trim();
+        var sesiStr = Array.from(selectedSesi).join(', ') || 'Belum dipilih';
+
+        var pesan = [
+          'Halo Tepi Kata! Saya ingin cek ketersediaan jadwal & pricelist:',
+          '',
+          '• Nama Pasangan: ' + nama,
+          '• Perkiraan Tanggal: ' + tgl,
+          '• Lokasi: ' + lokasi,
+          '• Paket Diminati: ' + paket,
+          '• Rencana Prosesi: ' + sesiStr
+        ];
+        if (catatan) pesan.push('• Catatan: ' + catatan);
+
+        bmPreview.textContent = pesan.join('\n');
+        bmStatus.textContent = '';
+        bookingModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+
+      function closeBookingModal() {
+        bookingModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      document.getElementById('bmClose').addEventListener('click', closeBookingModal);
+      document.getElementById('bmDone').addEventListener('click', closeBookingModal);
+      bookingModal.addEventListener('click', function (e) {
+        if (e.target === bookingModal) closeBookingModal();
+      });
+
+      document.getElementById('bmCopy').addEventListener('click', function () {
+        var text = bmPreview.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            bmStatus.textContent = 'Pesan disalin — tinggal tempel ke WhatsApp Tepi Kata.';
+          }).catch(function () { fallbackCopy(text); });
+        } else {
+          fallbackCopy(text);
+        }
+      });
+
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); bmStatus.textContent = 'Pesan disalin — tinggal tempel ke WhatsApp Tepi Kata.'; }
+        catch (err) { bmStatus.textContent = 'Silakan salin teks di atas secara manual.'; }
+        ta.remove();
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          if (!lightbox.classList.contains('hidden')) closeLightbox();
+          if (!bookingModal.classList.contains('hidden')) closeBookingModal();
+        } else if (!lightbox.classList.contains('hidden')) {
+          if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + filteredGallery.length) % filteredGallery.length; showLightboxItem(); }
+          if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % filteredGallery.length; showLightboxItem(); }
+        }
+      });
+
+      /* --- Subtle Scroll Reveal --- */
+      var reveals = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+      }
+
+      renderGallery();
+      renderTesti();
+      renderSesiChips();
+    })();
+  </script>
+</body>
+</html>

@@ -3,14 +3,14 @@
     "nama": "Tepi Kata",
     "tagline": "Foto & Film Pernikahan",
     "kota": "Makassar, Sulawesi Selatan",
-    "whatsapp": "",
-    "instagram": "tepikata",
+    "whatsapp": "6285343808999",
+    "instagram": "tepi_kata",
     "copyright": "© 2026 Tepi Kata"
   },
   "hero": {
     "label": "Makassar & Sulawesi Selatan · Foto & Film Pernikahan",
     "judul": "Cerita Cinta yang *Abadi*\ndalam Foto & Film",
-    "subjudul": "Dokumentasi pernikahan natural, jujur, dan sinematik—mengabadikan setiap detik dari lamaran, siraman, mappacci, hingga akad dan resepsi tanpa terasa kaku.",
+    "subjudul": "Setiap orang punya jalan cerita yang ingin diabadikan—dokumentasi pernikahan natural, jujur, dan sinematik dari lamaran, siraman, mappacci, hingga akad dan resepsi.",
     "gambar": "images/hero.jpg",
     "ctaUtama": "Lihat Karya",
     "ctaSekunder": "Cek Tanggal"
@@ -22,12 +22,12 @@
   "galeri": [
     {
       "id": "g1",
-      "judul": "Cahaya Malam di Grand Ballroom",
+      "judul": "Kirab Bahagia di Grand Ballroom",
       "kategori": "Akad & Resepsi",
       "lokasi": "Makassar",
       "tahun": "2026",
       "gambar": "images/resepsi.jpg",
-      "deskripsi": "Momen hangat resepsi malam dengan pencahayaan dramatis yang tetap mempertahankan emosi alami kedua mempelai."
+      "deskripsi": "Langkah perdana kedua mempelai memasuki ballroom resepsi dalam balutan busana adat Bugis-Makassar disambut hangat keluarga dan sahabat."
     },
     {
       "id": "g2",
@@ -36,43 +36,70 @@
       "lokasi": "Gowa · Adat Bugis-Makassar",
       "tahun": "2026",
       "gambar": "images/mappacci.jpg",
-      "deskripsi": "Restu orang tua dan keluarga dalam prosesi adat Bugis-Makassar yang penuh haru dan kekhidmatan."
+      "deskripsi": "Restu orang tua dan sesepuh dalam prosesi sakral Malam Mappacci yang penuh doa, haru, dan kekhidmatan."
     },
     {
       "id": "g3",
-      "judul": "Senja di Tebing Pesisir",
+      "judul": "Minimalis di Jendela Kota Tua",
       "kategori": "Prewedding",
-      "lokasi": "Sulawesi Selatan",
+      "lokasi": "Makassar",
       "tahun": "2026",
       "gambar": "images/prewedding.jpg",
-      "deskripsi": "Sesi prewedding bernuansa editorial alam terbuka dengan cahaya matahari terbenam yang lembut."
+      "deskripsi": "Sesi prewedding bergaya arsitektural minimalis dengan komposisi simetris yang tenang dan abadi."
     },
     {
       "id": "g4",
-      "judul": "Pelukan di Bawah Lampu Senja",
+      "judul": "Khidmat Selepas Ijab Kabul",
       "kategori": "Akad & Resepsi",
       "lokasi": "Makassar",
       "tahun": "2026",
-      "gambar": "images/hero.jpg",
-      "deskripsi": "Jeda singkat berdua selepas prosesi, terekam jujur tanpa arahan kaku."
+      "gambar": "images/karya-akad-fadel.jpg",
+      "deskripsi": "Momen penuh syukur dalam sentuhan monokrom klasik tepat setelah akad nikah dinyatakan sah."
     },
     {
       "id": "g5",
+      "judul": "Keagungan Busana Adat Bugis-Makassar",
+      "kategori": "Adat & Mappacci",
+      "lokasi": "Makassar · Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/karya-adat-zaira.jpg",
+      "deskripsi": "Potret editorial bernuansa megah dengan pencahayaan dramatis yang merawat keindahan tradisi lokal."
+    },
+    {
+      "id": "g6",
+      "judul": "Romansa Adat dalam Cahaya Temaram",
+      "kategori": "Prewedding",
+      "lokasi": "Sulawesi Selatan",
+      "tahun": "2026",
+      "gambar": "images/karya-pw-alda.jpg",
+      "deskripsi": "Prewedding berbalut busana adat bernuansa gelap editorial, menonjolkan detail kipas, payung tradisional, dan tatapan hangat."
+    },
+    {
+      "id": "g7",
+      "judul": "Langkah Pertama di Tangga Ballroom",
+      "kategori": "Akad & Resepsi",
+      "lokasi": "Makassar",
+      "tahun": "2026",
+      "gambar": "images/karya-resepsi-lia.jpg",
+      "deskripsi": "Genggaman tangan penuh kebahagiaan dalam balutan baju bodo zamrud berpadu sulaman emas."
+    },
+    {
+      "id": "g8",
       "judul": "Tatapan Tenang Sebelum Akad",
       "kategori": "Adat & Mappacci",
       "lokasi": "Makassar",
       "tahun": "2026",
-      "gambar": "images/filosofi.jpg",
-      "deskripsi": "Potret sunyi beberapa menit sebelum ijab kabul dimulai—menangkap ketenangan di tengah riuh persiapan."
+      "gambar": "images/karya-adat-riri.jpg",
+      "deskripsi": "Potret editorial pengantin wanita dalam balutan busana adat hijau-emas dengan cahaya chiaroscuro yang intim."
     },
     {
-      "id": "g6",
-      "judul": "Lensa, Film, & Album Linen",
+      "id": "g9",
+      "judul": "Kisah di Pelataran Rumah Adat",
       "kategori": "Prewedding",
-      "lokasi": "Studio Tepi Kata",
+      "lokasi": "Sulawesi Selatan",
       "tahun": "2026",
-      "gambar": "images/tentang.jpg",
-      "deskripsi": "Detail kerajinan visual kami—dari pemilihan warna sinematik hingga cetakan album berbalut linen."
+      "gambar": "images/karya-pw-jeri.jpg",
+      "deskripsi": "Sesi prewedding berlatar arsitektur rumah kayu tradisional Sulawesi Selatan dengan sentuhan warna hangat sinematik."
     }
   ],
   "filosofi": {
@@ -219,7 +246,7 @@
       "kutipan": "Warna foto dan filmnya hangat, elegan, dan timeless. Dari prewedding sampai resepsi terasa seperti nonton film pendek tentang kisah kami sendiri.",
       "namaKlien": "Pasangan Prewedding & Wedding",
       "sesi": "Sulawesi Selatan",
-      "gambar": "images/prewedding.jpg"
+      "gambar": "images/hero.jpg"
     }
   ],
   "kontakSection": {
